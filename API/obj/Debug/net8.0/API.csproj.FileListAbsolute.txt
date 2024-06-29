@@ -140,3 +140,8 @@ C:\Repos\Fitness\API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Drawing.Com
 C:\Repos\Fitness\API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 C:\Repos\Fitness\API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
 C:\Repos\Fitness\API\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windows.Extensions.dll
+C:\Repos\Fitness\api\obj\Debug\net8.0\API.sourcelink.json
+C:\Repos\Fitness\API\bin\Debug\net8.0\MediatR.dll
+C:\Repos\Fitness\API\bin\Debug\net8.0\MediatR.Contracts.dll
+C:\Repos\Fitness\API\bin\Debug\net8.0\AutoMapper.dll
+C:\Repos\Fitness\API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

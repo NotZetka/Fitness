@@ -3,28 +3,80 @@
   "WorkspaceRootPath": "C:\\Repos\\Fitness\\API\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:controllers\\accountscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Repos\\Fitness\\API\\Migrations\\20240621090337_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20240621090337_init.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\database\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:database\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\database\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:database\\appuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\controllers\\baseapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:controllers\\baseapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\handlers\\accounts\\login\\loginhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:handlers\\accounts\\login\\loginhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:services\\tokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\exceptions\\identityexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:exceptions\\identityexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\data\\appuserrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:data\\appuserrole.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:data\\datacontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\handlers\\accounts\\login\\loginqueryresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:handlers\\accounts\\login\\loginqueryresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\handlers\\accounts\\register\\registerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:handlers\\accounts\\register\\registerhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\exceptions\\accounts\\usernotfountexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:exceptions\\accounts\\usernotfountexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\utilities\\mappingprolife.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:utilities\\mappingprolife.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\data\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:data\\dtos\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\exceptions\\emailalreadyexistsexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:exceptions\\emailalreadyexistsexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\handlers\\accounts\\login\\loginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:handlers\\accounts\\login\\loginquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\exceptions\\accounts\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:exceptions\\accounts\\invalidpasswordexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\handlers\\accounts\\register\\registerqueryresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:handlers\\accounts\\register\\registerqueryresult.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|c:\\repos\\fitness\\api\\exceptions\\usernamealreadyexistsexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{32068D16-7CA1-4F9F-95E1-9C71FC411182}|API.csproj|solutionrelative:exceptions\\usernamealreadyexistsexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,7 +86,7 @@
       "DocumentGroups": [
         {
           "DockedHeight": 200,
-          "SelectedChildIndex": 6,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,80 +98,249 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "20240621090337_init.cs",
-              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Migrations\\20240621090337_init.cs",
-              "RelativeDocumentMoniker": "Migrations\\20240621090337_init.cs",
-              "ToolTip": "C:\\Repos\\Fitness\\API\\Migrations\\20240621090337_init.cs",
-              "RelativeToolTip": "Migrations\\20240621090337_init.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T09:03:37.925Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AppUser.cs",
-              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Database\\AppUser.cs",
-              "RelativeDocumentMoniker": "Database\\AppUser.cs",
-              "ToolTip": "C:\\Repos\\Fitness\\API\\Database\\AppUser.cs",
-              "RelativeToolTip": "Database\\AppUser.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAQAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T08:39:19.114Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DataContext.cs",
-              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Database\\DataContext.cs",
-              "RelativeDocumentMoniker": "Database\\DataContext.cs",
-              "ToolTip": "C:\\Repos\\Fitness\\API\\Database\\DataContext.cs",
-              "RelativeToolTip": "Database\\DataContext.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-21T08:37:16.817Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Repos\\Fitness\\API\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAABLAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-18T09:54:31.289Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Repos\\Fitness\\API\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T07:59:58.328Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
               "Title": "BaseApiController.cs",
               "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Controllers\\BaseApiController.cs",
               "RelativeDocumentMoniker": "Controllers\\BaseApiController.cs",
               "ToolTip": "C:\\Repos\\Fitness\\API\\Controllers\\BaseApiController.cs",
               "RelativeToolTip": "Controllers\\BaseApiController.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAeAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T07:12:26.058Z",
+              "WhenOpened": "2024-06-28T13:14:02.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "InvalidPasswordException.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Exceptions\\Accounts\\InvalidPasswordException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\Accounts\\InvalidPasswordException.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Exceptions\\Accounts\\InvalidPasswordException.cs",
+              "RelativeToolTip": "Exceptions\\Accounts\\InvalidPasswordException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA1AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:45:28.458Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UserNotFountException.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Exceptions\\Accounts\\UserNotFountException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\Accounts\\UserNotFountException.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Exceptions\\Accounts\\UserNotFountException.cs",
+              "RelativeToolTip": "Exceptions\\Accounts\\UserNotFountException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:40:28.925Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoginHandler.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Login\\LoginHandler.cs",
+              "RelativeDocumentMoniker": "Handlers\\Accounts\\Login\\LoginHandler.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Login\\LoginHandler.cs",
+              "RelativeToolTip": "Handlers\\Accounts\\Login\\LoginHandler.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAwwCgAAAAMAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:19:13.568Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "LoginQueryResult.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Login\\LoginQueryResult.cs",
+              "RelativeDocumentMoniker": "Handlers\\Accounts\\Login\\LoginQueryResult.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Login\\LoginQueryResult.cs",
+              "RelativeToolTip": "Handlers\\Accounts\\Login\\LoginQueryResult.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAkAAAAPAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:19:04.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "LoginQuery.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Login\\LoginQuery.cs",
+              "RelativeDocumentMoniker": "Handlers\\Accounts\\Login\\LoginQuery.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Login\\LoginQuery.cs",
+              "RelativeToolTip": "Handlers\\Accounts\\Login\\LoginQuery.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAA3AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:18:47.224Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AccountsController.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Controllers\\AccountsController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AccountsController.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Controllers\\AccountsController.cs",
+              "RelativeToolTip": "Controllers\\AccountsController.cs",
+              "ViewState": "AQIAAAwAAAAAAAAAAADwvxAAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:17:43.306Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "IdentityException.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Exceptions\\IdentityException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\IdentityException.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Exceptions\\IdentityException.cs",
+              "RelativeToolTip": "Exceptions\\IdentityException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAYAAABAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T11:56:38.447Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAgwBYAAAAhAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T11:06:31.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DataContext.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Data\\DataContext.cs",
+              "RelativeDocumentMoniker": "Data\\DataContext.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Data\\DataContext.cs",
+              "RelativeToolTip": "Data\\DataContext.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAAvAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T11:28:41.794Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "AppUserRole.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Data\\AppUserRole.cs",
+              "RelativeDocumentMoniker": "Data\\AppUserRole.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Data\\AppUserRole.cs",
+              "RelativeToolTip": "Data\\AppUserRole.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAAcAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T10:54:01.606Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "TokenService.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Services\\TokenService.cs",
+              "RelativeDocumentMoniker": "Services\\TokenService.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Services\\TokenService.cs",
+              "RelativeToolTip": "Services\\TokenService.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-28T11:02:58.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "UserDto.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Data\\Dtos\\UserDto.cs",
+              "RelativeDocumentMoniker": "Data\\Dtos\\UserDto.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Data\\Dtos\\UserDto.cs",
+              "RelativeToolTip": "Data\\Dtos\\UserDto.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAqwAQAAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T12:48:07.313Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAwAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2024-06-28T11:10:21.546Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "RegisterHandler.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Register\\RegisterHandler.cs",
+              "RelativeDocumentMoniker": "Handlers\\Accounts\\Register\\RegisterHandler.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Register\\RegisterHandler.cs",
+              "RelativeToolTip": "Handlers\\Accounts\\Register\\RegisterHandler.cs",
+              "ViewState": "AQIAAAoAAAAAAAAAAAAswCYAAABNAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T10:26:50.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "MappingProlife.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Utilities\\MappingProlife.cs",
+              "RelativeDocumentMoniker": "Utilities\\MappingProlife.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Utilities\\MappingProlife.cs",
+              "RelativeToolTip": "Utilities\\MappingProlife.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAVAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T13:31:06.99Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "EmailAlreadyExistsException.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Exceptions\\EmailAlreadyExistsException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\EmailAlreadyExistsException.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Exceptions\\EmailAlreadyExistsException.cs",
+              "RelativeToolTip": "Exceptions\\EmailAlreadyExistsException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA4AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T10:59:39.212Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UsernameAlreadyExistsException.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Exceptions\\UsernameAlreadyExistsException.cs",
+              "RelativeDocumentMoniker": "Exceptions\\UsernameAlreadyExistsException.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Exceptions\\UsernameAlreadyExistsException.cs",
+              "RelativeToolTip": "Exceptions\\UsernameAlreadyExistsException.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T10:57:03.1Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "RegisterQueryResult.cs",
+              "DocumentMoniker": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Register\\RegisterQueryResult.cs",
+              "RelativeDocumentMoniker": "Handlers\\Accounts\\Register\\RegisterQueryResult.cs",
+              "ToolTip": "C:\\Repos\\Fitness\\API\\Handlers\\Accounts\\Register\\RegisterQueryResult.cs",
+              "RelativeToolTip": "Handlers\\Accounts\\Register\\RegisterQueryResult.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-27T10:27:03.129Z",
               "EditorCaption": ""
             }
           ]

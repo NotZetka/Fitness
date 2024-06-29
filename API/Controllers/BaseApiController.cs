@@ -7,10 +7,5 @@ namespace API.Controllers
     public class BaseApiController : ControllerBase
     {
 
-        [HttpGet]
-        public IActionResult Get()
-        {
-            return Ok("test");
-        }
     }
 }
