@@ -1,27 +1,22 @@
-<form #registerForm="ngForm" (ngSubmit)="register()" autocomplete="off">
-  <h2 class="text-center text-primary">Sign up</h2>
-  <hr>
-  <div class="mb-3">
-    <input type="text"
-           class="form-control"
-           name="username"
-           [(ngModel)]="model.username"
-           placeholder="Username"
-    >
-    <input type="text"
-           class="form-control"
-           name="email"
-           [(ngModel)]="model.email"
-           placeholder="Email"
-    >
-    <input type="password"
-           class="form-control"
-           name="password"
-           [(ngModel)]="model.password"
-           placeholder="Password"
-    >
-  <div class="text-center">
-    <button class="btn btn-success me-2" type="submit">Register</button>
-  </div>
-  </div>
-</form>
+<form [formGroup]="registerForm" (ngSubmit)="register()" autocomplete="off">
+       <hr>
+       <app-text-input [formControl]="$any(registerForm.controls['username'])" [label]="'Username'"></app-text-input>
+       <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]="'Email'"></app-text-input>
+       <div class="mb-3">
+              <label style="margin-right:10px">Gender: </label>
+              <label class="form-check-label">
+                     <input type="radio" value="male" formControlName="gender">Male
+              </label>
+              <label class="form-check-label">
+                     <input type="radio" class="ms-2" value="female" formControlName="gender">Female
+              </label>
+       </div>
+       <app-text-input [formControl]="$any(registerForm.controls['dateOfBirth'])" [label]="'Date of birth'" [type]="'date'"></app-text-input>
+       <app-text-input [formControl]="$any(registerForm.controls['password'])" [label]="'Password'" [type]="'password'"></app-text-input>
+       <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])"  [label]="'Confirm password'" [type]="'password'"></app-text-input>
+
+       <div class="form-group text-center">
+              <button [disabled]="!registerForm.valid" class="btn btn-success me-2" type="submit">Register</button>
+            </div>
+     </form>
+     

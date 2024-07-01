@@ -4,6 +4,6 @@ namespace API.Database
 {
     public class AppUser : IdentityUser<int>
     {
-        public DateTime DateOfBirth { get; set; }
+        public DateOnly DateOfBirth { get; set; }
     }
 }

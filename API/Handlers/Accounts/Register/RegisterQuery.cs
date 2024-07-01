@@ -1,13 +1,25 @@
 ﻿using MediatR;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Handlers.Accounts.Register
 {
     public class RegisterQuery : IRequest<RegisterQueryResult>
     {
+        [Required]
         public string UserName { get; set; }
+
+        [Required]
         public string Password { get; set; }
+
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
-        public DateTime DateOfBirth { get; set; }
+
+        [Required]
+        public string Gender { get; set; }
+
+        [Required]
+        public DateOnly? DateOfBirth { get; set; }
 
     }
 }

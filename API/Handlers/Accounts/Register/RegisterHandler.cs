@@ -27,7 +27,7 @@ namespace API.Handlers.Accounts.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
-                DateOfBirth = request.DateOfBirth,
+                DateOfBirth = (DateOnly)request.DateOfBirth,
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);

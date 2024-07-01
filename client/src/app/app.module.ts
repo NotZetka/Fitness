@@ -11,7 +11,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component'
 import { RegisterComponent } from './Accounts/register/register.component';
 import { LoginComponent } from './Accounts/login/login.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import { TextInputComponent } from './_forms/text-input/text-input.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {FormsModule} from "@angular/forms";
     NavBarComponent,
     HomeComponent,
     RegisterComponent,
-    LoginComponent
+    LoginComponent,
+    TextInputComponent
   ],
     imports: [
         BrowserModule,
@@ -28,7 +30,8 @@ import {FormsModule} from "@angular/forms";
         HttpClientModule,
         BrowserAnimationsModule,
         BsDropdownModule.forRoot(),
-        FormsModule
+        FormsModule,
+        ReactiveFormsModule
     ],
   providers: [provideAnimations()],
   bootstrap: [AppComponent]
