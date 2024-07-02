@@ -1,6 +1,10 @@
 using API.Database;
+using API.Handlers.Accounts.Login;
+using API.Handlers.Accounts.Register;
 using API.Middleware;
 using API.Services;
+using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -36,6 +40,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+builder.Services.AddTransient<IValidator<LoginQuery>, LoginQueryValidator>();
+builder.Services.AddTransient<IValidator<RegisterQuery>, RegisterQueryValidator>();
 
 builder.Services.AddAuthorization(opt =>
 {

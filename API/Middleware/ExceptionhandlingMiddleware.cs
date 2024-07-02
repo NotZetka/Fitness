@@ -1,4 +1,5 @@
 ﻿using API.Exceptions.Accounts;
+using FluentValidation;
 using Newtonsoft.Json;
 
 namespace API.Middleware
@@ -17,6 +18,12 @@ namespace API.Middleware
             try
             {
                 await _next(httpContext);
+            }
+            catch (ValidationException ex)
+            {
+                var errorMessages = ex.Errors.Select(x => $"{x.PropertyName} : {x.ErrorMessage}");
+                var message = string.Join(' ', errorMessages);
+                await HandleExceptionAsync(httpContext, message, StatusCodes.Status400BadRequest);
             }
             catch (IdentityException ex)
             {
