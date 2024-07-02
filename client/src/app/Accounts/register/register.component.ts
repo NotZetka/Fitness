@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {AbstractControl, FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from "@angular/forms";
-import { Router } from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators} from "@angular/forms";
+import {AccountService} from "../../_services/account.service";
 
 @Component({
   selector: 'app-register',
@@ -11,7 +10,7 @@ import { Router } from '@angular/router';
 export class RegisterComponent implements OnInit{
     registerForm : FormGroup = new FormGroup({});
 
-  constructor(private http: HttpClient, private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
   }
 
   ngOnInit(): void {
@@ -19,10 +18,7 @@ export class RegisterComponent implements OnInit{
     }
 
   register(){
-    console.log(this.registerForm)
-    this.http.post('https://localhost:7186/Accounts/Register', this.registerForm.value).subscribe({
-      next: () => this.router.navigateByUrl('/')
-    })
+   this.accountService.register(this.registerForm.value)
   }
 
   initializeForm(){

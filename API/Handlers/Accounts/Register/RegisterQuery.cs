@@ -19,7 +19,7 @@ namespace API.Handlers.Accounts.Register
         public string Gender { get; set; }
 
         [Required]
-        public DateOnly? DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
     }
 }

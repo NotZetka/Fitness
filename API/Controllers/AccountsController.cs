@@ -1,8 +1,6 @@
-﻿using API.Database;
-using API.Handlers.Accounts.Login;
+﻿using API.Handlers.Accounts.Login;
 using API.Handlers.Accounts.Register;
 using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -24,7 +22,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(LoginQuery query)
+        public async Task<ActionResult<LoginQueryResult>> Login(LoginQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);

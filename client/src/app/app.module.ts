@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
@@ -13,6 +13,7 @@ import { RegisterComponent } from './Accounts/register/register.component';
 import { LoginComponent } from './Accounts/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TextInputComponent } from './_forms/text-input/text-input.component';
+import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,10 @@ import { TextInputComponent } from './_forms/text-input/text-input.component';
         FormsModule,
         ReactiveFormsModule
     ],
-  providers: [provideAnimations()],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    provideAnimations()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

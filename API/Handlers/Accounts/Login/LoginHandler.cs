@@ -34,11 +34,9 @@ namespace API.Handlers.Accounts.Login
 
             if (!result) throw new InvalidPasswordException();
 
-            var userDto = _mapper.Map<UserDto>(user);
-
             var token = await _tokenService.CreateToken(user);
 
-            return new LoginQueryResult { User = userDto, Token = token };
+            return new LoginQueryResult { Username = user.UserName!, Token = token };
         }
     }
 }

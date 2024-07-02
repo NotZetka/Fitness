@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {User} from "../../_models/User";
+import {AccountService} from "../../_services/account.service";
 
 @Component({
   selector: 'app-login',
@@ -6,5 +11,24 @@ import { Component } from '@angular/core';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  loginForm : FormGroup = new FormGroup({});
+
+  constructor(private formBuilder: FormBuilder, private accountService: AccountService) {
+  }
+
+  ngOnInit(): void {
+    this.initializeForm()
+  }
+
+  login(){
+    this.accountService.login(this.loginForm.value)
+  }
+
+  initializeForm(){
+    this.loginForm = this.formBuilder.group({
+      usernameOrEmail: ['', Validators.required],
+      password: ['', [Validators.required]]
+    })
+  }
 
 }

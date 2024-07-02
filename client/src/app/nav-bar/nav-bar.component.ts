@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
+import {AccountService} from "../_services/account.service";
 
 @Component({
   selector: 'app-nav-bar',
@@ -9,4 +10,9 @@ import { BsDropdownConfig } from 'ngx-bootstrap/dropdown';
 })
 export class NavBarComponent {
 
+  constructor(public accountService: AccountService) {}
+
+  logout(){
+    this.accountService.logout()
+  }
 }

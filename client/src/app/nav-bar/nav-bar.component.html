@@ -22,8 +22,11 @@
           </li>
         </ul>
         <div class="d-flex justify-content-center align-items-center">
-            <a routerLink="/login" routerLinkActive="active" class="text-white text-decoration-none">Login</a>
-            <a routerLink="/register" routerLinkActive="active" class="text-white text-decoration-none mx-2 px-2 py-1 rounded-4" style="background-color: rgb(128, 128, 128);">Sign Up</a>
+            <ng-container *ngIf="!(accountService.currentUser$ | async)">
+              <a routerLink="/login" routerLinkActive="active" class="text-white text-decoration-none">Login</a>
+              <a routerLink="/register" routerLinkActive="active" class="text-white text-decoration-none mx-2 px-2 py-1 rounded-4" style="background-color: rgb(128, 128, 128);">Sign Up</a>
+            </ng-container>
+            <div *ngIf="accountService.currentUser$ | async" class="btn text-white text-decoration-none mx-2 px-2 py-1 rounded-4" (click)="logout()" >Logout</div>
         </div>
       </div>
     </div>

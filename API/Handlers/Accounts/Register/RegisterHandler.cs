@@ -1,5 +1,6 @@
 ﻿using API.Database;
 using API.Exceptions;
+using API.Services;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,11 +11,13 @@ namespace API.Handlers.Accounts.Register
     {
         private readonly DataContext _context;
         private readonly UserManager<AppUser> _userManager;
+        private readonly ITokenService _tokenService;
 
-        public RegisterHandler(DataContext context, UserManager<AppUser> userManager)
+        public RegisterHandler(DataContext context, UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _context = context;
             _userManager = userManager;
+            _tokenService = tokenService;
         }
         public async Task<RegisterQueryResult> Handle(RegisterQuery request, CancellationToken cancellationToken)
         {
@@ -27,7 +30,8 @@ namespace API.Handlers.Accounts.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
-                DateOfBirth = (DateOnly)request.DateOfBirth,
+                DateOfBirth = request.DateOfBirth.Value,
+                Gender = request.Gender,
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -38,7 +42,9 @@ namespace API.Handlers.Accounts.Register
 
             if (!roleResult.Succeeded) throw new IdentityException(roleResult.Errors);
 
-            return new RegisterQueryResult();
+            var token = await _tokenService.CreateToken(user);
+
+            return new RegisterQueryResult { Username = user.UserName, Token = token};
         }
     }
 }

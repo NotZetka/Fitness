@@ -1,1 +1,8 @@
-<p>login works!!!</p>
+<form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
+  <hr>
+  <app-text-input [formControl]="$any(loginForm.controls['usernameOrEmail'])" [label]="'Username or email'"></app-text-input>
+  <app-text-input [formControl]="$any(loginForm.controls['password'])" [label]="'Password'" [type]="'password'"></app-text-input>
+  <div class="form-group text-center">
+    <button [disabled]="!loginForm.valid" class="btn btn-success me-2" type="submit">Login</button>
+  </div>
+</form>
