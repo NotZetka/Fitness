@@ -1,5 +1,6 @@
 ﻿using API.Database;
 using API.Exceptions;
+using API.Exceptions.Accounts;
 using API.Services;
 using MediatR;
 using Microsoft.AspNetCore.Identity;

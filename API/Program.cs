@@ -1,4 +1,5 @@
 using API.Database;
+using API.Middleware;
 using API.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -44,6 +45,8 @@ builder.Services.AddAuthorization(opt =>
 
 
 var app = builder.Build();
+
+app.UseMiddleware<ExceptionhandlingMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

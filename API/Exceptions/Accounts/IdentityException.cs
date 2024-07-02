@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace API.Exceptions
+namespace API.Exceptions.Accounts
 {
     public class IdentityException : Exception
     {
