@@ -1,6 +1,7 @@
 ﻿using API.Exceptions.Accounts;
 using FluentValidation;
 using Newtonsoft.Json;
+using Serilog;
 
 namespace API.Middleware
 {
@@ -64,6 +65,7 @@ namespace API.Middleware
             context.Response.StatusCode = statusCode;
 
             var result = JsonConvert.SerializeObject(new { error = message });
+            Log.Error(result);
             return context.Response.WriteAsync(result);
         }
     }
