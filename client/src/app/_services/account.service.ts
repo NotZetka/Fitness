@@ -3,6 +3,7 @@ import {User} from "../_models/User";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {BehaviorSubject} from "rxjs";
+import {ToastrService} from "ngx-toastr";
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +13,19 @@ export class AccountService {
   private currentUser = new BehaviorSubject<User | null>(null);
   currentUser$ = this.currentUser.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router,private toastr: ToastrService) { }
 
   login(form : any){
     this.http.post<User>(this.baseUrl + 'Login', form).subscribe({
       next: response => {
         if(response){
           this.setCurrentUser(response)
+          this.toastr.success('Successfully logged in')
         }
         this.router.navigateByUrl('/')
+      },
+      error: error =>{
+        this.toastr.error(error.error.error);
       }
     })
   }
@@ -30,8 +35,12 @@ export class AccountService {
       next: response => {
         if(response){
           this.setCurrentUser(response)
+          this.toastr.success('Successfully registered')
         }
         this.router.navigateByUrl('/')
+      },
+      error: error =>{
+        this.toastr.error(error.error.error);
       }
     })
   }
@@ -39,6 +48,7 @@ export class AccountService {
   logout(){
     localStorage.removeItem('user')
     this.currentUser.next(null)
+    this.toastr.success('Successfully logout')
   }
 
   setCurrentUser(user: User){
