@@ -1,4 +1,5 @@
-﻿using API.Exceptions.Accounts;
+﻿using API.Exceptions;
+using API.Exceptions.Accounts;
 using FluentValidation;
 using Newtonsoft.Json;
 using Serilog;
@@ -31,30 +32,21 @@ namespace API.Middleware
                 var message = string.Join(' ', ex.Errors.Select(x=>x.Description));
                 await HandleExceptionAsync(httpContext, message, StatusCodes.Status500InternalServerError);
             }
-            catch (InvalidPasswordException)
+            catch (UnauthorizedException ex)
             {
-                var message = "invalid password";
-                await HandleExceptionAsync(httpContext, message, StatusCodes.Status401Unauthorized);
+                await HandleExceptionAsync(httpContext, ex.Message, StatusCodes.Status401Unauthorized);
             }
-            catch (UserNotFountException ex)
+            catch (NotFoundException ex)
             {
-                var message = ex.UsernameOrEmail.Contains('@') ?
-                    $"user with email: {ex.UsernameOrEmail} has not been found" :
-                    $"user with username: {ex.UsernameOrEmail} has not been found";
-                await HandleExceptionAsync(httpContext, message, StatusCodes.Status404NotFound);
+                await HandleExceptionAsync(httpContext, ex.Message, StatusCodes.Status404NotFound);
             }
-            catch (EmailAlreadyExistsException)
+            catch (ForbiddenException ex)
             {
-                var message = "Email already exists";
-                await HandleExceptionAsync(httpContext, message, StatusCodes.Status403Forbidden);
+                await HandleExceptionAsync(httpContext, ex.Message, StatusCodes.Status403Forbidden);
             }
-            catch (UsernameAlreadyExistsException)
+            catch (Exception ex)
             {
-                var message = "User already exists";
-                await HandleExceptionAsync(httpContext, message, StatusCodes.Status403Forbidden);
-            }
-            catch (Exception)
-            {
+                Log.Error(ex.Message, ex);
                 await HandleExceptionAsync(httpContext, "Something went wrong", StatusCodes.Status500InternalServerError);
             }
         }

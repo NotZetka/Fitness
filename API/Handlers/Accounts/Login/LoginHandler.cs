@@ -1,6 +1,5 @@
-﻿using API.Data.Dtos;
-using API.Database;
-using API.Exceptions.Accounts;
+﻿using API.Data;
+using API.Exceptions;
 using API.Services;
 using AutoMapper;
 using MediatR;
@@ -28,11 +27,17 @@ namespace API.Handlers.Accounts.Login
                 _userManager.Users.FirstOrDefault(x=>x.Email.ToLower() == request.UsernameOrEmail.ToLower()) :
                 _userManager.Users.FirstOrDefault(x => x.UserName.ToLower() == request.UsernameOrEmail.ToLower());
 
-            if (user == null) throw new UserNotFountException(request.UsernameOrEmail);
+            if (user == null)
+            {
+                var message = request.UsernameOrEmail.Contains('@') ?
+                    $"user with email: {request.UsernameOrEmail} has not been found" :
+                    $"user with username: {request.UsernameOrEmail} has not been found";
+                throw new NotFoundException(message);
+            }
 
             var result = await _userManager.CheckPasswordAsync(user, request.Password);
 
-            if (!result) throw new InvalidPasswordException();
+            if (!result) throw new UnauthorizedException("invalid password");
 
             var token = await _tokenService.CreateToken(user);
 

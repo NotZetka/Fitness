@@ -1,4 +1,4 @@
-﻿using API.Database;
+﻿using API.Data;
 using API.Exceptions;
 using API.Exceptions.Accounts;
 using API.Services;
@@ -23,9 +23,9 @@ namespace API.Handlers.Accounts.Register
         public async Task<RegisterQueryResult> Handle(RegisterQuery request, CancellationToken cancellationToken)
         {
             if (await _context.Users.FirstOrDefaultAsync(x =>
-                x.UserName.ToLower() == request.UserName.ToLower()) != null) throw new UsernameAlreadyExistsException();
+                x.UserName.ToLower() == request.UserName.ToLower()) != null) throw new ForbiddenException("User already exists");
             if (await _context.Users.FirstOrDefaultAsync(x =>
-                x.Email.ToLower() == request.Email.ToLower()) != null) throw new EmailAlreadyExistsException();
+                x.Email.ToLower() == request.Email.ToLower()) != null) throw new ForbiddenException("Email already exists");
 
             var user = new AppUser()
             {

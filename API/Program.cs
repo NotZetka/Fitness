@@ -1,12 +1,7 @@
-using API.Database;
-using API.Handlers.Accounts.Login;
-using API.Handlers.Accounts.Register;
 using API.Middleware;
 using API.Services;
-using FluentValidation;
-using MediatR;
+using API.Utilities.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
@@ -15,20 +10,16 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DataContext>(options =>
-       options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddIdentityCore<AppUser>()
-    .AddRoles<AppUserRole>()
-    .AddRoleManager<RoleManager<AppUserRole>>()
-    .AddEntityFrameworkStores<DataContext>()
-    .AddDefaultTokenProviders();
+builder.Services.AddDatabaseWithIdentities(builder.Configuration.GetConnectionString("DefaultConnection"));
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddControllers();
 builder.Services.AddCors();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -45,9 +36,7 @@ Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 builder.Host.UseSerilog();
-builder.Services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-builder.Services.AddTransient<IValidator<LoginQuery>, LoginQueryValidator>();
-builder.Services.AddTransient<IValidator<RegisterQuery>, RegisterQueryValidator>();
+builder.Services.AddValidatiors();
 
 builder.Services.AddAuthorization(opt =>
 {
@@ -58,6 +47,8 @@ builder.Services.AddAuthorization(opt =>
 
 var app = builder.Build();
 
+app.ApplyMigrations();
+await app.AddIdentitiesToDb();
 app.UseMiddleware<ExceptionhandlingMiddleware>();
 app.UseSerilogRequestLogging();
 
@@ -79,19 +70,5 @@ app.UseCors(opt => opt
     .WithOrigins("http://localhost:4200")
     );
 app.MapControllers();
-
-var roleManager = app.Services.CreateScope().ServiceProvider.GetRequiredService<RoleManager<AppUserRole>>();
-var roles = new List<AppUserRole>
-            {
-                new AppUserRole{Name = "Member"},
-                new AppUserRole{Name = "Admin"},
-                new AppUserRole{Name = "Moderator"},
-            };
-
-foreach (var role in roles)
-{
-    if(await roleManager.FindByNameAsync(role.Name) == null)
-        await roleManager.CreateAsync(role);
-}
 
 app.Run();

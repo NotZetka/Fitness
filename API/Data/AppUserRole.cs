@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace API.Database
+namespace API.Data
 {
     public class AppUserRole : IdentityRole<int>
     {

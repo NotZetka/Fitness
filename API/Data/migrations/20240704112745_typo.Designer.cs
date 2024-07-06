@@ -4,6 +4,7 @@ using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace API.Data.migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240704112745_typo")]
+    partial class typo
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,6 +139,7 @@ namespace API.Data.migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("FitnessPlanId")
@@ -152,34 +156,6 @@ namespace API.Data.migrations
                     b.ToTable("Exercises");
                 });
 
-            modelBuilder.Entity("API.Data.ExerciseTemplate", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("FitnessPlanTemaplteId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("FitnessPlanTemplateId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FitnessPlanTemplateId");
-
-                    b.ToTable("ExerciseTemplates");
-                });
-
             modelBuilder.Entity("API.Data.FitnessPlan", b =>
                 {
                     b.Property<int>("Id")
@@ -194,9 +170,6 @@ namespace API.Data.migrations
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TemplateId")
-                        .HasColumnType("int");
 
                     b.Property<int>("UserId")
                         .HasColumnType("int");
@@ -218,6 +191,10 @@ namespace API.Data.migrations
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Exercises")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -257,7 +234,7 @@ namespace API.Data.migrations
 
                     b.HasIndex("ExerciseId");
 
-                    b.ToTable("Records");
+                    b.ToTable("Record");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -374,21 +351,10 @@ namespace API.Data.migrations
                     b.Navigation("FitnessPlan");
                 });
 
-            modelBuilder.Entity("API.Data.ExerciseTemplate", b =>
-                {
-                    b.HasOne("API.Data.FitnessPlanTemplate", "FitnessPlanTemplate")
-                        .WithMany("Exercises")
-                        .HasForeignKey("FitnessPlanTemplateId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("FitnessPlanTemplate");
-                });
-
             modelBuilder.Entity("API.Data.FitnessPlan", b =>
                 {
                     b.HasOne("API.Data.AppUser", "User")
-                        .WithMany("FitnessPlans")
+                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -399,7 +365,7 @@ namespace API.Data.migrations
             modelBuilder.Entity("API.Data.FitnessPlanTemplate", b =>
                 {
                     b.HasOne("API.Data.AppUser", "Author")
-                        .WithMany("FitnessPlansTemplates")
+                        .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -469,24 +435,12 @@ namespace API.Data.migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("API.Data.AppUser", b =>
-                {
-                    b.Navigation("FitnessPlans");
-
-                    b.Navigation("FitnessPlansTemplates");
-                });
-
             modelBuilder.Entity("API.Data.Exercise", b =>
                 {
                     b.Navigation("Records");
                 });
 
             modelBuilder.Entity("API.Data.FitnessPlan", b =>
-                {
-                    b.Navigation("Exercises");
-                });
-
-            modelBuilder.Entity("API.Data.FitnessPlanTemplate", b =>
                 {
                     b.Navigation("Exercises");
                 });
