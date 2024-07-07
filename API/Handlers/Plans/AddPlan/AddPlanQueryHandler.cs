@@ -21,7 +21,7 @@ namespace API.Handlers.Plans.AddPlan
             var planTemplate = _context
                 .FitnessPlanTemplates
                 .Include(x=>x.Exercises)
-                .Where(x => x.Public)
+                .Where(x => x.Public || x.AuthorId == _userService.GetCurrentUserId())
                 .FirstOrDefault(x => x.Id == request.Id);
 
             if (planTemplate == null) throw new NotFoundException($"Plan with id {request.Id} has not been found");
@@ -30,17 +30,21 @@ namespace API.Handlers.Plans.AddPlan
 
             if (user.FitnessPlans.Select(x => x.TemplateId).Contains(planTemplate.Id)) return new AddPlanQueryResult();
 
+            var exercises = planTemplate.Exercises
+                .SelectMany(x => Enumerable.Repeat(new Exercise
+                {
+                    Name = x.Name,
+                    Description = x.Description
+                }, x.Sets))
+                .ToList() ?? new List<Exercise>();
+
             var plan = new FitnessPlan
             {
                 TemplateId = planTemplate.Id,
                 Archived = false,
                 User = user,
                 Name = planTemplate.Name,
-                Exercises = planTemplate.Exercises.Select(x => new Exercise
-                {
-                    Name = x.Name,
-                    Description = x.Description,
-                }).ToList(),
+                Exercises = exercises,
             };
 
             await _context.FitnessPlans.AddAsync(plan);

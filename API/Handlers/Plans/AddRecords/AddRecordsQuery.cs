@@ -7,7 +7,7 @@ namespace API.Handlers.Plans.AddRecord
         public IEnumerable<QueryRecord> Records { get; set; }
         public class QueryRecord
         {
-            public int RecordId { get; set; }
+            public int ExerciseId { get; set; }
             public int Weight { get; set; }
             public int Repetitions { get; set; }
         }

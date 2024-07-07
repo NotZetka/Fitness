@@ -22,7 +22,7 @@ namespace API.Handlers.Plans.AddRecord
 
             foreach (var exercise in exercises)
             {
-                var record = request.Records.FirstOrDefault(x => x.RecordId == exercise.Id);
+                var record = request.Records.FirstOrDefault(x => x.ExerciseId == exercise.Id);
                 if (record != null) exercise.Records.Add(new Record { 
                     Date = DateTime.Today,
                     Weight = record.Weight,

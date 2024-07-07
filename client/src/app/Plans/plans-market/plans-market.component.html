@@ -1,0 +1,32 @@
+<div class="container">
+  <hr>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Author</th>
+      <th>Exercises</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let plan of plans">
+      <tr>
+        <td>{{plan.name}}</td>
+        <td>{{plan.authorName}}</td>
+        <td *ngIf="plan.show"><button class="btn" (click)="plan.show = !plan.show"> &#9650;</button></td>
+        <td *ngIf="!plan.show"><button class="btn" (click)="plan.show = !plan.show"> &#9660;</button></td>
+        <td><button class="btn btn-success" (click)="addPlan(plan.planId)">+</button> </td>
+      </tr>
+      <ng-container *ngIf="plan.show">
+        <tr class="table-secondary" *ngFor="let exercise of plan.exercises">
+          <td>{{exercise.name}}</td>
+          <td>{{exercise.description}}</td>
+          <td>{{exercise.sets}}</td>
+          <td></td>
+        </tr>
+      </ng-container>
+    </ng-container>
+    </tbody>
+  </table>
+</div>

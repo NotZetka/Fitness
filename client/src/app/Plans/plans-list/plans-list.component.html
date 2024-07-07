@@ -1,0 +1,52 @@
+<div class="container justify-content-center">
+  <hr>
+  <div class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th style="width: 80%">Name</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let plan of plans">
+        <tr *ngIf="!plan.archived">
+          <td>{{plan.name}}</td>
+          <td><button class="btn btn-secondary" routerLink="/plans/list/{{plan.id}}" >Details</button> </td>
+          <td><button class="btn btn-success" (click)="archivePlan(plan.id)">Archive</button> </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+    <ng-container *ngIf="!showArchived">
+      <div class="text-center">
+        <button class="btn btn-secondary" (click)="showArchived=!showArchived">Show archived</button>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="showArchived">
+      <div class="text-center">
+        <button class="btn btn-secondary mb-3" (click)="showArchived=!showArchived">Hide archived</button>
+      </div>
+
+      <div class="row">
+        <table class="table">
+          <thead>
+          <tr>
+            <th style="width: 80%">Name</th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <ng-container *ngFor="let plan of plans">
+            <tr *ngIf="plan.archived">
+              <td>{{plan.name}}</td>
+              <td><button class="btn btn-dark" (click)="archivePlan(plan.id)">Unarchive</button> </td>
+            </tr>
+          </ng-container>
+          </tbody>
+        </table>
+      </div>
+    </ng-container>
+</div>

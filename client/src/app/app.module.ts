@@ -17,6 +17,11 @@ import {JwtInterceptor} from "./_interceptors/jwt.interceptor";
 import {ToastrModule} from "ngx-toastr";
 import {NgxSpinnerModule} from "ngx-spinner";
 import {loadingInterceptor} from "./_interceptors/loading.interceptor";
+import { PlansMainComponent } from './Plans/plans-main/plans-main.component';
+import { PlansCreateComponent } from './Plans/plans-create/plans-create.component';
+import { PlansMarketComponent } from './Plans/plans-market/plans-market.component';
+import { PlansListComponent } from './Plans/plans-list/plans-list.component';
+import { PlansDetailComponent } from './Plans/plans-detail/plans-detail.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,12 @@ import {loadingInterceptor} from "./_interceptors/loading.interceptor";
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    TextInputComponent
+    TextInputComponent,
+    PlansMainComponent,
+    PlansCreateComponent,
+    PlansMarketComponent,
+    PlansListComponent,
+    PlansDetailComponent
   ],
     imports: [
         BrowserModule,

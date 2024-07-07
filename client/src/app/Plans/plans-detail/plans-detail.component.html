@@ -1,0 +1,41 @@
+<div class="container">
+  <hr>
+  <h1 class="text-center">{{plan?.name}}</h1>
+  <hr>
+  <table class="table">
+    <thead>
+      <tr class="text-center">
+        <th class="align-middle" rowspan="2">Exercise</th>
+        <th colspan="2">Record</th>
+        <th colspan="2">Last</th>
+        <th colspan="2">Difference</th>
+        <th colspan="2">Current</th>
+      </tr>
+      <tr>
+        <th>Weight</th>
+        <th>Reps</th>
+        <th>Weight</th>
+        <th>Reps</th>
+        <th>Weight</th>
+        <th>Reps</th>
+        <th>Weight</th>
+        <th>Reps</th>
+      </tr>
+    </thead>
+    <tbody>
+    <ng-container *ngFor="let exercise of plan?.exercises">
+      <tr>
+        <td>{{exercise.name}}</td>
+        <td>{{recordWeight(exercise.records)?.weight ?? 0}}</td>
+        <td>{{recordWeight(exercise.records)?.repetitions ?? 0}}</td>
+        <td>{{exercise.records.pop()?.weight ?? 0}}</td>
+        <td>{{exercise.records.pop()?.repetitions ?? 0}}</td>
+        <td>{{(exercise.records.pop()?.weight ?? 0) - (exercise.records.pop()?.weight ?? 0)}}</td>
+        <td>{{(exercise.records.pop()?.repetitions ?? 0) - (exercise.records.pop()?.repetitions ?? 0)}}</td>
+      </tr>
+    </ng-container>
+    </tbody>
+  </table>
+</div>
+
+

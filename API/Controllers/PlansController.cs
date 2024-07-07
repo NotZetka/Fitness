@@ -30,7 +30,6 @@ namespace API.Controllers
         }
 
         [HttpGet("Templates")]
-        [AllowAnonymous]
         public async Task<ActionResult> GetPlanTemplates()
         {
             var query = new GetPlanTemplatesQuery();
