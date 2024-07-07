@@ -18,11 +18,11 @@ namespace API.Handlers.Plans.AddPlan
         }
         public async Task<AddPlanQueryResult> Handle(AddPlanQuery request, CancellationToken cancellationToken)
         {
-            var planTemplate = _context
+            var planTemplate = await _context
                 .FitnessPlanTemplates
                 .Include(x=>x.Exercises)
                 .Where(x => x.Public || x.AuthorId == _userService.GetCurrentUserId())
-                .FirstOrDefault(x => x.Id == request.Id);
+                .FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (planTemplate == null) throw new NotFoundException($"Plan with id {request.Id} has not been found");
 
@@ -31,12 +31,14 @@ namespace API.Handlers.Plans.AddPlan
             if (user.FitnessPlans.Select(x => x.TemplateId).Contains(planTemplate.Id)) return new AddPlanQueryResult();
 
             var exercises = planTemplate.Exercises
-                .SelectMany(x => Enumerable.Repeat(new Exercise
-                {
-                    Name = x.Name,
-                    Description = x.Description
-                }, x.Sets))
-                .ToList() ?? new List<Exercise>();
+                .SelectMany(x => Enumerable.Range(1, x.Sets)
+                    .Select(_ => new Exercise
+                    {
+                        Name = x.Name,
+                        Description = x.Description
+                    })
+                ).ToList();
+
 
             var plan = new FitnessPlan
             {
@@ -47,7 +49,7 @@ namespace API.Handlers.Plans.AddPlan
                 Exercises = exercises,
             };
 
-            await _context.FitnessPlans.AddAsync(plan);
+            _context.FitnessPlans.Add(plan);
             await _context.SaveChangesAsync();
 
             return new AddPlanQueryResult();

@@ -1,7 +1,8 @@
-import {Record} from "./record";
+import {Rec} from "./rec";
 
 export interface Exercise {
+  id: number;
   name: string;
   description: string;
-  records: Record[];
+  records: Rec[];
 }

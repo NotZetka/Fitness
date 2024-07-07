@@ -2,14 +2,16 @@
   <hr>
   <h1 class="text-center">{{plan?.name}}</h1>
   <hr>
-  <table class="table">
-    <thead>
+  <h3 class="text-center">Summary</h3>
+  <form [formGroup]="exerciseForm" (ngSubmit)="onSubmit()">
+    <table class="table">
+      <thead>
       <tr class="text-center">
         <th class="align-middle" rowspan="2">Exercise</th>
         <th colspan="2">Record</th>
         <th colspan="2">Last</th>
         <th colspan="2">Difference</th>
-        <th colspan="2">Current</th>
+        <th style="width: 20%" colspan="2">Current</th>
       </tr>
       <tr>
         <th>Weight</th>
@@ -21,21 +23,64 @@
         <th>Weight</th>
         <th>Reps</th>
       </tr>
-    </thead>
-    <tbody>
-    <ng-container *ngFor="let exercise of plan?.exercises">
-      <tr>
-        <td>{{exercise.name}}</td>
-        <td>{{recordWeight(exercise.records)?.weight ?? 0}}</td>
-        <td>{{recordWeight(exercise.records)?.repetitions ?? 0}}</td>
-        <td>{{exercise.records.pop()?.weight ?? 0}}</td>
-        <td>{{exercise.records.pop()?.repetitions ?? 0}}</td>
-        <td>{{(exercise.records.pop()?.weight ?? 0) - (exercise.records.pop()?.weight ?? 0)}}</td>
-        <td>{{(exercise.records.pop()?.repetitions ?? 0) - (exercise.records.pop()?.repetitions ?? 0)}}</td>
-      </tr>
-    </ng-container>
-    </tbody>
-  </table>
+      </thead>
+      <tbody formArrayName="exercises">
+      <ng-container *ngFor="let exercise of plan?.exercises; let i = index">
+        <tr [formGroupName]="i">
+          <td>{{exercise.name}}</td>
+          <td>{{recordWeight(exercise.records)?.weight ?? 0}}</td>
+          <td>{{recordWeight(exercise.records)?.repetitions ?? 0}}</td>
+          <td>{{exercise.records[exercise.records.length-1]?.weight ?? 0}}</td>
+          <td>{{exercise.records[exercise.records.length-1]?.repetitions ?? 0}}</td>
+          <td>{{(exercise.records[exercise.records.length-1]?.weight ?? 0) - (exercise.records[exercise.records.length-2]?.weight ?? 0)}}</td>
+          <td>{{(exercise.records[exercise.records.length-1]?.repetitions ?? 0) - (exercise.records[exercise.records.length-2]?.repetitions ?? 0)}}</td>
+          <td>
+            <input type="number" formControlName="weight" placeholder="Weight" class="form-control" />
+          </td>
+          <td>
+            <input type="number" formControlName="reps" placeholder="Reps" class="form-control"/>
+          </td>
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+    <button [disabled]="!exerciseForm.valid" type="submit" class="w-100 btn btn-success text-center">Save</button>
+  </form>
 </div>
 
 
+<div class="container justify-content-center">
+  <hr>
+  <h3 class="text-center">Details</h3>
+    <table class="table">
+      <thead>
+      <tr>
+        <th style="width: 20%">Name</th>
+        <th style="width: 70%">Description</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let exercise of plan?.exercises">
+        <tr>
+          <td>{{exercise.name}}</td>
+          <td>{{exercise.description}}</td>
+          <td *ngIf="showRecord.get(exercise.id)"><button class="btn" (click)="showRecord.set(exercise.id, !showRecord.get(exercise.id))"> &#9650;</button></td>
+          <td *ngIf="!showRecord.get(exercise.id)"><button class="btn" (click)="showRecord.set(exercise.id, !showRecord.get(exercise.id))"> &#9660;</button></td>
+        </tr>
+        <ng-container *ngIf="showRecord.get(exercise.id)">
+            <tr>
+              <th style="width: 50%">Date</th>
+              <th style="width: 25%">Weight</th>
+              <th style="width: 25%">Repetiotions</th>
+            </tr>
+              <tr *ngFor="let record of exercise.records">
+                <td>{{record.date}}</td>
+                <td>{{record.weight}}</td>
+                <td>{{record.repetitions}}</td>
+              </tr>
+        </ng-container>
+      </ng-container>
+      </tbody>
+    </table>
+</div>

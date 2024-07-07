@@ -3,7 +3,9 @@ import {ActivatedRoute} from "@angular/router";
 import {Plan} from "../models/plan";
 import {HttpClient} from "@angular/common/http";
 import {GetPlanQueryResult} from "../models/GetPlanQueryResult";
-import {Record} from "../models/record";
+import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AddRecordsQuery} from "../models/AddRecordsQuery";
+import {Rec} from "../models/rec";
 
 @Component({
   selector: 'app-plans-detail',
@@ -11,10 +13,12 @@ import {Record} from "../models/record";
   styleUrl: './plans-detail.component.css'
 })
 export class PlansDetailComponent implements OnInit {
+  exerciseForm: FormGroup = new FormGroup({})
   planId? : number;
   plan? : Plan;
+  showRecord : Map<number,boolean> = new Map<number, boolean>();
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) { }
+  constructor(private route: ActivatedRoute, private http: HttpClient, private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
@@ -22,15 +26,55 @@ export class PlansDetailComponent implements OnInit {
     });
     this.http.get<GetPlanQueryResult>('https://localhost:7186/plans/'+this.planId).subscribe({
       next: response => {
-        this.plan = response.plan;
+        this.plan = response.plan
+        this.plan.exercises.map(exercise => {
+          this.showRecord.set(exercise.id, false);
+        })
+        this.initializeForm();
+      },
+      error: (err) => {
+        console.error(err);
       }
     })
   }
 
-  recordWeight(records: Record[]){
+  initializeForm(): void {
+    const exerciseFormGroups = this.plan?.exercises.map(exercise => this.formBuilder.group({
+      weight: ['',[Validators.required]],
+      reps: ['1', [Validators.required, Validators.min(1)]],
+      exerciseId: [exercise.id]
+    })) || [];
+
+    this.exerciseForm = this.formBuilder.group({
+      exercises: this.formBuilder.array(exerciseFormGroups)
+    });
+  }
+
+  get exercises(): FormArray {
+    return this.exerciseForm.get('exercises') as FormArray;
+  }
+
+  recordWeight(records: Rec[]){
     let weights = records.map(x=>x.weight)
     let maxValue =  Math.max(...weights);
     let record  = records.filter(x=>x.weight == maxValue).pop()
     return record;
+  }
+
+  onSubmit(): void {
+    const submittedData = this.exerciseForm.value.exercises.map((exercise: any, index: number) => ({
+      exerciseId: this.plan?.exercises[index].id,
+      weight: exercise.weight,
+      repetitions: exercise.reps
+    }));
+    const query : AddRecordsQuery =  {
+      records: submittedData,
+    }
+    console.log(query)
+    this.http.post('https://localhost:7186/plans/add', query).subscribe({
+      next: _ => {
+        this.ngOnInit()
+      }
+    })
   }
 }
