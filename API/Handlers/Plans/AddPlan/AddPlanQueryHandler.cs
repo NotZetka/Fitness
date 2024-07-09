@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Data.Repositories.PlansRepository;
 using API.Exceptions;
 using API.Services;
 using MediatR;
@@ -8,23 +9,20 @@ namespace API.Handlers.Plans.AddPlan
 {
     public class AddPlanQueryHandler : IRequestHandler<AddPlanQuery, AddPlanQueryResult>
     {
-        private readonly DataContext _context;
         private readonly IUserService _userService;
+        private readonly IPlansRepository _plansRepository;
 
-        public AddPlanQueryHandler(DataContext context, IUserService userService)
+        public AddPlanQueryHandler(IUserService userService, IPlansRepository plansRepository)
         {
-            _context = context;
             _userService = userService;
+            _plansRepository = plansRepository;
         }
         public async Task<AddPlanQueryResult> Handle(AddPlanQuery request, CancellationToken cancellationToken)
         {
-            var planTemplate = await _context
-                .FitnessPlanTemplates
-                .Include(x=>x.Exercises)
-                .Where(x => x.Public || x.AuthorId == _userService.GetCurrentUserId())
-                .FirstOrDefaultAsync(x => x.Id == request.Id);
+            var planTemplate = await _plansRepository.GetPlanTemplateByIdAsync(request.Id, true);
 
             if (planTemplate == null) throw new NotFoundException($"Plan with id {request.Id} has not been found");
+            if (planTemplate.AuthorId != _userService.GetCurrentUserId() && !planTemplate.Public) throw new ForbiddenException("You are not allowed to add this plan");
 
             var user = await _userService.GetCurrentUserAsync(includeFitnessPlans: true);
 
@@ -49,8 +47,8 @@ namespace API.Handlers.Plans.AddPlan
                 Exercises = exercises,
             };
 
-            _context.FitnessPlans.Add(plan);
-            await _context.SaveChangesAsync();
+            _plansRepository.AddFitnessPlan(plan);
+            await _plansRepository.SaveChangesAsync();
 
             return new AddPlanQueryResult();
         }

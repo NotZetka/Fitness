@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Data.Repositories.PlansRepository;
 using API.Services;
 using MediatR;
 
@@ -6,12 +7,12 @@ namespace API.Handlers.Plans.AddRecord
 {
     public class AddRecordsQueryHandler : IRequestHandler<AddRecordsQuery, AddRecordsQueryResult>
     {
-        private readonly DataContext _context;
+        private readonly IPlansRepository _plansRepository;
         private readonly IUserService _userService;
 
-        public AddRecordsQueryHandler(DataContext context, IUserService userService)
+        public AddRecordsQueryHandler(IPlansRepository plansRepository, IUserService userService)
         {
-            _context = context;
+            _plansRepository = plansRepository;
             _userService = userService;
         }
         public async Task<AddRecordsQueryResult> Handle(AddRecordsQuery request, CancellationToken cancellationToken)
@@ -30,7 +31,7 @@ namespace API.Handlers.Plans.AddRecord
                 });
             }
 
-            await _context.SaveChangesAsync();
+            await _plansRepository.SaveChangesAsync();
 
             return new AddRecordsQueryResult();
         }

@@ -1,23 +1,22 @@
 ﻿using API.Data;
+using API.Data.Repositories.PlansRepository;
 using API.Services;
 using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using static API.Data.FitnessPlanTemplate;
 
 namespace API.Handlers.Plans.Publish
 {
     public class PublishPlanQueryHandler : IRequestHandler<PublishPlanQuery, PublishPlanQueryResult>
     {
-        private readonly DataContext _context;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
+        private readonly IPlansRepository _plansRepository;
 
-        public PublishPlanQueryHandler(DataContext context, IUserService userService, IMapper mapper)
+        public PublishPlanQueryHandler(IUserService userService, IMapper mapper, IPlansRepository plansRepository)
         {
-            _context = context;
             _userService = userService;
             _mapper = mapper;
+            _plansRepository = plansRepository;
         }
 
         public async Task<PublishPlanQueryResult> Handle(PublishPlanQuery request, CancellationToken cancellationToken)
@@ -32,9 +31,9 @@ namespace API.Handlers.Plans.Publish
                 Exercises = request.Exercises.Select(_mapper.Map<ExerciseTemplate>).ToList()
             };
 
-            _context.FitnessPlanTemplates.Add(plan);
+            _plansRepository.AddFitnessPlanTemplate(plan);
 
-            await _context.SaveChangesAsync();
+            await _plansRepository.SaveChangesAsync();
 
             return new() { Id =  plan.Id };
         }

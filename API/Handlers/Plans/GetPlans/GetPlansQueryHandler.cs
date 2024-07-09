@@ -8,13 +8,11 @@ namespace API.Handlers.Plans.GetPlans
 {
     public class GetPlansQueryHandler : IRequestHandler<GetPlansQuery, GetPlansQueryResult>
     {
-        private readonly DataContext _context;
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
 
-        public GetPlansQueryHandler(DataContext context, IMapper mapper, IUserService userService)
+        public GetPlansQueryHandler(IMapper mapper, IUserService userService)
         {
-            _context = context;
             _mapper = mapper;
             _userService = userService;
         }

@@ -1,4 +1,4 @@
-﻿using API.Data;
+﻿using API.Data.Repositories.PlansRepository;
 using API.Exceptions;
 using API.Services;
 using MediatR;
@@ -8,17 +8,17 @@ namespace API.Handlers.Plans.ChangeVisibility
     public class ChangevisibilityQueryHandler : IRequestHandler<ChangevisibilityQuery, ChangevisibilityQueryResult>
     {
         private readonly IUserService _userService;
-        private readonly DataContext _context;
+        private readonly IPlansRepository _plansRepository;
 
-        public ChangevisibilityQueryHandler(IUserService userService, DataContext context)
+        public ChangevisibilityQueryHandler(IUserService userService, IPlansRepository plansRepository)
         {
             _userService = userService;
-            _context = context;
+            _plansRepository = plansRepository;
         }
         public async Task<ChangevisibilityQueryResult> Handle(ChangevisibilityQuery request, CancellationToken cancellationToken)
         {
             var userId = _userService.GetCurrentUserId();
-            var plan = _context.FitnessPlanTemplates.FirstOrDefault(x => x.Id == request.TemplateId);
+            var plan = await _plansRepository.GetPlanTemplateByIdAsync(request.TemplateId, false);
 
             if (plan == null) throw new NotFoundException($"Plan template with id: {request.TemplateId} has not been found");
 
@@ -26,7 +26,7 @@ namespace API.Handlers.Plans.ChangeVisibility
 
             plan.Public = !plan.Public;
 
-            await _context.SaveChangesAsync();
+            await _plansRepository.SaveChangesAsync();
 
             return new();
         }

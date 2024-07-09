@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Data.Repositories.UsersRepository;
 using API.Exceptions;
 using API.Exceptions.Accounts;
 using API.Services;
@@ -10,22 +11,20 @@ namespace API.Handlers.Accounts.Register
 {
     public class RegisterHandler : IRequestHandler<RegisterQuery, RegisterQueryResult>
     {
-        private readonly DataContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
+        private readonly IUsersRepository _accountsRepository;
 
-        public RegisterHandler(DataContext context, UserManager<AppUser> userManager, ITokenService tokenService)
+        public RegisterHandler(UserManager<AppUser> userManager, ITokenService tokenService, IUsersRepository accountsRepository)
         {
-            _context = context;
             _userManager = userManager;
             _tokenService = tokenService;
+            _accountsRepository = accountsRepository;
         }
         public async Task<RegisterQueryResult> Handle(RegisterQuery request, CancellationToken cancellationToken)
         {
-            if (await _context.Users.FirstOrDefaultAsync(x =>
-                x.UserName.ToLower() == request.UserName.ToLower()) != null) throw new ForbiddenException("User already exists");
-            if (await _context.Users.FirstOrDefaultAsync(x =>
-                x.Email.ToLower() == request.Email.ToLower()) != null) throw new ForbiddenException("Email already exists");
+            if (await _accountsRepository.FindUserByUsernamelAsync(request.UserName) != null) throw new ForbiddenException("User already exists");
+            if (await _accountsRepository.FindUserByEmailAsync(request.Email) != null) throw new ForbiddenException("Email already exists");
 
             var user = new AppUser()
             {

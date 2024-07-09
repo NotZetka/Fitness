@@ -1,4 +1,6 @@
 ﻿using API.Data;
+using API.Data.Repositories.PlansRepository;
+using API.Data.Repositories.UsersRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -41,6 +43,14 @@ namespace API.Utilities.Extensions
                 .AddRoleManager<RoleManager<AppUserRole>>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
+        }
+
+        public static IServiceCollection AddRepositories(this IServiceCollection services)
+        {
+            services.AddScoped<IPlansRepository, PlansRepository>();
+            services.AddScoped<IUsersRepository , UsersRepository>();
+
+            return services;
         }
 
     }

@@ -9,14 +9,12 @@ namespace API.Handlers.Accounts.Login
 {
     public class LoginHandler : IRequestHandler<LoginQuery, LoginQueryResult>
     {
-        private readonly DataContext _context;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
 
-        public LoginHandler(DataContext context, UserManager<AppUser> userManager, IMapper mapper, ITokenService tokenService)
+        public LoginHandler(UserManager<AppUser> userManager, IMapper mapper, ITokenService tokenService)
         {
-            _context = context;
             _userManager = userManager;
             _mapper = mapper;
             _tokenService = tokenService;
