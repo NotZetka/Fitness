@@ -1,5 +1,7 @@
 ﻿using API.Handlers.Accounts.Login;
 using API.Handlers.Accounts.Register;
+using API.Handlers.Messages.GetMessageThread;
+using API.Handlers.Messages.SendMessage;
 using API.Handlers.Plans.AddPlan;
 using API.Handlers.Plans.AddRecord;
 using API.Handlers.Plans.AddRecords;
@@ -20,6 +22,8 @@ namespace API.Utilities.Extensions
             services.AddTransient<IValidator<PublishPlanQuery>, PublicPlanQueryValidator>();
             services.AddTransient<IValidator<AddPlanQuery>, AddPlanQueryValidator>();
             services.AddTransient<IValidator<AddRecordsQuery>, AddRecordsQueryValidator>();
+            services.AddTransient<IValidator<SendMessageQuery>, SendMessageQueryValidator>();
+            services.AddTransient<IValidator<GetMessageThreadQuery>, GetMessageThreadQueryValidator>();
 
             return services;
         }

@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {PlanTemplateResponse} from "../models/planTemplateResponse";
 import {Router} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-plans-create',
@@ -10,6 +11,7 @@ import {Router} from "@angular/router";
   styleUrl: './plans-create.component.css'
 })
 export class PlansCreateComponent implements OnInit {
+  baseUrl  = environment.baseUrl;
   createPlanForm : FormGroup = new FormGroup({})
   exerciseForm: FormGroup = new FormGroup({})
   exercises : any[] = new Array<any>();
@@ -28,9 +30,9 @@ export class PlansCreateComponent implements OnInit {
       'public': this.createPlanForm.value['public']=='public'
     }
     console.log(result)
-    this.http.post<PlanTemplateResponse>('https://localhost:7186/Plans/Publish',result).subscribe({
+    this.http.post<PlanTemplateResponse>(this.baseUrl + 'Plans/Publish',result).subscribe({
       next: response => {
-        this.http.get('https://localhost:7186/Plans/add/'+response.id).subscribe({})
+        this.http.get(this.baseUrl + 'Plans/add/'+response.id).subscribe({})
         this.router.navigateByUrl('/plans/list')
       }
     })

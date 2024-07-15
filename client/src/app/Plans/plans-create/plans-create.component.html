@@ -1,6 +1,5 @@
 <div class="container col-6 justify-content-center">
   <form [formGroup]="createPlanForm" (ngSubmit)="submit()" autocomplete="off">
-    <hr>
     <app-text-input [formControl]="$any(createPlanForm.controls['name'])" [label]="'Name'"></app-text-input>
     <div class="mb-3 text-center">
       <label class="form-check-label">

@@ -4,6 +4,7 @@ import {HttpClient} from "@angular/common/http";
 import {GetPlanTemplatesQueryResult} from "../models/GetPlanTemplatesQueryResult";
 import {Router} from "@angular/router";
 import {add} from "ngx-bootstrap/chronos";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-plans-market',
@@ -11,12 +12,13 @@ import {add} from "ngx-bootstrap/chronos";
   styleUrl: './plans-market.component.css'
 })
 export class PlansMarketComponent implements OnInit {
+  baseUrl = environment.baseUrl;
     plans : Array<PlanTemplate> = new Array<PlanTemplate>();
 
     constructor(private http : HttpClient, private router: Router) {}
 
     ngOnInit(): void {
-      this.http.get<GetPlanTemplatesQueryResult>('https://localhost:7186/Plans/Templates/').subscribe({
+      this.http.get<GetPlanTemplatesQueryResult>(this.baseUrl + 'Plans/Templates/').subscribe({
         next: response => {
           this.plans = response.plans;
         }
@@ -24,7 +26,7 @@ export class PlansMarketComponent implements OnInit {
     }
 
     addPlan(id: number){
-      this.http.get('https://localhost:7186/Plans/add/'+id).subscribe({
+      this.http.get(this.baseUrl + 'Plans/add/'+id).subscribe({
         next: response => {
           this.router.navigateByUrl('/plans/list')
         }

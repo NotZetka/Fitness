@@ -6,6 +6,7 @@ import {GetPlanQueryResult} from "../models/GetPlanQueryResult";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AddRecordsQuery} from "../models/AddRecordsQuery";
 import {Rec} from "../models/rec";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-plans-detail',
@@ -13,7 +14,8 @@ import {Rec} from "../models/rec";
   styleUrl: './plans-detail.component.css'
 })
 export class PlansDetailComponent implements OnInit {
-  exerciseForm: FormGroup = new FormGroup({})
+  baseUrl = environment.baseUrl;
+  exerciseForm: FormGroup = new FormGroup({});
   planId? : number;
   plan? : Plan;
   showRecord : Map<number,boolean> = new Map<number, boolean>();
@@ -24,7 +26,7 @@ export class PlansDetailComponent implements OnInit {
     this.route.paramMap.subscribe(params => {
       this.planId = Number(params.get('id'));
     });
-    this.http.get<GetPlanQueryResult>('https://localhost:7186/plans/'+this.planId).subscribe({
+    this.http.get<GetPlanQueryResult>(this.baseUrl + 'plans/'+this.planId).subscribe({
       next: response => {
         this.plan = response.plan
         this.plan.exercises.map(exercise => {

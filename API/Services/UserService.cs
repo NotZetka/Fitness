@@ -1,7 +1,6 @@
 ﻿using API.Data;
-using API.Exceptions;
+using API.Utilities.Extensions;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Claims;
 
 namespace API.Services
 {
@@ -51,10 +50,8 @@ namespace API.Services
         public int GetCurrentUserId()
         {
             var user = _httpContext.User;
-            var id = user.Claims.First(x=>x.Type == ClaimTypes.NameIdentifier).Value;
-            if (id == null) throw new NotFoundException("User not found");
 
-            return int.Parse(id);
+            return user.GetUserId();
         }
     }
 }

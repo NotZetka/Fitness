@@ -9,5 +9,8 @@ namespace API.Data
 
         public IEnumerable<FitnessPlan> FitnessPlans { get; set; }
         public IEnumerable<FitnessPlanTemplate> FitnessPlansTemplates { get; set; }
+
+        public IEnumerable<Message> MessagesSend { get; set; }
+        public IEnumerable<Message> MessagesReceived { get; set; }
     }
 }

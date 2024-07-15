@@ -236,6 +236,44 @@ namespace API.Data.migrations
                     b.ToTable("FitnessPlanTemplates");
                 });
 
+            modelBuilder.Entity("API.Data.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateSend")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("ReceiverId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReceiverUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SenderId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SenderUsername")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReceiverId");
+
+                    b.HasIndex("SenderId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("API.Data.Record", b =>
                 {
                     b.Property<int>("Id")
@@ -410,6 +448,25 @@ namespace API.Data.migrations
                     b.Navigation("Author");
                 });
 
+            modelBuilder.Entity("API.Data.Message", b =>
+                {
+                    b.HasOne("API.Data.AppUser", "Receiver")
+                        .WithMany("MessagesReceived")
+                        .HasForeignKey("ReceiverId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("API.Data.AppUser", "Sender")
+                        .WithMany("MessagesSend")
+                        .HasForeignKey("SenderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Receiver");
+
+                    b.Navigation("Sender");
+                });
+
             modelBuilder.Entity("API.Data.Record", b =>
                 {
                     b.HasOne("API.Data.Exercise", "Exercise")
@@ -477,6 +534,10 @@ namespace API.Data.migrations
                     b.Navigation("FitnessPlans");
 
                     b.Navigation("FitnessPlansTemplates");
+
+                    b.Navigation("MessagesReceived");
+
+                    b.Navigation("MessagesSend");
                 });
 
             modelBuilder.Entity("API.Data.Exercise", b =>

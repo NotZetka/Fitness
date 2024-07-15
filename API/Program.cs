@@ -1,5 +1,6 @@
 using API.Middleware;
 using API.Services;
+using API.SignalR;
 using API.Utilities.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddSingleton<PresenceTracker>();
+builder.Services.AddValidatiors();
+builder.Services.AddSignalR();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -32,12 +36,27 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateIssuer = false,
             ValidateAudience = false
         };
+
+        options.Events = new JwtBearerEvents() 
+        {
+            OnMessageReceived = context =>
+            {
+                var accessToken = context.Request.Query["access_token"];
+
+                var path = context.HttpContext.Request.Path;
+                if(!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs"))
+                {
+                    context.Token = accessToken;
+                }
+
+                return Task.CompletedTask;
+            }
+        };
     });
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
     .CreateLogger();
 builder.Host.UseSerilog();
-builder.Services.AddValidatiors();
 
 builder.Services.AddAuthorization(opt =>
 {
@@ -51,6 +70,11 @@ var app = builder.Build();
 app.ApplyMigrations();
 await app.AddIdentitiesToDb();
 app.UseMiddleware<ExceptionhandlingMiddleware>();
+app.UseCors(opt => opt
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials()
+    .WithOrigins("http://localhost:4200"));
 app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
@@ -65,11 +89,9 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 
-app.UseCors(opt => opt
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .WithOrigins("http://localhost:4200")
-    );
+
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 
 app.Run();

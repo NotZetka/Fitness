@@ -8,11 +8,17 @@ import {PlansListComponent} from "./Plans/plans-list/plans-list.component";
 import {PlansCreateComponent} from "./Plans/plans-create/plans-create.component";
 import {PlansMarketComponent} from "./Plans/plans-market/plans-market.component";
 import {PlansDetailComponent} from "./Plans/plans-detail/plans-detail.component";
+import {AccountsListComponent} from "./Accounts/list/accounts-list.component";
+import {UserDetailComponent} from "./Accounts/user-detail/user-detail.component";
+import {MessagesChatComponent} from "./Messages/chat/messages-chat.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
   {path:'register', component: RegisterComponent},
   {path:'login', component: LoginComponent},
+  {path:'accounts/list', component: AccountsListComponent},
+  {path:'accounts/:id', component: UserDetailComponent},
+  {path:'messages/:userId', component: MessagesChatComponent},
   {path:'plans', component: PlansMainComponent},
   {path:'plans/list', component: PlansListComponent},
   {path:'plans/list/:id', component: PlansDetailComponent},

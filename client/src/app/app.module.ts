@@ -22,6 +22,10 @@ import { PlansCreateComponent } from './Plans/plans-create/plans-create.componen
 import { PlansMarketComponent } from './Plans/plans-market/plans-market.component';
 import { PlansListComponent } from './Plans/plans-list/plans-list.component';
 import { PlansDetailComponent } from './Plans/plans-detail/plans-detail.component';
+import { AccountsListComponent } from './Accounts/list/accounts-list.component';
+import { UserCardComponent } from './Accounts/user-card/user-card.component';
+import { UserDetailComponent } from './Accounts/user-detail/user-detail.component';
+import { MessagesChatComponent } from './Messages/chat/messages-chat.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +39,11 @@ import { PlansDetailComponent } from './Plans/plans-detail/plans-detail.componen
     PlansCreateComponent,
     PlansMarketComponent,
     PlansListComponent,
-    PlansDetailComponent
+    PlansDetailComponent,
+    AccountsListComponent,
+    UserCardComponent,
+    UserDetailComponent,
+    MessagesChatComponent
   ],
     imports: [
         BrowserModule,

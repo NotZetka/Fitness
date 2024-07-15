@@ -14,6 +14,7 @@ namespace API.Data
         public DbSet<FitnessPlan> FitnessPlans { get; set; }
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Record> Records { get; set; }
+        public DbSet<Message> Messages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -44,6 +45,15 @@ namespace API.Data
                 .HasMany(x=>x.Records)
                 .WithOne(x=>x.Exercise);
 
+            builder.Entity<Message>()
+                .HasOne(x => x.Sender)
+                .WithMany(x => x.MessagesSend)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            builder.Entity<Message>()
+                .HasOne(x => x.Receiver)
+                .WithMany(x=>x.MessagesReceived)
+                .OnDelete(DeleteBehavior.NoAction);
         }
 
     }

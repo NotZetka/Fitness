@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Data.Repositories.MessagesRepository;
 using API.Data.Repositories.PlansRepository;
 using API.Data.Repositories.UsersRepository;
 using Microsoft.AspNetCore.Identity;
@@ -49,6 +50,7 @@ namespace API.Utilities.Extensions
         {
             services.AddScoped<IPlansRepository, PlansRepository>();
             services.AddScoped<IUsersRepository , UsersRepository>();
+            services.AddScoped<IMessageRepository, MessageRepository>();
 
             return services;
         }

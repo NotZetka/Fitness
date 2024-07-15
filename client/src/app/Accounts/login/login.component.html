@@ -1,5 +1,4 @@
 <form [formGroup]="loginForm" (ngSubmit)="login()" autocomplete="off">
-  <hr>
   <app-text-input [formControl]="$any(loginForm.controls['usernameOrEmail'])" [label]="'Username or email'"></app-text-input>
   <app-text-input [formControl]="$any(loginForm.controls['password'])" [label]="'Password'" [type]="'password'"></app-text-input>
   <div class="form-group text-center">

@@ -14,6 +14,9 @@
           <li class="nav-item mx-2">
             <a class="nav-link" routerLink="/plans">Plans</a>
           </li>
+          <li class="nav-item mx-2">
+            <a class="nav-link" routerLink="/accounts/list">Users</a>
+          </li>
         </ul>
         <div class="d-flex justify-content-center align-items-center">
             <ng-container *ngIf="!(accountService.currentUser$ | async)">

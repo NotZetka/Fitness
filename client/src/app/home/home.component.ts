@@ -5,10 +5,6 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent implements OnInit {
-  ngOnInit(): void {
-    console.log("Home componnent")
-  }
-
+export class HomeComponent {
   protected readonly localStorage = localStorage;
 }

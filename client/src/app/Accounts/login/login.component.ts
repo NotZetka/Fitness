@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {User} from "../../_models/User";
 import {AccountService} from "../../_services/account.service";
 
 @Component({

@@ -14,6 +14,7 @@ namespace API.Utilities
             CreateMap<FitnessPlan, FitnessPlanDto>();
             CreateMap<Exercise, ExerciseDto>();
             CreateMap<Record,  RecordDto>();
+            CreateMap<Message, MessageDto>();
         }
     }
 }
