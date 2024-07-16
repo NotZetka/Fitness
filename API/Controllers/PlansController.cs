@@ -14,12 +14,8 @@ namespace API.Controllers
     [Authorize]
     public class PlansController : BaseApiController
     {
-        private readonly IMediator _mediator;
+        public PlansController(IMediator mediator) : base(mediator) { }
 
-        public PlansController(IMediator mediator, IHttpContextAccessor contextAccessor)
-        {
-            _mediator = mediator;
-        }
 
         [HttpPost("Publish")]
         public async Task<ActionResult> PublicPlan(PublishPlanQuery query)

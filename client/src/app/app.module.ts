@@ -26,6 +26,8 @@ import { AccountsListComponent } from './Accounts/list/accounts-list.component';
 import { UserCardComponent } from './Accounts/user-card/user-card.component';
 import { UserDetailComponent } from './Accounts/user-detail/user-detail.component';
 import { MessagesChatComponent } from './Messages/chat/messages-chat.component';
+import { BodyMainComponent } from './Body/body-main/body-main.component';
+import { BodyRecordDetailsComponent } from './Body/body-record-details/body-record-details.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { MessagesChatComponent } from './Messages/chat/messages-chat.component';
     AccountsListComponent,
     UserCardComponent,
     UserDetailComponent,
-    MessagesChatComponent
+    MessagesChatComponent,
+    BodyMainComponent,
+    BodyRecordDetailsComponent
   ],
     imports: [
         BrowserModule,

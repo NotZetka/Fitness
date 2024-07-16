@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Data.Repositories.BodyWeightRepository;
 using API.Data.Repositories.MessagesRepository;
 using API.Data.Repositories.PlansRepository;
 using API.Data.Repositories.UsersRepository;
@@ -51,6 +52,7 @@ namespace API.Utilities.Extensions
             services.AddScoped<IPlansRepository, PlansRepository>();
             services.AddScoped<IUsersRepository , UsersRepository>();
             services.AddScoped<IMessageRepository, MessageRepository>();
+            services.AddScoped<IBodyWeightRepository, BodyWeightRepository>();
 
             return services;
         }

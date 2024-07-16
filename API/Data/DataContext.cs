@@ -15,6 +15,8 @@ namespace API.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<Record> Records { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<BodyWeight> BodyWeights { get; set; }
+        public DbSet<BodyWeightRecord> BodyWeightRecords { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -54,6 +56,21 @@ namespace API.Data
                 .HasOne(x => x.Receiver)
                 .WithMany(x=>x.MessagesReceived)
                 .OnDelete(DeleteBehavior.NoAction);
+
+
+            builder.Entity<BodyWeight>()
+                .HasOne(x=>x.User)
+                .WithOne(x=>x.BodyWeight)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<BodyWeightRecord>()
+                .HasOne(x => x.BodyWeight)
+                .WithMany(x => x.WeightRecords)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<AppUser>()
+                .HasOne(x => x.BodyWeight)
+                .WithOne(x => x.User);
         }
 
     }

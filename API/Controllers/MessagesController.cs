@@ -8,12 +8,7 @@ namespace API.Controllers
     [Authorize]
     public class MessagesController : BaseApiController
     {
-        private readonly IMediator _mediator;
-
-        public MessagesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public MessagesController(IMediator mediator) : base(mediator) { }
 
         [HttpGet("{userId}")]
         public async Task<ActionResult> GetMessageThread(int userId)

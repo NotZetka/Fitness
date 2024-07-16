@@ -9,12 +9,7 @@ namespace API.Controllers
 {
     public class AccountsController : BaseApiController
     {
-        private readonly IMediator _mediator;
-
-        public AccountsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
+        public AccountsController(IMediator mediator) : base(mediator) { }
 
         [HttpPost("Register")]
         public async Task<ActionResult<RegisterQueryResult>> Register(RegisterQuery query)

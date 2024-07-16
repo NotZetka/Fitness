@@ -1,0 +1,24 @@
+<form [formGroup]="recordForm" (ngSubmit)="onSubmit()">
+  <app-text-input [label]="'Weight'" [type]="'number'" formControlName="weight"></app-text-input>
+  <app-text-input [label]="'Neck Circumference'" [type]="'number'" formControlName="neck"></app-text-input>
+  <app-text-input [label]="'Chest Circumference'" [type]="'number'" formControlName="chest"></app-text-input>
+  <app-text-input [label]="'Arm Circumference'" [type]="'number'" formControlName="arm"></app-text-input>
+  <app-text-input [label]="'Forearm Circumference'" [type]="'number'" formControlName="forearm"></app-text-input>
+  <app-text-input [label]="'Waist Circumference'" [type]="'number'" formControlName="waist"></app-text-input>
+  <app-text-input [label]="'Hip Circumference'" [type]="'number'" formControlName="hip"></app-text-input>
+  <app-text-input [label]="'Thigh Circumference'" [type]="'number'" formControlName="thigh"></app-text-input>
+  <app-text-input [label]="'Calf Circumference'" [type]="'number'" formControlName="calf"></app-text-input>
+
+  <div class="mb-3">
+    <label>BMI: {{recordForm.get('bmi')?.value}}</label>
+  </div>
+  <div class="mb-3">
+    <label>Status: {{recordForm.get('status')?.value}}</label>
+  </div>
+  <div class="mb-3">
+    <label>Body Fat Percentage: {{recordForm.get('bodyFat')?.value}}</label>
+  </div>
+
+  <button [disabled]="!recordForm.valid" *ngIf="!isViewMode" class="btn btn-primary" type="submit">Save</button>
+</form>
+<button class="btn btn-secondary mt-3" (click)="navigateBack()">Back</button>

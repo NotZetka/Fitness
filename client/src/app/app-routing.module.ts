@@ -11,6 +11,8 @@ import {PlansDetailComponent} from "./Plans/plans-detail/plans-detail.component"
 import {AccountsListComponent} from "./Accounts/list/accounts-list.component";
 import {UserDetailComponent} from "./Accounts/user-detail/user-detail.component";
 import {MessagesChatComponent} from "./Messages/chat/messages-chat.component";
+import {BodyMainComponent} from "./Body/body-main/body-main.component";
+import {BodyRecordDetailsComponent} from "./Body/body-record-details/body-record-details.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -24,6 +26,9 @@ const routes: Routes = [
   {path:'plans/list/:id', component: PlansDetailComponent},
   {path:'plans/create', component: PlansCreateComponent},
   {path:'plans/market', component: PlansMarketComponent},
+  {path:'plans/market', component: PlansMarketComponent},
+  {path:'body', component: BodyMainComponent},
+  { path: 'body-record-details', component: BodyRecordDetailsComponent }
 ];
 
 @NgModule({

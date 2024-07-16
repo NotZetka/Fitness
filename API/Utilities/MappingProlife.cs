@@ -1,5 +1,6 @@
 ﻿using API.Data;
 using API.Data.Dtos;
+using API.Handlers.BodyWeight.AddBodyWeightRecord;
 using AutoMapper;
 
 namespace API.Utilities
@@ -15,6 +16,9 @@ namespace API.Utilities
             CreateMap<Exercise, ExerciseDto>();
             CreateMap<Record,  RecordDto>();
             CreateMap<Message, MessageDto>();
+            CreateMap<AddBodyWeightRecordQuery, BodyWeightRecord>();
+            CreateMap<BodyWeight,BodyWeightDto>();
+            CreateMap<BodyWeightRecord, BodyWeightRecordDto>();
         }
     }
 }

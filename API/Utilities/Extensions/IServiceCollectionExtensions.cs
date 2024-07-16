@@ -1,5 +1,7 @@
 ﻿using API.Handlers.Accounts.Login;
 using API.Handlers.Accounts.Register;
+using API.Handlers.BodyWeight.AddBodyWeightRecord;
+using API.Handlers.BodyWeight.SetHeight;
 using API.Handlers.Messages.GetMessageThread;
 using API.Handlers.Messages.SendMessage;
 using API.Handlers.Plans.AddPlan;
@@ -24,6 +26,8 @@ namespace API.Utilities.Extensions
             services.AddTransient<IValidator<AddRecordsQuery>, AddRecordsQueryValidator>();
             services.AddTransient<IValidator<SendMessageQuery>, SendMessageQueryValidator>();
             services.AddTransient<IValidator<GetMessageThreadQuery>, GetMessageThreadQueryValidator>();
+            services.AddTransient<IValidator<AddBodyWeightRecordQuery>, AddBodyweightQueryValidator>();
+            services.AddTransient<IValidator<SetHeightQuery>, SetHeightQueryValidator>();
 
             return services;
         }

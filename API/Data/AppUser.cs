@@ -12,5 +12,6 @@ namespace API.Data
 
         public IEnumerable<Message> MessagesSend { get; set; }
         public IEnumerable<Message> MessagesReceived { get; set; }
+        public BodyWeight BodyWeight { get; set; } = new();
     }
 }
