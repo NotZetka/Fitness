@@ -1,6 +1,7 @@
 ﻿using API.Handlers.Plans.AddPlan;
 using API.Handlers.Plans.AddRecord;
 using API.Handlers.Plans.ArchivePlan;
+using API.Handlers.Plans.ChangeVisibility;
 using API.Handlers.Plans.GetPlan;
 using API.Handlers.Plans.GetPlans;
 using API.Handlers.Plans.GetPlanTemplates;
@@ -12,10 +13,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class PlansController : BaseApiController
+    public class PlansController(IMediator mediator) : BaseApiController(mediator)
     {
-        public PlansController(IMediator mediator) : base(mediator) { }
-
 
         [HttpPost("Publish")]
         public async Task<ActionResult> PublicPlan(PublishPlanQuery query)
@@ -26,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("Templates")]
-        public async Task<ActionResult> GetPlanTemplates()
+        public async Task<ActionResult<GetPlanTemplatesQueryResult>> GetPlanTemplates()
         {
             var query = new GetPlanTemplatesQuery();
             var result = await _mediator.Send(query);
@@ -81,7 +80,7 @@ namespace API.Controllers
         [HttpPatch("visibility/{id}")]
         public async Task<ActionResult> ChangeVisibilty(int id)
         {
-            var query = new ArchivePlanQuery { PlanId = id };
+            var query = new ChangevisibilityQuery { TemplateId = id };
             var result = await _mediator.Send(query);
 
             return Ok(result);

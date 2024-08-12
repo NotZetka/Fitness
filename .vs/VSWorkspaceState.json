@@ -1,8 +1,10 @@
 {
   "ExpandedNodes": [
     "",
-    "\\API"
+    "\\API",
+    "\\Tests",
+    "\\Tests\\IntegrationTests"
   ],
-  "SelectedNode": "\\API\\API.sln",
+  "SelectedNode": "\\Tests\\IntegrationTests\\AccountsControllerTests.cs",
   "PreviewInSolutionExplorer": false
 }

@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class AccountsController : BaseApiController
+    public class AccountsController(IMediator mediator) : BaseApiController(mediator)
     {
-        public AccountsController(IMediator mediator) : base(mediator) { }
 
         [HttpPost("Register")]
         public async Task<ActionResult<RegisterQueryResult>> Register(RegisterQuery query)
@@ -27,7 +26,7 @@ namespace API.Controllers
 
         [HttpGet("List")]
         [Authorize]
-        public async Task<ActionResult> GetAccountList()
+        public async Task<ActionResult<GetAccountsListQueryResponse>> GetAccountList()
         {
             var query = new GetAccountsListQuery();
             var response = await _mediator.Send(query);

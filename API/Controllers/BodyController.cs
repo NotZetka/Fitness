@@ -1,5 +1,4 @@
-﻿using API.Data.Repositories.BodyWeightRepository;
-using API.Handlers.BodyWeight.AddBodyWeightRecord;
+﻿using API.Handlers.BodyWeight.AddBodyWeightRecord;
 using API.Handlers.BodyWeight.GetBodyWeight;
 using API.Handlers.BodyWeight.SetHeight;
 using MediatR;
@@ -9,16 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class BodyController : BaseApiController
+    public class BodyController(IMediator mediator) : BaseApiController(mediator)
     {
-        private readonly IBodyWeightRepository bodyWeightRepository;
-
-        public BodyController(IMediator mediator, IBodyWeightRepository bodyWeightRepository) : base(mediator)
-        {
-            this.bodyWeightRepository = bodyWeightRepository;
-        }
-
-
         [HttpPut]
         public async Task<ActionResult> SetHeight(SetHeightQuery query)
         {
@@ -36,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetBodyWeight()
+        public async Task<ActionResult<GetBodyWeightQueryResponse>> GetBodyWeight()
         {
             var query = new GetBodyWeightQuery();
 

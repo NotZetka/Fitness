@@ -9,13 +9,11 @@ namespace API.Handlers.Plans.ArchivePlan
     public class ArchivePlanQueryHandler : IRequestHandler<ArchivePlanQuery, ArchivePlanQueryResult>
     {
         private readonly IUserService _userService;
-        private readonly IMapper _mapper;
         private readonly IPlansRepository _plansRepository;
 
-        public ArchivePlanQueryHandler(IUserService userService, IMapper mapper, IPlansRepository plansRepository)
+        public ArchivePlanQueryHandler(IUserService userService, IPlansRepository plansRepository)
         {
             _userService = userService;
-            _mapper = mapper;
             _plansRepository = plansRepository;
         }
 

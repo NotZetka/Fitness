@@ -6,10 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class MessagesController : BaseApiController
+    public class MessagesController(IMediator mediator) : BaseApiController(mediator)
     {
-        public MessagesController(IMediator mediator) : base(mediator) { }
-
         [HttpGet("{userId}")]
         public async Task<ActionResult> GetMessageThread(int userId)
         {
