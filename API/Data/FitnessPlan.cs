@@ -1,8 +1,7 @@
 ﻿namespace API.Data
 {
-    public class FitnessPlan
+    public class FitnessPlan : DbEntity
     {
-        public int Id { get; set; }
 
         public int TemplateId { get; set; }
         public bool Archived { get; set; }

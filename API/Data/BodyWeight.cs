@@ -1,8 +1,7 @@
 ﻿namespace API.Data
 {
-    public class BodyWeight
+    public class BodyWeight : DbEntity
     {
-        public int Id { get; set; }
         public int? Height { get; set; }
         public int UserId { get; set; }
         public AppUser User { get; set; }

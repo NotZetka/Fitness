@@ -1,23 +1,14 @@
 ﻿using API.Data;
-using API.Data.Repositories.BodyWeightRepository;
+using API.Data.Repositories;
 using API.Services;
 using AutoMapper;
 using MediatR;
 
 namespace API.Handlers.BodyWeight.AddBodyWeightRecord
 {
-    public class AddBodyWeightRecordQueryHandler : IRequestHandler<AddBodyWeightRecordQuery, AddBodyWeightRecordQueryResponse>
+    public class AddBodyWeightRecordQueryHandler(IUnitOfWork _unitOfWork, IMapper _mapper, IUserService _userService) 
+        : IRequestHandler<AddBodyWeightRecordQuery, AddBodyWeightRecordQueryResponse>
     {
-        private readonly IBodyWeightRepository _bodyWeightRepository;
-        private readonly IMapper _mapper;
-        private readonly IUserService _userService;
-
-        public AddBodyWeightRecordQueryHandler(IBodyWeightRepository bodyWeightRepository, IMapper mapper, IUserService userService)
-        {
-            _bodyWeightRepository = bodyWeightRepository;
-            _mapper = mapper;
-            _userService = userService;
-        }
         public async Task<AddBodyWeightRecordQueryResponse> Handle(AddBodyWeightRecordQuery request, CancellationToken cancellationToken)
         {
             var record = _mapper.Map<BodyWeightRecord>(request);
@@ -26,9 +17,9 @@ namespace API.Handlers.BodyWeight.AddBodyWeightRecord
 
             var userId = _userService.GetCurrentUserId();
 
-            _bodyWeightRepository.AddRecord(userId, record);
+            _unitOfWork.BodyWeightRepository.AddRecord(userId, record);
 
-            await _bodyWeightRepository.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new AddBodyWeightRecordQueryResponse();
         }

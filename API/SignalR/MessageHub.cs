@@ -1,7 +1,6 @@
 ﻿using API.Data;
 using API.Data.Dtos;
-using API.Data.Repositories.MessagesRepository;
-using API.Data.Repositories.UsersRepository;
+using API.Data.Repositories;
 using API.Exceptions;
 using API.Handlers.Messages.SendMessage;
 using API.Services;
@@ -14,8 +13,7 @@ namespace API.SignalR
 {
     [Authorize]
     public class MessageHub(
-        IMessageRepository _messageRepository,
-        IUsersRepository _usersRepository,
+        IUnitOfWork _unitOfWork,
         IUserService _userService,
         IMapper _mapper,
         IValidator<SendMessageQuery> _queryValidator) : Hub
@@ -36,7 +34,7 @@ namespace API.SignalR
             await Groups.AddToGroupAsync(Context.ConnectionId, groupname);
 
 
-            var messages = await _messageRepository.GetMessageThreadAsync(currnetUserId, otherUserId);
+            var messages = await _unitOfWork.MessageRepository.GetMessageThreadAsync(currnetUserId, otherUserId);
 
             await Clients.Group(groupname).SendAsync("ReceiveMessageThread", messages);
         }
@@ -56,7 +54,7 @@ namespace API.SignalR
 
             if (request.ReceiverId == currentUser.Id) throw new ForbiddenException("You can't send message to yourself");
 
-            var receiver = await _usersRepository.FindUserByIdAsync(request.ReceiverId);
+            var receiver = await _unitOfWork.UsersRepository.FindUserByIdAsync(request.ReceiverId);
 
             if (receiver == null) throw new NotFoundException("Receiver has not been fund");
 
@@ -69,9 +67,9 @@ namespace API.SignalR
                 Content = request.Content,
             };
 
-            _messageRepository.Add(message);
+            _unitOfWork.MessageRepository.Add(message);
 
-            await _messageRepository.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             var group = GetGroupName(currentUser.Id, request.ReceiverId);
             await Clients.Group(group).SendAsync("NewMessage", _mapper.Map<MessageDto>(message));

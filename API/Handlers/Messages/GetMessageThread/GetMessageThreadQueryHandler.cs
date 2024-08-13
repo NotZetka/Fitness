@@ -1,5 +1,5 @@
 ﻿using API.Data.Dtos;
-using API.Data.Repositories.MessagesRepository;
+using API.Data.Repositories;
 using API.Services;
 using AutoMapper;
 using MediatR;
@@ -8,13 +8,13 @@ namespace API.Handlers.Messages.GetMessageThread
 {
     public class GetMessageThreadQueryHandler : IRequestHandler<GetMessageThreadQuery, GetMessageThreadQueryResponse>
     {
-        private readonly IMessageRepository _messageRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
 
-        public GetMessageThreadQueryHandler(IMessageRepository messageRepository, IUserService userService, IMapper mapper)
+        public GetMessageThreadQueryHandler(IUnitOfWork unitOfWork, IUserService userService, IMapper mapper)
         {
-            _messageRepository = messageRepository;
+            _unitOfWork = unitOfWork;
             _userService = userService;
             _mapper = mapper;
         }
@@ -22,7 +22,7 @@ namespace API.Handlers.Messages.GetMessageThread
         {
             var curentUserId = _userService.GetCurrentUserId();
 
-            var messageThread = await _messageRepository.GetMessageThreadAsync(curentUserId, request.userId);
+            var messageThread = await _unitOfWork.MessageRepository.GetMessageThreadAsync(curentUserId, request.userId);
 
             return new GetMessageThreadQueryResponse()
             {

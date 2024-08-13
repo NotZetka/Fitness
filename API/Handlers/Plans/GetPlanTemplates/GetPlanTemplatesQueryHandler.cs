@@ -1,5 +1,5 @@
 ﻿using API.Data.Dtos;
-using API.Data.Repositories.PlansRepository;
+using API.Data.Repositories;
 using API.Services;
 using AutoMapper;
 using MediatR;
@@ -11,23 +11,23 @@ namespace API.Handlers.Plans.GetPlanTemplates
     {
         private readonly IMapper _mapper;
         private readonly IUserService _userService;
-        private readonly IPlansRepository _plansRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public GetPlanTemplatesQueryHandler(IMapper mapper, IUserService userService, IPlansRepository plansRepository)
+        public GetPlanTemplatesQueryHandler(IMapper mapper, IUserService userService, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _userService = userService;
-            _plansRepository = plansRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<GetPlanTemplatesQueryResult> Handle(GetPlanTemplatesQuery request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetCurrentUserAsync(includeFitnessPlans:true);
             var userPlanIds = user.FitnessPlans.Select(x => x.TemplateId);
 
-            var plans = await _plansRepository.GetPlansTemplateQuery()
+            var plans = await _unitOfWork.PlansTemplateRepository.GetPlansTemplateQuery()
                 .Include(x => x.Author)
                 .Include(x => x.Exercises)
-                .Where(x=>!userPlanIds.Contains(x.Id))
+                .Where(x=>!userPlanIds.Contains(x.Id) && x.Public)
                 .Select(x =>
                     new FitnessPlanTemplateDto()
                     {

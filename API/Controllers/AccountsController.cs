@@ -7,9 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-    public class AccountsController : BaseApiController
+    public class AccountsController(IMediator mediator) : BaseApiController(mediator)
     {
-        public AccountsController(IMediator mediator) : base(mediator) { }
 
         [HttpPost("Register")]
         public async Task<ActionResult<RegisterQueryResult>> Register(RegisterQuery query)

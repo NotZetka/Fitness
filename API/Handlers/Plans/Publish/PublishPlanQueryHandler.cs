@@ -1,5 +1,5 @@
 ﻿using API.Data;
-using API.Data.Repositories.PlansRepository;
+using API.Data.Repositories;
 using API.Services;
 using AutoMapper;
 using MediatR;
@@ -10,13 +10,13 @@ namespace API.Handlers.Plans.Publish
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private readonly IPlansRepository _plansRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public PublishPlanQueryHandler(IUserService userService, IMapper mapper, IPlansRepository plansRepository)
+        public PublishPlanQueryHandler(IUserService userService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _userService = userService;
             _mapper = mapper;
-            _plansRepository = plansRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<PublishPlanQueryResult> Handle(PublishPlanQuery request, CancellationToken cancellationToken)
@@ -31,9 +31,9 @@ namespace API.Handlers.Plans.Publish
                 Exercises = request.Exercises.Select(_mapper.Map<ExerciseTemplate>).ToList()
             };
 
-            _plansRepository.AddFitnessPlanTemplate(plan);
+            _unitOfWork.PlansTemplateRepository.Add(plan);
 
-            await _plansRepository.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new() { Id =  plan.Id };
         }

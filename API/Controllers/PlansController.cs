@@ -12,10 +12,8 @@ using Microsoft.AspNetCore.Mvc;
 namespace API.Controllers
 {
     [Authorize]
-    public class PlansController : BaseApiController
+    public class PlansController(IMediator mediator) : BaseApiController(mediator)
     {
-        public PlansController(IMediator mediator) : base(mediator) { }
-
 
         [HttpPost("Publish")]
         public async Task<ActionResult> PublicPlan(PublishPlanQuery query)

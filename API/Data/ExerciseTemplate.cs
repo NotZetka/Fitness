@@ -1,8 +1,7 @@
 ﻿namespace API.Data
 {
-    public class ExerciseTemplate
+    public class ExerciseTemplate : DbEntity
     {
-        public int Id { get; set; }
         public int Sets { get; set; }
         public int FitnessPlanTemaplteId { get; set; }
         public FitnessPlanTemplate FitnessPlanTemplate { get; set; }

@@ -1,20 +1,13 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data.Repositories.MessagesRepository
+namespace API.Data.Repositories
 {
-    public class MessageRepository : AbstractRepository, IMessageRepository
+    public class MessageRepository(DataContext context) : AbstractRepository<Message>(context), IMessageRepository
     {
-        public MessageRepository(DataContext context) : base(context) { }
-
-        public void Add(Message message)
-        {
-            _context.Messages.Add(message);
-        }
-
         public async Task<IEnumerable<Message>> GetMessageThreadAsync(int firstUserId, int secondUserId)
         {
-            return await _context.Messages
+            return await _dbSet
                 .Where(x=> 
                 (x.SenderId == firstUserId && x.ReceiverId == secondUserId) ||
                 (x.SenderId == secondUserId && x.ReceiverId == firstUserId))

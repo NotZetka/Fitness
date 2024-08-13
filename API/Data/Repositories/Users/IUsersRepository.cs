@@ -1,8 +1,8 @@
 ﻿using API.Data.Dtos;
 
-namespace API.Data.Repositories.UsersRepository
+namespace API.Data.Repositories
 {
-    public interface IUsersRepository : IRepository
+    public interface IUsersRepository
     {
         Task<AppUser> FindUserByIdAsync(int id);
         Task<AppUser> FindUserByEmailAsync(string email);

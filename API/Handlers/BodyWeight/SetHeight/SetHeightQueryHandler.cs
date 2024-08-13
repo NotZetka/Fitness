@@ -1,4 +1,4 @@
-﻿using API.Data.Repositories.BodyWeightRepository;
+﻿using API.Data.Repositories;
 using API.Services;
 using MediatR;
 
@@ -6,21 +6,21 @@ namespace API.Handlers.BodyWeight.SetHeight
 {
     public class SetHeightQueryHandler : IRequestHandler<SetHeightQuery, SetHeightQueryResponse>
     {
-        private readonly IBodyWeightRepository _bodyWeightRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IUserService _userService;
 
-        public SetHeightQueryHandler(IBodyWeightRepository bodyWeightRepository, IUserService userService)
+        public SetHeightQueryHandler(IUnitOfWork unitOfWork, IUserService userService)
         {
-            _bodyWeightRepository = bodyWeightRepository;
+            _unitOfWork = unitOfWork;
             _userService = userService;
         }
         public async Task<SetHeightQueryResponse> Handle(SetHeightQuery request, CancellationToken cancellationToken)
         {
             var userId = _userService.GetCurrentUserId();
 
-            _bodyWeightRepository.SetHeight(request.Height, userId);
+            _unitOfWork.BodyWeightRepository.SetHeight(request.Height, userId);
 
-            await _bodyWeightRepository.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new SetHeightQueryResponse();
         }

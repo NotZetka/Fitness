@@ -1,11 +1,10 @@
 ﻿using API.Data;
-using API.Data.Repositories.UsersRepository;
+using API.Data.Repositories;
 using API.Exceptions;
 using API.Exceptions.Accounts;
 using API.Services;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Handlers.Accounts.Register
 {
@@ -13,18 +12,18 @@ namespace API.Handlers.Accounts.Register
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
-        private readonly IUsersRepository _accountsRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public RegisterHandler(UserManager<AppUser> userManager, ITokenService tokenService, IUsersRepository accountsRepository)
+        public RegisterHandler(UserManager<AppUser> userManager, ITokenService tokenService, IUnitOfWork unitOfWork)
         {
             _userManager = userManager;
             _tokenService = tokenService;
-            _accountsRepository = accountsRepository;
+            _unitOfWork = unitOfWork;
         }
         public async Task<RegisterQueryResult> Handle(RegisterQuery request, CancellationToken cancellationToken)
         {
-            if (await _accountsRepository.FindUserByUsernamelAsync(request.UserName) != null) throw new ForbiddenException("User already exists");
-            if (await _accountsRepository.FindUserByEmailAsync(request.Email) != null) throw new ForbiddenException("Email already exists");
+            if (await _unitOfWork.UsersRepository.FindUserByUsernamelAsync(request.UserName) != null) throw new ForbiddenException("User already exists");
+            if (await _unitOfWork.UsersRepository.FindUserByEmailAsync(request.Email) != null) throw new ForbiddenException("Email already exists");
 
             var user = new AppUser()
             {

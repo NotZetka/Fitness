@@ -1,8 +1,4 @@
 ﻿using API.Data;
-using API.Data.Repositories.BodyWeightRepository;
-using API.Data.Repositories.MessagesRepository;
-using API.Data.Repositories.PlansRepository;
-using API.Data.Repositories.UsersRepository;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +15,7 @@ namespace API.Utilities.Extensions
             dbContext.Database.Migrate();
         }
 
-        public static async Task AddIdentitiesToDb(this IApplicationBuilder app) 
+        public static async void AddIdentitiesToDb(this IApplicationBuilder app) 
         {
             var roleManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<RoleManager<AppUserRole>>();
             var roles = new List<AppUserRole>
@@ -45,16 +41,6 @@ namespace API.Utilities.Extensions
                 .AddRoleManager<RoleManager<AppUserRole>>()
                 .AddEntityFrameworkStores<DataContext>()
                 .AddDefaultTokenProviders();
-        }
-
-        public static IServiceCollection AddRepositories(this IServiceCollection services)
-        {
-            services.AddScoped<IPlansRepository, PlansRepository>();
-            services.AddScoped<IUsersRepository , UsersRepository>();
-            services.AddScoped<IMessageRepository, MessageRepository>();
-            services.AddScoped<IBodyWeightRepository, BodyWeightRepository>();
-
-            return services;
         }
 
     }

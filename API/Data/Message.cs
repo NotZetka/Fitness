@@ -1,9 +1,8 @@
 ﻿
 namespace API.Data
 {
-    public class Message
+    public class Message : DbEntity
     {
-        public int Id { get; set; }
         public string SenderUsername { get; set; }
         public string ReceiverUsername { get; set; }
 

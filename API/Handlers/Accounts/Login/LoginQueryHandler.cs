@@ -7,16 +7,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace API.Handlers.Accounts.Login
 {
-    public class LoginHandler : IRequestHandler<LoginQuery, LoginQueryResult>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, LoginQueryResult>
     {
         private readonly UserManager<AppUser> _userManager;
-        private readonly IMapper _mapper;
         private readonly ITokenService _tokenService;
 
-        public LoginHandler(UserManager<AppUser> userManager, IMapper mapper, ITokenService tokenService)
+        public LoginQueryHandler(UserManager<AppUser> userManager, ITokenService tokenService)
         {
             _userManager = userManager;
-            _mapper = mapper;
             _tokenService = tokenService;
         }
         public async Task<LoginQueryResult> Handle(LoginQuery request, CancellationToken cancellationToken)

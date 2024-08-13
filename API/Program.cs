@@ -1,3 +1,4 @@
+using API.Data.Repositories;
 using API.Middleware;
 using API.Services;
 using API.SignalR;
@@ -12,7 +13,6 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDatabaseWithIdentities(builder.Configuration.GetConnectionString("DefaultConnection"));
-builder.Services.AddRepositories();
 builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddControllers();
 builder.Services.AddCors();
@@ -20,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddSingleton<PresenceTracker>();
@@ -68,7 +69,7 @@ builder.Services.AddAuthorization(opt =>
 var app = builder.Build();
 
 app.ApplyMigrations();
-await app.AddIdentitiesToDb();
+app.AddIdentitiesToDb();
 app.UseMiddleware<ExceptionhandlingMiddleware>();
 app.UseCors(opt => opt
     .AllowAnyHeader()

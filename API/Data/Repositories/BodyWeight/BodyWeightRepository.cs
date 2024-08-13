@@ -4,27 +4,20 @@ using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace API.Data.Repositories.BodyWeightRepository
+namespace API.Data.Repositories
 {
-    public class BodyWeightRepository : AbstractRepository, IBodyWeightRepository
+    public class BodyWeightRepository(DataContext context, IMapper _mapper) : AbstractRepository<BodyWeight>(context), IBodyWeightRepository
     {
-        private readonly IMapper _mapper;
-
-        public BodyWeightRepository(DataContext context, IMapper mapper) : base(context)
-        {
-            _mapper = mapper;
-        }
-
         public void AddRecord(int userId, BodyWeightRecord record)
         {
-            var bodyWeight = _context.BodyWeights.First(x=>x.UserId == userId);
+            var bodyWeight = _dbSet.First(x=>x.UserId == userId);
 
             bodyWeight.WeightRecords.Add(record);
         }
 
         public async Task<BodyWeightDto> GetBodyWeightAsync(int userId)
         {
-            return await _context.BodyWeights
+            return await _dbSet
                 .Where(x=>x.UserId == userId)
                 .ProjectTo<BodyWeightDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync();
@@ -32,7 +25,7 @@ namespace API.Data.Repositories.BodyWeightRepository
 
         public void SetHeight(int height, int userId)
         {
-            var bodyWeight = _context.BodyWeights.FirstOrDefault(x => x.UserId == userId);
+            var bodyWeight = _dbSet.FirstOrDefault(x => x.UserId == userId);
 
             bodyWeight.Height = height;
         }

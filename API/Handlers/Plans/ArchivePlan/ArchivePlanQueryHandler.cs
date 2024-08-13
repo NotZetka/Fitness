@@ -1,4 +1,4 @@
-﻿using API.Data.Repositories.PlansRepository;
+﻿using API.Data.Repositories;
 using API.Exceptions;
 using API.Services;
 using AutoMapper;
@@ -10,13 +10,13 @@ namespace API.Handlers.Plans.ArchivePlan
     {
         private readonly IUserService _userService;
         private readonly IMapper _mapper;
-        private readonly IPlansRepository _plansRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public ArchivePlanQueryHandler(IUserService userService, IMapper mapper, IPlansRepository plansRepository)
+        public ArchivePlanQueryHandler(IUserService userService, IMapper mapper, IUnitOfWork unitOfWork)
         {
             _userService = userService;
             _mapper = mapper;
-            _plansRepository = plansRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<ArchivePlanQueryResult> Handle(ArchivePlanQuery request, CancellationToken cancellationToken)
@@ -28,7 +28,7 @@ namespace API.Handlers.Plans.ArchivePlan
 
             plan.Archived = !plan.Archived;
 
-            await _plansRepository.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return new();
         }
