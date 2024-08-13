@@ -1,4 +1,4 @@
-﻿using API.Data.Repositories;
+﻿using API.Data.Repositories.PlansRepository;
 using API.Exceptions;
 using API.Services;
 using AutoMapper;

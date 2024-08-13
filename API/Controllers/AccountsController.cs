@@ -26,7 +26,7 @@ namespace API.Controllers
 
         [HttpGet("List")]
         [Authorize]
-        public async Task<ActionResult> GetAccountList()
+        public async Task<ActionResult<GetAccountsListQueryResponse>> GetAccountList()
         {
             var query = new GetAccountsListQuery();
             var response = await _mediator.Send(query);

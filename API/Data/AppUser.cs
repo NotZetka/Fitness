@@ -7,11 +7,11 @@ namespace API.Data
         public DateTime DateOfBirth { get; set; }
         public string Gender { get; set; }
 
-        public IEnumerable<FitnessPlan> FitnessPlans { get; set; }
-        public IEnumerable<FitnessPlanTemplate> FitnessPlansTemplates { get; set; }
+        public IList<FitnessPlan> FitnessPlans { get; set; }
+        public IList<FitnessPlanTemplate> FitnessPlansTemplates { get; set; }
 
-        public IEnumerable<Message> MessagesSend { get; set; }
-        public IEnumerable<Message> MessagesReceived { get; set; }
+        public IList<Message> MessagesSend { get; set; }
+        public IList<Message> MessagesReceived { get; set; }
         public BodyWeight BodyWeight { get; set; } = new();
     }
 }

@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetBodyWeight()
+        public async Task<ActionResult<GetBodyWeightQueryResponse>> GetBodyWeight()
         {
             var query = new GetBodyWeightQuery();
 
