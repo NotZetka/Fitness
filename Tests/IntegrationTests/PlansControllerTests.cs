@@ -34,7 +34,7 @@ namespace Tests.IntegrationTests
             var plansList = JsonConvert.DeserializeObject<GetPlanTemplatesQueryResult>(stringResponse);
 
             Assert.NotNull(plansList);
-            Assert.Equal(2, plansList.Plans.Count());
+            Assert.Single(plansList.Plans);
         }
 
         [Fact]
@@ -222,7 +222,8 @@ namespace Tests.IntegrationTests
                         Sets = 2,
                         Description = "Description"
                     }
-                }
+                },
+                Public = false,
             };
             var plan = new FitnessPlan
             {
@@ -261,7 +262,8 @@ namespace Tests.IntegrationTests
                         Sets = 2,
                         Description = "Description"
                     }
-                }
+                },
+                Public = true
             };
             var user2 = _context.Users.Include(x => x.FitnessPlansTemplates).First(x => x.UserName == "TestUserPlan2");
             user2.FitnessPlansTemplates.Add(planTemplate2);
