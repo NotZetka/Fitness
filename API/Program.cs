@@ -1,8 +1,8 @@
-using API.Data.Repositories;
 using API.Middleware;
-using API.Services;
 using API.SignalR;
 using API.Utilities.Extensions;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -26,11 +26,9 @@ namespace API
             builder.Services.AddSwaggerGen();
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
-            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-            builder.Services.AddScoped<ITokenService, TokenService>();
-            builder.Services.AddScoped<IUserService, UserService>();
-            builder.Services.AddSingleton<PresenceTracker>();
-            builder.Services.AddValidatiors();
+            builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
+                .AddFluentValidationAutoValidation();
+            builder.Services.AddServices();
             builder.Services.AddSignalR();
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

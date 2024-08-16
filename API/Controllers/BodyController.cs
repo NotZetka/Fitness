@@ -11,7 +11,7 @@ namespace API.Controllers
     public class BodyController(IMediator mediator) : BaseApiController(mediator)
     {
         [HttpPut]
-        public async Task<ActionResult> SetHeight(SetHeightQuery query)
+        public async Task<ActionResult> SetHeight(SetHeightCommand query)
         {
             await _mediator.Send(query);
 
@@ -19,7 +19,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddBodyweightRecord(AddBodyWeightRecordQuery query)
+        public async Task<ActionResult> AddBodyweightRecord(AddBodyWeightRecordCommand query)
         {
             await _mediator.Send(query);
 
@@ -27,7 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetBodyWeightQueryResponse>> GetBodyWeight()
+        public async Task<ActionResult<GetBodyWeightResponse>> GetBodyWeight()
         {
             var query = new GetBodyWeightQuery();
 

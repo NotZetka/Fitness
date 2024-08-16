@@ -21,7 +21,7 @@ namespace Tests.IntegrationTests
         {
             await InitializeUsers();
             var user = _context.Users.Include(x=>x.BodyWeight).First(x=>x.UserName== "TestBodyWeight");
-            var query = new SetHeightQuery { Height = 110 };
+            var query = new SetHeightCommand { Height = 110 };
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json"); 
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -40,7 +40,7 @@ namespace Tests.IntegrationTests
         {
             await InitializeUsers();
             var user = _context.Users.Include(x => x.BodyWeight).First(x => x.UserName == "TestBodyWeight");
-            var query = new AddBodyWeightRecordQuery { Weight = 110 };
+            var query = new AddBodyWeightRecordCommand { Weight = 110 };
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -64,7 +64,7 @@ namespace Tests.IntegrationTests
         {
             await InitializeUsers();
             var user = _context.Users.Include(x => x.BodyWeight).First(x => x.UserName == "TestBodyWeight");
-            var query = new AddBodyWeightRecordQuery { 
+            var query = new AddBodyWeightRecordCommand { 
                 Weight = 110,
                 Neck = 10,
                 Chest = 10,
@@ -106,7 +106,7 @@ namespace Tests.IntegrationTests
         {
             await InitializeUsers();
             var user = _context.Users.Include(x => x.BodyWeight).First(x => x.UserName == "TestBodyWeight");
-            var query = new AddBodyWeightRecordQuery();
+            var query = new AddBodyWeightRecordCommand();
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

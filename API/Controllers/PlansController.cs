@@ -17,7 +17,7 @@ namespace API.Controllers
     {
 
         [HttpPost("Publish")]
-        public async Task<ActionResult> PublicPlan(PublishPlanQuery query)
+        public async Task<ActionResult> PublicPlan(PublishPlanCommand query)
         {
             var reslut = await _mediator.Send(query);
 
@@ -25,7 +25,7 @@ namespace API.Controllers
         }
 
         [HttpGet("Templates")]
-        public async Task<ActionResult<GetPlanTemplatesQueryResult>> GetPlanTemplates()
+        public async Task<ActionResult<GetPlanTemplatesResponse>> GetPlanTemplates()
         {
             var query = new GetPlanTemplatesQuery();
             var result = await _mediator.Send(query);
@@ -36,7 +36,7 @@ namespace API.Controllers
         [HttpGet("add/{id}")]
         public async Task<ActionResult> AddPlan(int id)
         {
-            var query = new AddPlanQuery() { Id = id };
+            var query = new AddPlanCommand() { Id = id };
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -44,7 +44,7 @@ namespace API.Controllers
 
         [HttpPost("add")]
         [Authorize]
-        public async Task<ActionResult> AddRecord(AddRecordsQuery query)
+        public async Task<ActionResult> AddRecord(AddRecordsCommand query)
         {
             var reslut = await _mediator.Send(query);
             return Ok();
@@ -71,7 +71,7 @@ namespace API.Controllers
         [HttpPatch("archive/{id}")]
         public async Task<ActionResult> ArchivePlan(int id)
         {
-            var query = new ArchivePlanQuery { PlanId = id };
+            var query = new ArchivePlanCommand { PlanId = id };
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -80,7 +80,7 @@ namespace API.Controllers
         [HttpPatch("visibility/{id}")]
         public async Task<ActionResult> ChangeVisibilty(int id)
         {
-            var query = new ChangevisibilityQuery { TemplateId = id };
+            var query = new ChangevisibilityCommand { TemplateId = id };
             var result = await _mediator.Send(query);
 
             return Ok(result);

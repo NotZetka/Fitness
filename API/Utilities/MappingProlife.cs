@@ -16,7 +16,7 @@ namespace API.Utilities
             CreateMap<Exercise, ExerciseDto>();
             CreateMap<Record,  RecordDto>();
             CreateMap<Message, MessageDto>();
-            CreateMap<AddBodyWeightRecordQuery, BodyWeightRecord>();
+            CreateMap<AddBodyWeightRecordCommand, BodyWeightRecord>();
             CreateMap<BodyWeight,BodyWeightDto>();
             CreateMap<BodyWeightRecord, BodyWeightRecordDto>();
         }

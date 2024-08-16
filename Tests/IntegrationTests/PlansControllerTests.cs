@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
-using static API.Handlers.Plans.AddRecord.AddRecordsQuery;
+using static API.Handlers.Plans.AddRecord.AddRecordsCommand;
 
 namespace Tests.IntegrationTests
 {
@@ -31,7 +31,7 @@ namespace Tests.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var plansList = JsonConvert.DeserializeObject<GetPlanTemplatesQueryResult>(stringResponse);
+            var plansList = JsonConvert.DeserializeObject<GetPlanTemplatesResponse>(stringResponse);
 
             Assert.NotNull(plansList);
             Assert.Single(plansList.Plans);
@@ -44,7 +44,7 @@ namespace Tests.IntegrationTests
             var user = _context.Users.First();
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var query = new PublishPlanQuery()
+            var query = new PublishPlanCommand()
             {
                 Name = "PublishPlanTest",
                 Exercises = new List<ExerciseTemplateDto>()
@@ -92,9 +92,9 @@ namespace Tests.IntegrationTests
                 .First(x => x.UserName == "TestUserPlan");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var query = new AddRecordsQuery
+            var query = new AddRecordsCommand
             {
-                Records = new List<QueryRecord>
+                Records = new List<RecordEntity>
                 {
                     new()
                     {

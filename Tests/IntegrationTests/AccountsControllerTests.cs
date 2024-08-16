@@ -107,7 +107,7 @@ namespace Tests.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var accountsList = JsonConvert.DeserializeObject<GetAccountsListQueryResponse>(stringResponse);
+            var accountsList = JsonConvert.DeserializeObject<GetAccountsListResponse>(stringResponse);
 
             Assert.NotNull(accountsList);
             Assert.False(accountsList.Users.Select(x=>x.UserName).Contains("TestList"));

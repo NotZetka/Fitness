@@ -2,7 +2,7 @@
 
 namespace API.Handlers.Plans.GetPlans
 {
-    public class GetPlansQuery : IRequest<GetPlansQueryResult>
+    public class GetPlansQuery : IRequest<GetPlansResponse>
     {
     }
 }

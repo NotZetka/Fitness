@@ -2,7 +2,7 @@
 
 namespace API.Handlers.Accounts.List
 {
-    public class GetAccountsListQuery : IRequest<GetAccountsListQueryResponse>
+    public class GetAccountsListQuery : IRequest<GetAccountsListResponse>
     {
     }
 }

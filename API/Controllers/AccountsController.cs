@@ -11,14 +11,14 @@ namespace API.Controllers
     {
 
         [HttpPost("Register")]
-        public async Task<ActionResult<RegisterQueryResult>> Register(RegisterQuery query)
+        public async Task<ActionResult<RegisterResponse>> Register(RegisterCommand query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult<LoginQueryResult>> Login(LoginQuery query)
+        public async Task<ActionResult<LoginResponse>> Login(LoginQuery query)
         {
             var response = await _mediator.Send(query);
             return Ok(response);
@@ -26,7 +26,7 @@ namespace API.Controllers
 
         [HttpGet("List")]
         [Authorize]
-        public async Task<ActionResult<GetAccountsListQueryResponse>> GetAccountList()
+        public async Task<ActionResult<GetAccountsListResponse>> GetAccountList()
         {
             var query = new GetAccountsListQuery();
             var response = await _mediator.Send(query);

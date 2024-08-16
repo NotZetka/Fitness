@@ -16,7 +16,7 @@ namespace API.SignalR
         IUnitOfWork _unitOfWork,
         IUserService _userService,
         IMapper _mapper,
-        IValidator<SendMessageQuery> _queryValidator) : Hub
+        IValidator<SendMessageCommand> _queryValidator) : Hub
     {
         public override async Task OnConnectedAsync()
         {
@@ -44,7 +44,7 @@ namespace API.SignalR
             return base.OnDisconnectedAsync(exception);
         }
 
-        public async Task SendMessage(SendMessageQuery request) 
+        public async Task SendMessage(SendMessageCommand request) 
         {
             var validation = _queryValidator.Validate(request);
 

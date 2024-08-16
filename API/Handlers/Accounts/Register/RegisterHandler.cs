@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace API.Handlers.Accounts.Register
 {
-    public class RegisterHandler : IRequestHandler<RegisterQuery, RegisterQueryResult>
+    public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse>
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly ITokenService _tokenService;
@@ -20,7 +20,7 @@ namespace API.Handlers.Accounts.Register
             _tokenService = tokenService;
             _unitOfWork = unitOfWork;
         }
-        public async Task<RegisterQueryResult> Handle(RegisterQuery request, CancellationToken cancellationToken)
+        public async Task<RegisterResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             if (await _unitOfWork.UsersRepository.FindUserByUsernamelAsync(request.UserName) != null) throw new ForbiddenException("User already exists");
             if (await _unitOfWork.UsersRepository.FindUserByEmailAsync(request.Email) != null) throw new ForbiddenException("Email already exists");
@@ -43,7 +43,7 @@ namespace API.Handlers.Accounts.Register
 
             var token = await _tokenService.CreateToken(user);
 
-            return new RegisterQueryResult { Username = user.UserName, Token = token};
+            return new RegisterResponse { Username = user.UserName, Token = token};
         }
     }
 }

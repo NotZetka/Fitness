@@ -4,7 +4,7 @@ using MediatR;
 
 namespace API.Handlers.BodyWeight.GetBodyWeight
 {
-    public class GetBodyWeightQuery : IRequest<GetBodyWeightQueryResponse>
+    public class GetBodyWeightQuery : IRequest<GetBodyWeightResponse>
     {
     }
 }
