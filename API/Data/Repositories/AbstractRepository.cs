@@ -28,13 +28,12 @@ namespace API.Data.Repositories
         }
         public void Delete(T entity)
         {
-            _dbSet.Remove(entity);
+            _dbSet.Where(x=>x.Id == entity.Id).ExecuteDelete();
         }
 
         public void DeleteById(int id)
         {
-            var entity = GetById(id);
-            _dbSet.Remove(entity);
+            _dbSet.Where(x => x.Id == id).ExecuteDelete();
         }
         public virtual IList<T> GetAll()
         {

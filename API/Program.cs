@@ -6,6 +6,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
 using System.Text;
@@ -23,7 +24,27 @@ namespace API
             builder.Services.AddControllers();
             builder.Services.AddCors();
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.AddSwaggerGen(cfg =>
+            {
+                cfg.AddSecurityDefinition("bearerAuth", new OpenApiSecurityScheme
+                {
+                    Type = SecuritySchemeType.Http,
+                    Scheme = "Bearer"
+                });
+                cfg.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme, 
+                                Id = "bearerAuth"
+                            }
+                        },[]
+                    }
+                });
+            });
             builder.Services.AddHttpContextAccessor();
             builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
             builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly())
