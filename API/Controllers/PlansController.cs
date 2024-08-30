@@ -1,4 +1,5 @@
-﻿using API.Handlers.Plans.AddPlan;
+﻿using API.Data.Dtos;
+using API.Handlers.Plans.AddPlan;
 using API.Handlers.Plans.AddRecord;
 using API.Handlers.Plans.ArchivePlan;
 using API.Handlers.Plans.ChangeVisibility;
@@ -6,6 +7,7 @@ using API.Handlers.Plans.GetPlan;
 using API.Handlers.Plans.GetPlans;
 using API.Handlers.Plans.GetPlanTemplates;
 using API.Handlers.Plans.Publish;
+using API.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -25,9 +27,8 @@ namespace API.Controllers
         }
 
         [HttpGet("Templates")]
-        public async Task<ActionResult<GetPlanTemplatesResponse>> GetPlanTemplates()
+        public async Task<ActionResult<PagedResult<FitnessPlanTemplateDto>>> GetPlanTemplates([FromQuery] GetPlanTemplatesQuery query)
         {
-            var query = new GetPlanTemplatesQuery();
             var result = await _mediator.Send(query);
 
             return Ok(result);
@@ -51,7 +52,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> GetPlans()
+        public async Task<ActionResult<GetPlansResponse>> GetPlans()
         {
             var query = new GetPlansQuery();
             var result = await _mediator.Send(query);

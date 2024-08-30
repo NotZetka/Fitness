@@ -1,5 +1,9 @@
 import {PlanTemplate} from "./planTemplate";
 
 export interface GetPlanTemplatesQueryResult {
-  plans: PlanTemplate[];
+  items: PlanTemplate[];
+  totalPages: number,
+  totalCount: number,
+  itemsFrom: number,
+  itemsTo: number
 }

@@ -4,6 +4,7 @@ using API.Data.Dtos;
 using API.Handlers.Plans.AddRecord;
 using API.Handlers.Plans.GetPlanTemplates;
 using API.Handlers.Plans.Publish;
+using API.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -31,10 +32,10 @@ namespace Tests.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var plansList = JsonConvert.DeserializeObject<GetPlanTemplatesResponse>(stringResponse);
+            var plansList = JsonConvert.DeserializeObject<PagedResult<FitnessPlanTemplateDto>>(stringResponse);
 
             Assert.NotNull(plansList);
-            Assert.Single(plansList.Plans);
+            Assert.Single(plansList.Items);
         }
 
         [Fact]

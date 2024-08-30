@@ -20,7 +20,7 @@ export class PlansMarketComponent implements OnInit {
     ngOnInit(): void {
       this.http.get<GetPlanTemplatesQueryResult>(this.baseUrl + 'Plans/Templates/').subscribe({
         next: response => {
-          this.plans = response.plans;
+          this.plans = response.items;
         }
       })
     }

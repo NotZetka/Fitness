@@ -1,4 +1,5 @@
 ﻿using API.Data.Dtos;
+using API.Utilities;
 
 namespace API.Data.Repositories
 {
@@ -7,6 +8,6 @@ namespace API.Data.Repositories
         Task<AppUser> FindUserByIdAsync(int id);
         Task<AppUser> FindUserByEmailAsync(string email);
         Task<AppUser> FindUserByUsernamelAsync(string email);
-        Task<IEnumerable<UserDto>> GetUsersListAsync();
+        Task<PagedResult<UserDto>> GetUsersListAsync(int? pageNumber = null, int? pageSize = null);
     }
 }

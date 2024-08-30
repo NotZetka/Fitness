@@ -1,9 +1,11 @@
-﻿using API.Data.Repositories;
+﻿using API.Data.Dtos;
+using API.Data.Repositories;
+using API.Utilities;
 using MediatR;
 
 namespace API.Handlers.Accounts.List
 {
-    public class GetAccountsListHandler : IRequestHandler<GetAccountsListQuery, GetAccountsListResponse>
+    public class GetAccountsListHandler : IRequestHandler<GetAccountsListQuery, PagedResult<UserDto>>
     {
         private readonly IUnitOfWork _unitOfWork;
 
@@ -11,11 +13,9 @@ namespace API.Handlers.Accounts.List
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<GetAccountsListResponse> Handle(GetAccountsListQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<UserDto>> Handle(GetAccountsListQuery request, CancellationToken cancellationToken)
         {
-            var usersList = await _unitOfWork.UsersRepository.GetUsersListAsync();
-
-            return new GetAccountsListResponse() { Users = usersList };
+            return await _unitOfWork.UsersRepository.GetUsersListAsync();
         }
     }
 }

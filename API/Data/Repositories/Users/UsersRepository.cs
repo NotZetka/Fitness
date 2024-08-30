@@ -1,5 +1,6 @@
 ﻿using API.Data.Dtos;
 using API.Services;
+using API.Utilities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -37,12 +38,19 @@ namespace API.Data.Repositories
                 x.UserName.ToLower() == username.ToLower());
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsersListAsync()
+        public async Task<PagedResult<UserDto>> GetUsersListAsync(int? pageNumber = null, int? pageSize = null)
         {
-            return await _dbSet
+            var query = _dbSet
                 .Where(x => x.Id != _userService.GetCurrentUserId())
-                .ProjectTo<UserDto>(_configurationProvider)
-                .ToListAsync();
+                .ProjectTo<UserDto>(_configurationProvider);
+
+            if(pageNumber != null && pageSize != null)
+            {
+                query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
+                return await PagedResult<UserDto>.CreateFromQueryAsync(query, pageNumber.Value, pageSize.Value);
+            }
+
+            return new PagedResult<UserDto>(await query.ToListAsync());
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿using API.Handlers.Accounts.List;
+﻿using API.Data.Dtos;
+using API.Handlers.Accounts.List;
 using API.Handlers.Accounts.Login;
 using API.Handlers.Accounts.Register;
+using API.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +28,8 @@ namespace API.Controllers
 
         [HttpGet("List")]
         [Authorize]
-        public async Task<ActionResult<GetAccountsListResponse>> GetAccountList()
+        public async Task<ActionResult<PagedResult<UserDto>>> GetAccountList([FromQuery] GetAccountsListQuery query)
         {
-            var query = new GetAccountsListQuery();
             var response = await _mediator.Send(query);
             return Ok(response);
         }
