@@ -1,7 +1,11 @@
 <div class="container">
-  <ng-container *ngIf="bodyWeight">
+  <div *ngIf="!isLoaded" class="text-center">
+    <p>Loading data...</p>
+  </div>
+
+  <ng-container *ngIf="isLoaded && bodyWeightRecords">
     <div class="text-center" *ngIf="!isEditingHeight; else heightInput">
-      <p class="text-light bg-dark p-2 rounded">Height: {{bodyWeight.height}}</p>
+      <p class="text-light bg-dark p-2 rounded">Height: {{height}}</p>
       <button class="btn btn-primary mt-2" (click)="enableHeightEdit()">Change</button>
     </div>
     <ng-template #heightInput>
@@ -24,14 +28,20 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let record of bodyWeight.weightRecords">
+      <tr *ngFor="let record of bodyWeightRecords.items">
         <td>{{record.date | date}}</td>
         <td>{{record.weight}}</td>
-        <td>{{ calculateBMI(record.weight, bodyWeight.height) }}</td>
-        <td>{{ getStatus(record.weight, bodyWeight.height) }}</td>
+        <td>{{ calculateBMI(record.weight, height) }}</td>
+        <td>{{ getStatus(record.weight, height) }}</td>
         <td><button class="btn btn-secondary" (click)="viewDetails(record)">Details</button></td>
       </tr>
       </tbody>
     </table>
+
+    <div class="d-flex justify-content-between mt-4">
+      <button class="btn btn-secondary" (click)="goToPreviousPage()" [disabled]="currentPage === 1">Previous</button>
+      <span>Page {{currentPage}} of {{bodyWeightRecords.totalPages}}</span>
+      <button class="btn btn-secondary" (click)="goToNextPage()" [disabled]="currentPage === bodyWeightRecords.totalPages">Next</button>
+    </div>
   </ng-container>
 </div>

@@ -1,5 +1,23 @@
-<div  class="row">
-  <div class="col-2" *ngFor="let user of users">
-    <app-user-card [user]="user"></app-user-card>
+<p class="text-center my-4 fs-5">Users from {{itemsFrom}} to {{itemsTo}} of {{totalCount}}</p>
+
+<div class="row justify-content-center align-items-center g-3">
+  <div class="col-10 col-sm-6 col-md-4 col-lg-3 col-xl-2" *ngFor="let user of users">
+    <app-user-card [user]="user" class="shadow-sm rounded mb-4"></app-user-card>
   </div>
+</div>
+
+<p class="text-center my-3 fs-5">Page {{currentPage}} of {{totalPages}}</p>
+
+<div class="d-flex justify-content-center align-items-center mt-3">
+  <button class="btn btn-secondary me-2" (click)="previousPage()" [disabled]="currentPage === 1">Previous</button>
+  <input
+    type="number"
+    class="form-control text-center me-2"
+    style="width: 80px;"
+  [(ngModel)]="currentPage"
+  (change)="goToPage(currentPage)"
+  min="1"
+  [max]="totalPages || 1"
+  />
+  <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage === totalPages">Next</button>
 </div>

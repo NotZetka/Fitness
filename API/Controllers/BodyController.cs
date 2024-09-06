@@ -27,10 +27,8 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<GetBodyWeightResponse>> GetBodyWeight()
+        public async Task<ActionResult<GetBodyWeightResponse>> GetBodyWeight([FromQuery] GetBodyWeightQuery query)
         {
-            var query = new GetBodyWeightQuery();
-
             var result = await _mediator.Send(query);
 
             return Ok(result);

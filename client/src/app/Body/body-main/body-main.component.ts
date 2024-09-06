@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BodyService } from '../../_services/body.service';
-import { BodyWeight } from '../models/BodyWeight';
+import {BodyWeightRecord} from "../models/BodyWeightRecord";
+import {PagedResult} from "../../_common/PagedResult";
 
 @Component({
   selector: 'app-body-main',
@@ -9,36 +10,50 @@ import { BodyWeight } from '../models/BodyWeight';
   styleUrls: ['./body-main.component.css']
 })
 export class BodyMainComponent implements OnInit {
-  bodyWeight?: BodyWeight;
+  bodyWeightRecords?: PagedResult<BodyWeightRecord>;
+  height?: number;
   genderMale: boolean = false;
   isEditingHeight: boolean = true;
   newHeight?: number;
+  isLoaded: boolean = false;
+  currentPage = 1;
+  pageSize = 10;
 
   constructor(private bodyService: BodyService, private router: Router) {}
 
   ngOnInit(): void {
-    this.bodyService.getBodyWeight().subscribe({
+    this.loadBodyWeightRecords(this.currentPage, this.pageSize)
+  }
+
+  loadBodyWeightRecords(pageNumber: number, pageSize: number): void {
+    this.bodyService.getBodyWeight(pageNumber, pageSize).subscribe({
       next: response => {
-        this.bodyWeight = response.bodyWeight;
-        if (this.bodyWeight.height) {
+        this.bodyWeightRecords = response.bodyWeightRecords;
+        console.log(this.bodyWeightRecords);
+        if (response.height) {
+          this.height = response.height;
           this.isEditingHeight = false;
         }
         this.genderMale = response.genderMale;
+        this.isLoaded = true;
+      },
+      error: () => {
+        this.isLoaded = false;
       }
     });
   }
 
   enableHeightEdit(): void {
     this.isEditingHeight = true;
-    this.newHeight = this.bodyWeight?.height || undefined;
+    this.newHeight = this.height || undefined;
   }
 
   saveHeight(): void {
     if (this.newHeight != null) {
       this.bodyService.saveHeight(this.newHeight).subscribe({
         next: () => {
-          if (this.bodyWeight && this.newHeight) {
-            this.bodyWeight.height = this.newHeight;
+          if (this.bodyWeightRecords && this.newHeight) {
+            this.height = this.newHeight;
           }
           this.isEditingHeight = !this.isEditingHeight;
         }
@@ -66,10 +81,24 @@ export class BodyMainComponent implements OnInit {
   }
 
   addRecord(): void {
-    this.router.navigate(['/body-record-details'], { queryParams: { genderMale: this.genderMale, height: this.bodyWeight?.height, isViewMode: false } });
+    this.router.navigate(['/body-record-details'], { queryParams: { genderMale: this.genderMale, height: this.height, isViewMode: false } });
   }
 
   viewDetails(record: any): void {
-    this.router.navigate(['/body-record-details'], { queryParams: { ...record, genderMale: this.genderMale, height: this.bodyWeight?.height, isViewMode: true } });
+    this.router.navigate(['/body-record-details'], { queryParams: { ...record, genderMale: this.genderMale, height: this.height, isViewMode: true } });
+  }
+
+  goToPreviousPage(): void {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadBodyWeightRecords(this.currentPage, this.pageSize);
+    }
+  }
+
+  goToNextPage(): void {
+    if (this.bodyWeightRecords && this.currentPage < this.bodyWeightRecords.totalPages) {
+      this.currentPage++;
+      this.loadBodyWeightRecords(this.currentPage, this.pageSize);
+    }
   }
 }

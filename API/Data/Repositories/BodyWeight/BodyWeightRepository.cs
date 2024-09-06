@@ -1,5 +1,6 @@
 ﻿
 using API.Data.Dtos;
+using API.Utilities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
@@ -15,11 +16,26 @@ namespace API.Data.Repositories
             bodyWeight.WeightRecords.Add(record);
         }
 
-        public async Task<BodyWeightDto> GetBodyWeightAsync(int userId)
+        public async Task<PagedResult<BodyWeightRecordDto>> GetBodyWeightRecordsAsync(int userId, int? pageNumber = null, int? pageSize = null)
+        {
+            var query = _dbSet
+                .Where(x => x.UserId == userId)
+                .SelectMany(x => x.WeightRecords)
+                .ProjectTo<BodyWeightRecordDto>(_mapper.ConfigurationProvider);
+
+            if (pageNumber != null && pageSize != null)
+            {
+                return await PagedResult<BodyWeightRecordDto>.CreateFromQueryAsync(query, pageNumber.Value, pageSize.Value);
+            }
+
+            return new PagedResult<BodyWeightRecordDto>(await query.ToListAsync());
+        }
+
+        public async Task<int?> GetHeight(int userId)
         {
             return await _dbSet
-                .Where(x=>x.UserId == userId)
-                .ProjectTo<BodyWeightDto>(_mapper.ConfigurationProvider)
+                .Where(x => x.UserId == userId)
+                .Select(x => x.Height)
                 .FirstOrDefaultAsync();
         }
 

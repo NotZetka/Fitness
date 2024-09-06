@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace API.Utilities
 {
     public class PagedResult<T>
     {
+        public PagedResult() {}
         public PagedResult(List<T> items)
         {
             Items = items;
@@ -26,9 +28,10 @@ namespace API.Utilities
         public int TotalCount { get; set; }
         public int ItemsFrom { get; set; }
         public int ItemsTo { get; set; }
-        public static async Task<PagedResult<T>> CreateFromQueryAsync(IQueryable<T> items, int pageNumber, int pageSize)
+        public static async Task<PagedResult<T>> CreateFromQueryAsync(IQueryable<T> query, int pageNumber, int pageSize)
         {
-            var totalCount = items.Count();
+            var totalCount = query.Count();
+            var items = query.Skip((pageNumber - 1) * pageSize).Take(pageSize);
             var toatlPages = (int)Math.Ceiling(totalCount / (double)pageSize);
             var itemsFrom = (pageNumber - 1) * pageSize + 1;
             var itemsTo = itemsFrom + pageSize - 1 < totalCount ? itemsFrom + pageSize - 1 : totalCount;

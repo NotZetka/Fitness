@@ -1,6 +1,8 @@
-import {BodyWeight} from "./BodyWeight";
+import {BodyWeightRecord} from "./BodyWeightRecord";
+import {PagedResult} from "../../_common/PagedResult";
 
 export interface GetBodyWeightQueryResponse {
-  bodyWeight: BodyWeight;
+  bodyWeightRecords: PagedResult<BodyWeightRecord>
+  height: number;
   genderMale: boolean;
 }

@@ -18,10 +18,13 @@ namespace API.Handlers.BodyWeight.GetBodyWeight
         {
             var user = await _userService.GetCurrentUserAsync();
 
-            var bodyWeight = await _unitOfWork.BodyWeightRepository.GetBodyWeightAsync(user.Id);
+            var height = await _unitOfWork.BodyWeightRepository.GetHeight(user.Id);
+
+            var bodyWeight = await _unitOfWork.BodyWeightRepository.GetBodyWeightRecordsAsync(user.Id, request.PageNumber, request.PageSize);
 
             return new GetBodyWeightResponse() { 
-                BodyWeight = bodyWeight,
+                BodyWeightRecords = bodyWeight,
+                Height = height,
                 GenderMale = user.Gender.Equals("male", StringComparison.OrdinalIgnoreCase),
             };
         }

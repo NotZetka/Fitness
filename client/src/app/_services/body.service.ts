@@ -12,8 +12,8 @@ export class BodyService {
 
   constructor(private http : HttpClient) { }
 
-  getBodyWeight(){
-    return this.http.get<GetBodyWeightQueryResponse>(this.baseUrl+'Body');
+  getBodyWeight(pageNumber : number, pageSize : number){
+    return this.http.get<GetBodyWeightQueryResponse>(this.baseUrl+'Body?' + 'PageNumber=' + pageNumber + '&PageSize=' + pageSize);
   }
 
   saveHeight(height: number){

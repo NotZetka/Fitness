@@ -46,7 +46,6 @@ namespace API.Data.Repositories
 
             if(pageNumber != null && pageSize != null)
             {
-                query = query.Skip((pageNumber.Value - 1) * pageSize.Value).Take(pageSize.Value);
                 return await PagedResult<UserDto>.CreateFromQueryAsync(query, pageNumber.Value, pageSize.Value);
             }
 
