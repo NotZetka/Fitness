@@ -22,6 +22,6 @@ jobs:
       - name: Change Dir
         run: cd API
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build API.csproj --no-restore
       - name: Test
         run: dotnet test
