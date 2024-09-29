@@ -19,6 +19,8 @@ jobs:
         uses: actions/setup-dotnet@v4.0.1
         with:
           dotnet-version: 8.0.x
+      - name: Change Dir
+        run: cd API
       - name: Build
         run: dotnet build --no-restore
       - name: Test
