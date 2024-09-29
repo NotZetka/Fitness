@@ -19,3 +19,7 @@ jobs:
         uses: actions/setup-dotnet@v4.0.1
         with:
           dotnet-version: 8.0.x
+      - name: Build
+        run: dotnet builde --no-restore
+      - name: Test
+        run: dotnet test
