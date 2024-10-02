@@ -15,7 +15,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using static API.Handlers.Plans.AddRecord.AddRecordsCommand;
 
-namespace Tests.IntegrationTests
+namespace IntegrationTests
 {
     public class PlansControllerTests(WebApplicationFactory<Program> factory) : BaseControllerTest(factory)
     {
@@ -58,7 +58,7 @@ namespace Tests.IntegrationTests
                     }
                 }
             };
-            _context.FitnessPlanTemplates.Where(x=>x.Name==query.Name).ExecuteDelete();
+            _context.FitnessPlanTemplates.Where(x => x.Name == query.Name).ExecuteDelete();
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
 
             var response = await _client.PostAsync("/Plans/Publish", content);
@@ -70,17 +70,17 @@ namespace Tests.IntegrationTests
         public async Task UserShouldAddPlan()
         {
             await InitializePlans();
-            var user = _context.Users.First(x=>x.UserName== "TestUserPlan");
+            var user = _context.Users.First(x => x.UserName == "TestUserPlan");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var planId = _context.FitnessPlanTemplates.Where(x=>x.AuthorId==user.Id).First().Id;
+            var planId = _context.FitnessPlanTemplates.Where(x => x.AuthorId == user.Id).First().Id;
 
             var response = await _client.GetAsync($"/Plans/Add/{planId}");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var userAfterChanges = GetNewContext().Users.Include(x=>x.FitnessPlans).FirstOrDefault(x=>x.Id == user.Id);
-            Assert.Equal(2,userAfterChanges.FitnessPlans.Count);
+            var userAfterChanges = GetNewContext().Users.Include(x => x.FitnessPlans).FirstOrDefault(x => x.Id == user.Id);
+            Assert.Equal(2, userAfterChanges.FitnessPlans.Count);
         }
 
         [Fact]
@@ -88,8 +88,8 @@ namespace Tests.IntegrationTests
         {
             await InitializePlans();
             var user = _context.Users
-                .Include(x=>x.FitnessPlans)
-                .ThenInclude(x=>x.Exercises)
+                .Include(x => x.FitnessPlans)
+                .ThenInclude(x => x.Exercises)
                 .First(x => x.UserName == "TestUserPlan");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
@@ -107,7 +107,7 @@ namespace Tests.IntegrationTests
             };
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
 
-            var response = await _client.PostAsync($"/Plans/Add",content);
+            var response = await _client.PostAsync($"/Plans/Add", content);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
@@ -145,7 +145,7 @@ namespace Tests.IntegrationTests
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         }
-        
+
         [Fact]
         public async Task UserShouldArchivePlan()
         {
@@ -157,11 +157,11 @@ namespace Tests.IntegrationTests
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var plan = user.FitnessPlans.First();
 
-            var response = await _client.PatchAsync($"/Plans/archive/{plan.Id}",null);
+            var response = await _client.PatchAsync($"/Plans/archive/{plan.Id}", null);
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
-            var planAfterChanges = GetNewContext().FitnessPlans.First(x=>x.Id==plan.Id);
+            var planAfterChanges = GetNewContext().FitnessPlans.First(x => x.Id == plan.Id);
             Assert.NotEqual(plan.Archived, planAfterChanges.Archived);
         }
 
@@ -234,7 +234,7 @@ namespace Tests.IntegrationTests
                     new()
                     {
                         Name = "Test exercise",
-                        Records = new List<API.Data.Record> 
+                        Records = new List<API.Data.Record>
                         {
                             new()
                             {
@@ -247,9 +247,9 @@ namespace Tests.IntegrationTests
                 }
             };
             var user1 = _context.Users
-                .Include(x=>x.FitnessPlansTemplates)
-                .Include(x=>x.FitnessPlans)
-                .First(x=>x.UserName=="TestUserPlan");
+                .Include(x => x.FitnessPlansTemplates)
+                .Include(x => x.FitnessPlans)
+                .First(x => x.UserName == "TestUserPlan");
             user1.FitnessPlansTemplates.Add(planTemplate);
             user1.FitnessPlans.Add(plan);
             var planTemplate2 = new FitnessPlanTemplate

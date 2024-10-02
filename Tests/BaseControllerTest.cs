@@ -10,7 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace Tests.IntegrationTests
+namespace IntegrationTests
 {
     public abstract class BaseControllerTest : IClassFixture<WebApplicationFactory<Program>>
     {

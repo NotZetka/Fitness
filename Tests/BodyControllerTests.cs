@@ -11,7 +11,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Tests.IntegrationTests
+namespace IntegrationTests
 {
     public class BodyControllerTests(WebApplicationFactory<Program> factory) : BaseControllerTest(factory)
     {
@@ -20,9 +20,9 @@ namespace Tests.IntegrationTests
         public async Task UserShouldSetHeightProperly()
         {
             await InitializeUsers();
-            var user = _context.Users.Include(x=>x.BodyWeight).First(x=>x.UserName== "TestBodyWeight");
+            var user = _context.Users.Include(x => x.BodyWeight).First(x => x.UserName == "TestBodyWeight");
             var query = new SetHeightCommand { Height = 110 };
-            var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json"); 
+            var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
@@ -52,7 +52,7 @@ namespace Tests.IntegrationTests
             var userAfterChanges = GetNewContext()
                 .Users
                 .Include(x => x.BodyWeight)
-                .ThenInclude(x=>x.WeightRecords)
+                .ThenInclude(x => x.WeightRecords)
                 .First(x => x.UserName == "TestBodyWeight");
 
             var weightRecord = userAfterChanges.BodyWeight.WeightRecords.Last();
@@ -64,7 +64,8 @@ namespace Tests.IntegrationTests
         {
             await InitializeUsers();
             var user = _context.Users.Include(x => x.BodyWeight).First(x => x.UserName == "TestBodyWeight");
-            var query = new AddBodyWeightRecordCommand { 
+            var query = new AddBodyWeightRecordCommand
+            {
                 Weight = 110,
                 Neck = 10,
                 Chest = 10,
@@ -74,7 +75,7 @@ namespace Tests.IntegrationTests
                 Hip = 10,
                 Thigh = 10,
                 Calf = 10
-                };
+            };
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);

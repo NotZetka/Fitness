@@ -12,7 +12,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 
-namespace Tests.IntegrationTests
+namespace IntegrationTests
 {
     public class AccountsControllerTests(WebApplicationFactory<Program> factory) : BaseControllerTest(factory)
     {
@@ -28,7 +28,7 @@ namespace Tests.IntegrationTests
                 Gender = "Male",
                 DateOfBirth = DateTime.Now.AddYears(-20),
             };
-            _context.Users.Where(x=>x.UserName=="Test").ExecuteDelete();
+            _context.Users.Where(x => x.UserName == "Test").ExecuteDelete();
 
             var content = new StringContent(JsonConvert.SerializeObject(query), Encoding.UTF8, "application/json");
 
@@ -98,12 +98,12 @@ namespace Tests.IntegrationTests
         {
             await InitializeUsers();
             var scope = _factory.Services.CreateScope();
-            
+
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
             var user = await userManager.FindByNameAsync("TestList");
             var token = GenerateJwtToken(user.Id.ToString());
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-        
+
             var response = await _client.GetAsync("/Accounts/List");
 
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
@@ -112,7 +112,7 @@ namespace Tests.IntegrationTests
             var accountsList = JsonConvert.DeserializeObject<PagedResult<UserDto>>(stringResponse);
 
             Assert.NotNull(accountsList);
-            Assert.False(accountsList.Items.Select(x=>x.UserName).Contains("TestList"));
+            Assert.False(accountsList.Items.Select(x => x.UserName).Contains("TestList"));
         }
 
         private async Task InitializeUsers()
