@@ -1,6 +1,8 @@
 ﻿using API;
 using API.Data;
+using API.Data.Dtos;
 using API.Handlers.Accounts.List;
+using API.Utilities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
@@ -107,10 +109,10 @@ namespace Tests.IntegrationTests
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var stringResponse = await response.Content.ReadAsStringAsync();
-            var accountsList = JsonConvert.DeserializeObject<GetAccountsListResponse>(stringResponse);
+            var accountsList = JsonConvert.DeserializeObject<PagedResult<UserDto>>(stringResponse);
 
             Assert.NotNull(accountsList);
-            Assert.False(accountsList.Users.Select(x=>x.UserName).Contains("TestList"));
+            Assert.False(accountsList.Items.Select(x=>x.UserName).Contains("TestList"));
         }
 
         private async Task InitializeUsers()
