@@ -1,14 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using API.Utilities.Static;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public class DataContext : IdentityDbContext<AppUser, AppUserRole, int>
+    public class DataContext : IdentityDbContext<AppUserBase, AppUserRole, int>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
 
         }
+
+        public DbSet<AppMember> Members { get; set; }
+        public DbSet<AppTrainer> Trainers { get; set; }
         public DbSet<FitnessPlanTemplate> FitnessPlanTemplates { get; set; }
         public DbSet<ExerciseTemplate> ExerciseTemplates { get; set; }
         public DbSet<FitnessPlan> FitnessPlans { get; set; }
@@ -27,9 +31,12 @@ namespace API.Data
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<FitnessPlanTemplate>()
-                .HasOne(x => x.Author)
-                .WithMany(x => x.FitnessPlansTemplates);
+            builder.Entity<AppUserBase>()
+                .ToTable("AspNetUsers")
+                .HasDiscriminator<string>("UserType")
+                .HasValue<AppMember>(RoleNames.Member)
+                .HasValue<AppTrainer>(RoleNames.Trainer);
+
 
             builder.Entity<ExerciseTemplate>()
                 .HasOne(x => x.FitnessPlanTemplate)
@@ -68,7 +75,7 @@ namespace API.Data
                 .WithMany(x => x.WeightRecords)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.Entity<AppUser>()
+            builder.Entity<AppMember>()
                 .HasOne(x => x.BodyWeight)
                 .WithOne(x => x.User);
         }

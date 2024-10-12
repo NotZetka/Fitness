@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { RegisterComponent } from './Accounts/register/register.component';
 import { LoginComponent } from './Accounts/login/login.component';
 import {PlansMainComponent} from "./Plans/plans-main/plans-main.component";
 import {PlansListComponent} from "./Plans/plans-list/plans-list.component";
@@ -13,6 +12,7 @@ import {UserDetailComponent} from "./Accounts/user-detail/user-detail.component"
 import {MessagesChatComponent} from "./Messages/chat/messages-chat.component";
 import {BodyMainComponent} from "./Body/body-main/body-main.component";
 import {BodyRecordDetailsComponent} from "./Body/body-record-details/body-record-details.component";
+import {RegisterComponent} from "./Accounts/register/register.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},

@@ -3,7 +3,6 @@ using API.Data.Repositories;
 using API.Exceptions;
 using API.Services;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Handlers.Plans.AddPlan
 {
@@ -24,11 +23,10 @@ namespace API.Handlers.Plans.AddPlan
             var planTemplate = await _unitOfWork.PlansTemplateRepository.GetByIdAsync(request.Id, true);
 
             if (planTemplate == null) throw new NotFoundException($"Plan with id {request.Id} has not been found");
-            if (planTemplate.AuthorId != _userService.GetCurrentUserId() && !planTemplate.Public) throw new ForbiddenException("You are not allowed to add this plan");
+            if (planTemplate.AuthorId != _userService.GetCurrentUserId()) throw new ForbiddenException("You are not allowed to add this plan");
 
             var user = await _userService.GetCurrentUserAsync(includeFitnessPlans: true);
 
-            if (user.FitnessPlans.Select(x => x.TemplateId).Contains(planTemplate.Id)) return new AddPlanResponse();
 
             var exercises = planTemplate.Exercises
                 .SelectMany(x => Enumerable.Range(1, x.Sets)
@@ -42,7 +40,6 @@ namespace API.Handlers.Plans.AddPlan
 
             var plan = new FitnessPlan
             {
-                TemplateId = planTemplate.Id,
                 Archived = false,
                 User = user,
                 Name = planTemplate.Name,

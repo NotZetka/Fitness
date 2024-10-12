@@ -23,7 +23,7 @@ namespace API.Middleware
             }
             catch (ValidationException ex)
             {
-                var errorMessages = ex.Errors.Select(x => $"{x.PropertyName} : {x.ErrorMessage}");
+                var errorMessages = ex.Errors.Select(x => $"{x.PropertyName} : {x.ErrorMessage}").Distinct();
                 var message = string.Join(' ', errorMessages);
                 await HandleExceptionAsync(httpContext, message, StatusCodes.Status400BadRequest);
             }

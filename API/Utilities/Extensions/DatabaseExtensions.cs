@@ -1,4 +1,5 @@
 ﻿using API.Data;
+using API.Utilities.Static;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,9 +21,8 @@ namespace API.Utilities.Extensions
             var roleManager = app.ApplicationServices.CreateScope().ServiceProvider.GetRequiredService<RoleManager<AppUserRole>>();
             var roles = new List<AppUserRole>
             {
-                new AppUserRole{Name = "Member"},
-                new AppUserRole{Name = "Admin"},
-                new AppUserRole{Name = "Moderator"},
+                new AppUserRole{Name = RoleNames.Member},
+                new AppUserRole{Name = RoleNames.Trainer}
             };
 
             foreach (var role in roles)
@@ -36,7 +36,12 @@ namespace API.Utilities.Extensions
         {
             services.AddDbContext<DataContext>(options =>
                    options.UseSqlServer(connectionstring));
-            services.AddIdentityCore<AppUser>()
+            services.AddIdentityCore<AppMember>()
+                .AddRoles<AppUserRole>()
+                .AddRoleManager<RoleManager<AppUserRole>>()
+                .AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
+            services.AddIdentityCore<AppTrainer>()
                 .AddRoles<AppUserRole>()
                 .AddRoleManager<RoleManager<AppUserRole>>()
                 .AddEntityFrameworkStores<DataContext>()

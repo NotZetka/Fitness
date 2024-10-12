@@ -3,10 +3,10 @@
     public class FitnessPlan : DbEntity
     {
 
-        public int TemplateId { get; set; }
+        public AppMember? Trainer { get; set; }
         public bool Archived { get; set; }
         public int UserId { get; set; }
-        public AppUser User { get; set; }
+        public AppMember User { get; set; }
         public string Name { get; set; }
         public IEnumerable<Exercise> Exercises { get; set; }
     }

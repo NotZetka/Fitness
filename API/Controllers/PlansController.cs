@@ -2,11 +2,10 @@
 using API.Handlers.Plans.AddPlan;
 using API.Handlers.Plans.AddRecord;
 using API.Handlers.Plans.ArchivePlan;
-using API.Handlers.Plans.ChangeVisibility;
+using API.Handlers.Plans.CreatePlan;
 using API.Handlers.Plans.GetPlan;
 using API.Handlers.Plans.GetPlans;
 using API.Handlers.Plans.GetPlanTemplates;
-using API.Handlers.Plans.Publish;
 using API.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -18,8 +17,8 @@ namespace API.Controllers
     public class PlansController(IMediator mediator) : BaseApiController(mediator)
     {
 
-        [HttpPost("Publish")]
-        public async Task<ActionResult> PublicPlan(PublishPlanCommand query)
+        [HttpPost("Create")]
+        public async Task<ActionResult> CreatePlan(CreatePlanCommand query)
         {
             var reslut = await _mediator.Send(query);
 
@@ -73,15 +72,6 @@ namespace API.Controllers
         public async Task<ActionResult> ArchivePlan(int id)
         {
             var query = new ArchivePlanCommand { PlanId = id };
-            var result = await _mediator.Send(query);
-
-            return Ok(result);
-        }
-
-        [HttpPatch("visibility/{id}")]
-        public async Task<ActionResult> ChangeVisibilty(int id)
-        {
-            var query = new ChangevisibilityCommand { TemplateId = id };
             var result = await _mediator.Send(query);
 
             return Ok(result);
