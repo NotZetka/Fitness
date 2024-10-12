@@ -23,12 +23,10 @@ namespace API.Handlers.Plans.GetPlanTemplates
         public async Task<PagedResult<FitnessPlanTemplateDto>> Handle(GetPlanTemplatesQuery request, CancellationToken cancellationToken)
         {
             var user = await _userService.GetCurrentUserAsync(includeFitnessPlans:true);
-            var userPlanIds = user.FitnessPlans.Select(x => x.TemplateId);
 
             var query = _unitOfWork.PlansTemplateRepository.GetPlansTemplateQuery()
                 .Include(x => x.Author)
                 .Include(x => x.Exercises)
-                .Where(x => !userPlanIds.Contains(x.Id) && x.Public)
                 .Select(x =>
                     new FitnessPlanTemplateDto()
                     {

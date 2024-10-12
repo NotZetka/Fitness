@@ -30,7 +30,7 @@ export class PlansCreateComponent implements OnInit {
       'public': this.createPlanForm.value['public']=='public'
     }
     console.log(result)
-    this.http.post<PlanTemplateResponse>(this.baseUrl + 'Plans/Publish',result).subscribe({
+    this.http.post<PlanTemplateResponse>(this.baseUrl + 'Plans/Create',result).subscribe({
       next: response => {
         this.http.get(this.baseUrl + 'Plans/add/'+response.id).subscribe({})
         this.router.navigateByUrl('/plans/list')

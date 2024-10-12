@@ -3,29 +3,34 @@ using API.Data.Repositories;
 using API.Exceptions;
 using API.Exceptions.Accounts;
 using API.Services;
+using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 
-namespace API.Handlers.Accounts.Register
+namespace API.Handlers.Accounts.Register.Member
 {
-    public class RegisterHandler : IRequestHandler<RegisterCommand, RegisterResponse>
+    public class RegisterMemberHandler : IRequestHandler<RegisterMemberCommand, RegisterResponse>
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<AppMember> _userManager;
         private readonly ITokenService _tokenService;
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IValidator<RegisterMemberCommand> _validator;
 
-        public RegisterHandler(UserManager<AppUser> userManager, ITokenService tokenService, IUnitOfWork unitOfWork)
+        public RegisterMemberHandler(UserManager<AppMember> userManager, ITokenService tokenService, IUnitOfWork unitOfWork, IValidator<RegisterMemberCommand> validator)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _unitOfWork = unitOfWork;
+            _validator = validator;
         }
-        public async Task<RegisterResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
+        public async Task<RegisterResponse> Handle(RegisterMemberCommand request, CancellationToken cancellationToken)
         {
+            _validator.ValidateAndThrow(request);
+
             if (await _unitOfWork.UsersRepository.FindUserByUsernamelAsync(request.UserName) != null) throw new ForbiddenException("User already exists");
             if (await _unitOfWork.UsersRepository.FindUserByEmailAsync(request.Email) != null) throw new ForbiddenException("Email already exists");
 
-            var user = new AppUser()
+            var user = new AppMember()
             {
                 UserName = request.UserName,
                 Email = request.Email,
@@ -43,7 +48,7 @@ namespace API.Handlers.Accounts.Register
 
             var token = await _tokenService.CreateToken(user);
 
-            return new RegisterResponse { Username = user.UserName, Token = token};
+            return new RegisterResponse { Token = token };
         }
     }
 }

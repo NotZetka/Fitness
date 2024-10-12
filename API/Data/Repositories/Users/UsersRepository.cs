@@ -11,7 +11,7 @@ namespace API.Data.Repositories
     {
         private readonly AutoMapper.IConfigurationProvider _configurationProvider;
         private readonly IUserService _userService;
-        private readonly DbSet<AppUser> _dbSet;
+        private readonly DbSet<AppUserBase> _dbSet;
 
         public UsersRepository(DataContext context, IMapper mapper, IUserService userService)
         {
@@ -20,19 +20,19 @@ namespace API.Data.Repositories
             _dbSet = context.Users;
         }
 
-        public async Task<AppUser> FindUserByEmailAsync(string email)
+        public async Task<AppUserBase> FindUserByEmailAsync(string email)
         {
             return await _dbSet.FirstOrDefaultAsync(x =>
                 x.Email.ToLower() == email.ToLower());
         }
 
-        public async Task<AppUser> FindUserByIdAsync(int id)
+        public async Task<AppUserBase> FindUserByIdAsync(int id)
         {
             return await _dbSet.FirstOrDefaultAsync(x =>
                 x.Id == id);
         }
 
-        public async Task<AppUser> FindUserByUsernamelAsync(string username)
+        public async Task<AppUserBase> FindUserByUsernamelAsync(string username)
         {
             return await _dbSet.FirstOrDefaultAsync(x =>
                 x.UserName.ToLower() == username.ToLower());

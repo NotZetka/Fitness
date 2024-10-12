@@ -9,7 +9,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { BrowserAnimationsModule, provideAnimations } from '@angular/platform-browser/animations';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HomeComponent } from './home/home.component'
-import { RegisterComponent } from './Accounts/register/register.component';
+import { RegisterMemberComponent } from './Accounts/register-member/register-member.component';
 import { LoginComponent } from './Accounts/login/login.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { TextInputComponent } from './_forms/text-input/text-input.component';
@@ -28,13 +28,15 @@ import { UserDetailComponent } from './Accounts/user-detail/user-detail.componen
 import { MessagesChatComponent } from './Messages/chat/messages-chat.component';
 import { BodyMainComponent } from './Body/body-main/body-main.component';
 import { BodyRecordDetailsComponent } from './Body/body-record-details/body-record-details.component';
+import { RegisterTrainerComponent } from './Accounts/register-trainer/register-trainer.component';
+import { RegisterComponent } from './Accounts/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
     HomeComponent,
-    RegisterComponent,
+    RegisterMemberComponent,
     LoginComponent,
     TextInputComponent,
     PlansMainComponent,
@@ -47,7 +49,9 @@ import { BodyRecordDetailsComponent } from './Body/body-record-details/body-reco
     UserDetailComponent,
     MessagesChatComponent,
     BodyMainComponent,
-    BodyRecordDetailsComponent
+    BodyRecordDetailsComponent,
+    RegisterTrainerComponent,
+    RegisterComponent
   ],
     imports: [
         BrowserModule,

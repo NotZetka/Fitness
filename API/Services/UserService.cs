@@ -6,7 +6,7 @@ namespace API.Services
 {
     public interface IUserService
     {
-        public Task<AppUser> GetCurrentUserAsync(
+        public Task<AppMember> GetCurrentUserAsync(
             bool includeFitnessPlans = false,
             bool includeExercises = false,
             bool includeRecords = false);
@@ -24,13 +24,13 @@ namespace API.Services
             _context = context;
         }
 
-        public async Task<AppUser> GetCurrentUserAsync(
+        public async Task<AppMember> GetCurrentUserAsync(
             bool includeFitnessPlans = false,
             bool includeExercises = false,
             bool includeRecords = false)
         {
             var userid = GetCurrentUserId();
-            var query = _context.Users.Where(x => x.Id == userid);
+            var query = _context.Members.Where(x => x.Id == userid);
 
             if (includeRecords)
             {
