@@ -6,8 +6,8 @@ services:
   api:
     container_name: api
     build:
-      context: .
-      dockerfile: API/Dockerfile
+      context: API
+      dockerfile: Dockerfile
     ports:
       - "5000:8080"
     depends_on:
@@ -16,7 +16,15 @@ services:
   docker_sqlserver:
     container_name: docker_sqlserver
     build:
-      context: .
-      dockerfile: API/db.Dockerfile
+      context: API
+      dockerfile: db.Dockerfile
     ports:
       - "1433:1433"
+
+  angular_app:
+    container_name: client
+    build:
+      context: client
+      dockerfile: Dockerfile  
+    ports:
+      - "4200:4200" 
