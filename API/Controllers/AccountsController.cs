@@ -22,12 +22,12 @@ namespace API.Controllers
             if(query.Role == RoleNames.Member)
             {
                 var response = await _mediator.Send(mapper.Map<RegisterMemberCommand>(query));
-                return Ok(response.Token);
+                return Ok(response);
             }
             else if(query.Role == RoleNames.Trainer)
             {
                 var response = await _mediator.Send(mapper.Map<RegisterTrainerCommand>(query));
-                return Ok(response.Token);
+                return Ok(response);
             }
             return BadRequest("Invalid role name");
         }
@@ -36,7 +36,7 @@ namespace API.Controllers
         public async Task<ActionResult<LoginResponse>> Login(LoginQuery query)
         {
             var response = await _mediator.Send(query);
-            return Ok(response.Token);
+            return Ok(response);
         }
 
         [HttpGet("List")]

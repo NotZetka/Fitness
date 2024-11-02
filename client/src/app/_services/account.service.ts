@@ -6,7 +6,7 @@ import {BehaviorSubject} from "rxjs";
 import {ToastrService} from "ngx-toastr";
 import {PresenceService} from "./presence.service";
 import {environment} from "../../environments/environment";
-import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,11 @@ export class AccountService {
   constructor(private http: HttpClient, private router: Router,private toastr: ToastrService, private presenceService: PresenceService) { }
 
   login(form : any){
-    this.http.post<string>(this.baseUrl + 'Accounts/Login', form).subscribe({
+    this.http.post<User>(this.baseUrl + 'Accounts/Login', form).subscribe({
       next: response => {
         if(response){
-          this.setCurrentUser(response)
+          console.log(response)
+          this.setCurrentUser(response.token)
           this.toastr.success('Successfully logged in')
         }
         this.router.navigateByUrl('/')
@@ -34,11 +35,10 @@ export class AccountService {
   }
 
   register(form : any){
-    console.log(form)
-    this.http.post<string>(this.baseUrl + 'Accounts/Register', form).subscribe({
+    this.http.post<User>(this.baseUrl + 'Accounts/Register', form).subscribe({
       next: response => {
         if(response){
-          this.setCurrentUser(response)
+          this.setCurrentUser(response.token)
           this.toastr.success('Successfully registered')
         }
         this.router.navigateByUrl('/')
@@ -60,6 +60,7 @@ export class AccountService {
 
 
   setCurrentUser(token: string){
+    console.log(token)
     const helper = new JwtHelperService()
     const decodedToken = helper.decodeToken(token)
     const user: User = {

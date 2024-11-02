@@ -37,6 +37,7 @@ namespace API.Handlers.Accounts.Register.Trainer
 
             var user = new AppTrainer()
             {
+                Role = RoleNames.Trainer,
                 UserName = request.UserName,
                 Email = request.Email,
                 BankAccountNumber = request.BankAccountNumber,
