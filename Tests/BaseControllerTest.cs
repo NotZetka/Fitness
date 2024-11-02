@@ -19,7 +19,7 @@ namespace IntegrationTests
         protected readonly DataContext _context;
         public BaseControllerTest(WebApplicationFactory<Program> factory)
         {
-            var connectionString = "Server=(localdb)\\mssqllocaldb;Database=FitnessAppTest;Trusted_Connection=True;";
+            var connectionString = "Server=localhost, 1433; Database=FitnessAppTest; User Id=sa; Password=myPassword1!; TrustServerCertificate=True;";
 
             _factory = factory.WithWebHostBuilder(builder =>
             {

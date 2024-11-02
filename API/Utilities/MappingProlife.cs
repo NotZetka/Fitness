@@ -13,6 +13,8 @@ namespace API.Utilities
         public MappingProlife()
         {
             CreateMap<AppMember, UserDto>();
+            CreateMap<AppUserBase, UserDto>();
+            CreateMap<AppTrainer, UserDto>();
             CreateMap<ExerciseTemplateDto, ExerciseTemplate>();
             CreateMap<ExerciseTemplate, ExerciseTemplateDto>();
             CreateMap<FitnessPlan, FitnessPlanDto>();
