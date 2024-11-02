@@ -3,6 +3,7 @@ using API.Data.Repositories;
 using API.Exceptions;
 using API.Exceptions.Accounts;
 using API.Services;
+using API.Utilities.Static;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
@@ -32,6 +33,7 @@ namespace API.Handlers.Accounts.Register.Member
 
             var user = new AppMember()
             {
+                Role = RoleNames.Member,
                 UserName = request.UserName,
                 Email = request.Email,
                 DateOfBirth = request.DateOfBirth.Value,
