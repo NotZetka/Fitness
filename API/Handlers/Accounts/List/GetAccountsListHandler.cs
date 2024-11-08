@@ -15,7 +15,7 @@ namespace API.Handlers.Accounts.List
         }
         public async Task<PagedResult<UserDto>> Handle(GetAccountsListQuery request, CancellationToken cancellationToken)
         {
-            return await _unitOfWork.UsersRepository.GetUsersListAsync(request.PageNumber, request.PageSize);
+            return await _unitOfWork.UsersRepository.GetUsersListAsync(request.PageNumber, request.PageSize, request.Role);
         }
     }
 }

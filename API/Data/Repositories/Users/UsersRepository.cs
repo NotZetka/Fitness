@@ -38,11 +38,13 @@ namespace API.Data.Repositories
                 x.UserName.ToLower() == username.ToLower());
         }
 
-        public async Task<PagedResult<UserDto>> GetUsersListAsync(int? pageNumber = null, int? pageSize = null)
+        public async Task<PagedResult<UserDto>> GetUsersListAsync(int? pageNumber = null, int? pageSize = null, string role = null)
         {
             var query = _dbSet
                 .Where(x => x.Id != _userService.GetCurrentUserId())
                 .ProjectTo<UserDto>(_configurationProvider);
+
+            if(role != null) query = query.Where(x => x.Role == role);
 
             if(pageNumber != null && pageSize != null)
             {

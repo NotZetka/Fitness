@@ -8,5 +8,6 @@ namespace API.Handlers.Accounts.List
     {
         public int? PageNumber { get; set; }
         public int? PageSize { get; set; }
+        public string? Role { get; set; }
     }
 }
