@@ -8,6 +8,6 @@ namespace API.Data.Repositories
         Task<AppUserBase> FindUserByIdAsync(int id);
         Task<AppUserBase> FindUserByEmailAsync(string email);
         Task<AppUserBase> FindUserByUsernamelAsync(string email);
-        Task<PagedResult<UserDto>> GetUsersListAsync(int? pageNumber = null, int? pageSize = null);
+        Task<PagedResult<UserDto>> GetUsersListAsync(int? pageNumber = null, int? pageSize = null, string role = null);
     }
 }
