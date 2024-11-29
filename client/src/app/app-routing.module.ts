@@ -13,6 +13,9 @@ import {MessagesChatComponent} from "./Messages/chat/messages-chat.component";
 import {BodyMainComponent} from "./Body/body-main/body-main.component";
 import {BodyRecordDetailsComponent} from "./Body/body-record-details/body-record-details.component";
 import {RegisterComponent} from "./Accounts/register/register.component";
+import {PlansCreateTemplateComponent} from "./Plans/plans-create-template/plans-create-template.component";
+import {YourTemplatesComponent} from "./Plans/your-templates/your-templates.component";
+import {EditTemplateComponent} from "./Plans/edit-template/edit-template.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -25,7 +28,9 @@ const routes: Routes = [
   {path:'plans/list', component: PlansListComponent},
   {path:'plans/list/:id', component: PlansDetailComponent},
   {path:'plans/create', component: PlansCreateComponent},
-  {path:'plans/market', component: PlansMarketComponent},
+  {path:'plans/create-template', component: PlansCreateTemplateComponent},
+  {path:'plans/your-templates', component: YourTemplatesComponent},
+  {path:'plans/edit', component: EditTemplateComponent},
   {path:'plans/market', component: PlansMarketComponent},
   {path:'body', component: BodyMainComponent},
   { path: 'body-record-details', component: BodyRecordDetailsComponent }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { PlanTemplate } from "../models/planTemplate";
+import { PlanTemplate } from "../.models/planTemplate";
 import { HttpClient } from "@angular/common/http";
-import { GetPlanTemplatesQueryResult } from "../models/GetPlanTemplatesQueryResult";
+import { GetPlanTemplatesQueryResult } from "../.models/GetPlanTemplatesQueryResult";
 import { Router } from "@angular/router";
 import { environment } from "../../../environments/environment";
 

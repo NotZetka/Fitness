@@ -21,7 +21,7 @@ namespace API.Handlers.Plans.CreatePlan
 
         public async Task<CreatePlanResponse> Handle(CreatePlanCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUserAsync();
+            var user = await _userService.GetCurrentMemberAsync();
 
             var plan = new FitnessPlan()
             {

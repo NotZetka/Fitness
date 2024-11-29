@@ -50,7 +50,7 @@ namespace API.SignalR
 
             if (!validation.IsValid) throw new ValidationException(validation.Errors);
 
-            var currentUser = await _userService.GetCurrentUserAsync();
+            var currentUser = await _userService.GetCurrentMemberAsync();
 
             if (request.ReceiverId == currentUser.Id) throw new ForbiddenException("You can't send message to yourself");
 

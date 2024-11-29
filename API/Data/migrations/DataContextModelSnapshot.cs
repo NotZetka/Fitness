@@ -242,9 +242,6 @@ namespace API.Data.migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("FitnessPlanTemaplteId")
-                        .HasColumnType("int");
-
                     b.Property<int>("FitnessPlanTemplateId")
                         .HasColumnType("int");
 
@@ -309,6 +306,9 @@ namespace API.Data.migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("Public")
+                        .HasColumnType("bit");
 
                     b.HasKey("Id");
 
@@ -556,7 +556,7 @@ namespace API.Data.migrations
 
             modelBuilder.Entity("API.Data.FitnessPlan", b =>
                 {
-                    b.HasOne("API.Data.AppMember", "Trainer")
+                    b.HasOne("API.Data.AppTrainer", "Trainer")
                         .WithMany()
                         .HasForeignKey("TrainerId");
 

@@ -25,7 +25,7 @@ namespace API.Handlers.Plans.AddPlan
             if (planTemplate == null) throw new NotFoundException($"Plan with id {request.Id} has not been found");
             if (planTemplate.AuthorId != _userService.GetCurrentUserId()) throw new ForbiddenException("You are not allowed to add this plan");
 
-            var user = await _userService.GetCurrentUserAsync(includeFitnessPlans: true);
+            var user = await _userService.GetCurrentMemberAsync(includeFitnessPlans: true);
 
 
             var exercises = planTemplate.Exercises

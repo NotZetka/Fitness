@@ -3,10 +3,14 @@ using API.Handlers.Plans.AddPlan;
 using API.Handlers.Plans.AddRecord;
 using API.Handlers.Plans.ArchivePlan;
 using API.Handlers.Plans.CreatePlan;
+using API.Handlers.Plans.CreatePlanTemplate;
+using API.Handlers.Plans.EditPlanTemplate;
 using API.Handlers.Plans.GetPlan;
 using API.Handlers.Plans.GetPlans;
 using API.Handlers.Plans.GetPlanTemplates;
+using API.Handlers.Plans.GetYourTemplates;
 using API.Utilities;
+using API.Utilities.Static;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,15 +22,44 @@ namespace API.Controllers
     {
 
         [HttpPost("Create")]
-        public async Task<ActionResult> CreatePlan(CreatePlanCommand query)
+        [Authorize(RoleNames.RequireMemberRole)]
+        public async Task<ActionResult> CreatePlan(CreatePlanCommand command)
         {
-            var reslut = await _mediator.Send(query);
+            var reslut = await _mediator.Send(command);
 
             return Created(reslut.Id.ToString(), reslut);
+        }
+        
+        [HttpPost("Create-Template")]
+        [Authorize(RoleNames.RequireTrainerRole)]
+        public async Task<ActionResult> CreatePlanTemplate(CreatePlanTemplateCommand command)
+        {
+            var reslut = await _mediator.Send(command);
+
+            return Created(reslut.Id.ToString(), reslut);
+        }
+        
+        [HttpPut("Edit-Template/{id}")]
+        [Authorize(RoleNames.RequireTrainerRole)]
+        public async Task<ActionResult> EditPlanTemplate(int id, EditPlanTemplateCommand command)
+        {
+            command.Id = id;
+            await _mediator.Send(command);
+
+            return Ok();
         }
 
         [HttpGet("Templates")]
         public async Task<ActionResult<PagedResult<FitnessPlanTemplateDto>>> GetPlanTemplates([FromQuery] GetPlanTemplatesQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            return Ok(result);
+        }
+        
+        [HttpGet("Your-Templates")]
+        [Authorize(RoleNames.RequireTrainerRole)]
+        public async Task<ActionResult<PagedResult<FitnessPlanTemplateDto>>> GetYourTemplates([FromQuery] GetYourTemplatesQuery query)
         {
             var result = await _mediator.Send(query);
 
@@ -43,7 +76,7 @@ namespace API.Controllers
         }
 
         [HttpPost("add")]
-        [Authorize]
+        [Authorize(RoleNames.RequireMemberRole)]
         public async Task<ActionResult> AddRecord(AddRecordsCommand query)
         {
             var reslut = await _mediator.Send(query);

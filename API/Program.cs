@@ -1,6 +1,7 @@
 using API.Middleware;
 using API.SignalR;
 using API.Utilities.Extensions;
+using API.Utilities.Static;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -86,8 +87,8 @@ namespace API
 
             builder.Services.AddAuthorization(opt =>
             {
-                opt.AddPolicy("RequireAdminRole", policy => policy.RequireRole("Admin"));
-                opt.AddPolicy("RequireModeratorRole", policy => policy.RequireRole("Admin", "Moderator"));
+                opt.AddPolicy(RoleNames.RequireTrainerRole, policy => policy.RequireRole(RoleNames.Trainer));
+                opt.AddPolicy(RoleNames.RequireMemberRole, policy => policy.RequireRole(RoleNames.Member));
             });
 
 

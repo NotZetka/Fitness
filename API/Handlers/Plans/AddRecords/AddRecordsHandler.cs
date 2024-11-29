@@ -17,7 +17,7 @@ namespace API.Handlers.Plans.AddRecord
         }
         public async Task<AddRecordsResponse> Handle(AddRecordsCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUserAsync(includeRecords: true);
+            var user = await _userService.GetCurrentMemberAsync(includeRecords: true);
 
             var exercises = user.FitnessPlans.SelectMany(x => x.Exercises).ToList();
 
