@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
-import {Plan} from "../models/plan";
-import {GetPlansQueryResult} from "../models/GetPlansQueryResult";
+import {Plan} from "../.models/plan";
+import {GetPlansQueryResult} from "../.models/GetPlansQueryResult";
 import {environment} from "../../../environments/environment";
 
 @Component({

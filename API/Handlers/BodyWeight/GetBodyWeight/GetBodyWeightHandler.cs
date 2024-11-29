@@ -16,7 +16,7 @@ namespace API.Handlers.BodyWeight.GetBodyWeight
         }
         public async Task<GetBodyWeightResponse> Handle(GetBodyWeightQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUserAsync();
+            var user = await _userService.GetCurrentMemberAsync();
 
             var height = await _unitOfWork.BodyWeightRepository.GetHeight(user.Id);
 

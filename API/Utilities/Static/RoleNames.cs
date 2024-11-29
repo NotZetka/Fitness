@@ -2,7 +2,9 @@
 {
     public static class RoleNames
     {
-        public static string Trainer { get; } = "Trainer";
-        public static string Member { get; } = "Member";
+        public const string Trainer = "Trainer";
+        public const string RequireTrainerRole = "RequireTrainerRole";
+        public const string Member = "Member";
+        public const string RequireMemberRole = "RequireMemberRole";
     }
 }

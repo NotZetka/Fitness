@@ -18,7 +18,7 @@ namespace API.Handlers.Plans.GetPlan
         }
         public async Task<GetPlanResponse> Handle(GetPlanQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUserAsync(includeRecords:true);
+            var user = await _userService.GetCurrentMemberAsync(includeRecords:true);
             var plan = user.FitnessPlans.FirstOrDefault(x=>x.Id == request.PlanId);
 
             if (plan == null) throw new NotFoundException($"user doesn't own plan with id: {request.PlanId}");

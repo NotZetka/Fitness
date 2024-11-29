@@ -11,7 +11,7 @@ namespace API.Data.Repositories
             BodyWeightRepository = new BodyWeightRepository(context,mapper);
             MessageRepository = new MessageRepository(context);
             PlansRepository = new PlansRepository(context);
-            PlansTemplateRepository = new PlansTemplateRepository(context);
+            PlansTemplateRepository = new PlansTemplateRepository(context, mapper);
             UsersRepository = new UsersRepository(context,mapper,userService);
             _dataContext = context;
         }

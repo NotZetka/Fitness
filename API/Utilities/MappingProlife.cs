@@ -16,6 +16,7 @@ namespace API.Utilities
             CreateMap<AppUserBase, UserDto>();
             CreateMap<AppTrainer, UserDto>();
             CreateMap<ExerciseTemplateDto, ExerciseTemplate>();
+            CreateMap<ExerciseTemplateDto, Exercise>();
             CreateMap<ExerciseTemplate, ExerciseTemplateDto>();
             CreateMap<FitnessPlan, FitnessPlanDto>();
             CreateMap<Exercise, ExerciseDto>();
@@ -26,6 +27,9 @@ namespace API.Utilities
             CreateMap<BodyWeightRecord, BodyWeightRecordDto>();
             CreateMap<RegisterCommand, RegisterTrainerCommand>();
             CreateMap<RegisterCommand, RegisterMemberCommand>();
+            CreateMap<FitnessPlanTemplate, FitnessPlanTemplateDto>()
+                .ForMember(x=>x.AuthorName, y => y.MapFrom(x=>x.Author.UserName))
+                .ForMember(x=>x.PlanId, y => y.MapFrom(x=>x.Id));
         }
     }
 }

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {PlanTemplateResponse} from "../models/planTemplateResponse";
+import {PlanTemplateResponse} from "../.models/planTemplateResponse";
 import {Router} from "@angular/router";
 import {environment} from "../../../environments/environment";
 
@@ -40,8 +40,7 @@ export class PlansCreateComponent implements OnInit {
 
   initializeForm(){
     this.createPlanForm = this.formBuilder.group({
-      'name': ['', Validators.required],
-      'public': ['private']
+      'name': ['', Validators.required]
     })
     this.exerciseForm = this.formBuilder.group({
       'name': ['', Validators.required],

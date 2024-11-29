@@ -21,7 +21,7 @@ namespace API.Handlers.Plans.ArchivePlan
 
         public async Task<ArchivePlanResponse> Handle(ArchivePlanCommand request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUserAsync(includeFitnessPlans: true);
+            var user = await _userService.GetCurrentMemberAsync(includeFitnessPlans: true);
             var plan = user.FitnessPlans.FirstOrDefault(x => x.Id == request.PlanId);
 
             if (plan == null) throw new NotFoundException($"user doesn't own plan with id: {request.PlanId}");

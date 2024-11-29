@@ -18,7 +18,7 @@ namespace API.Handlers.Plans.GetPlans
         }
         public async Task<GetPlansResponse> Handle(GetPlansQuery request, CancellationToken cancellationToken)
         {
-            var user = await _userService.GetCurrentUserAsync(includeFitnessPlans: true);
+            var user = await _userService.GetCurrentMemberAsync(includeFitnessPlans: true);
             var plans = user.FitnessPlans.Select(_mapper.Map<FitnessPlanDto>);
 
             return new() { Plans = plans }; 

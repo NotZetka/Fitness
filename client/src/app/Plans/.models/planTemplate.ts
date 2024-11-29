@@ -6,4 +6,6 @@ export interface PlanTemplate {
   exercises: ExerciseTemplate[];
   planId: number;
   show: boolean;
+  public: boolean;
+  price: number;
 }

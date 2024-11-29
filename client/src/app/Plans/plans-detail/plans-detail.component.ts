@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {Plan} from "../models/plan";
+import {Plan} from "../.models/plan";
 import {HttpClient} from "@angular/common/http";
-import {GetPlanQueryResult} from "../models/GetPlanQueryResult";
+import {GetPlanQueryResult} from "../.models/GetPlanQueryResult";
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {AddRecordsQuery} from "../models/AddRecordsQuery";
-import {Rec} from "../models/rec";
+import {AddRecordsQuery} from "../.models/AddRecordsQuery";
+import {Rec} from "../.models/rec";
 import {environment} from "../../../environments/environment";
 
 @Component({
@@ -73,7 +73,7 @@ export class PlansDetailComponent implements OnInit {
       records: submittedData,
     }
     console.log(query)
-    this.http.post('https://localhost:7186/plans/add', query).subscribe({
+    this.http.post(this.baseUrl + 'plans/add', query).subscribe({
       next: _ => {
         this.ngOnInit()
       }

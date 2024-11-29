@@ -30,6 +30,9 @@ import { BodyMainComponent } from './Body/body-main/body-main.component';
 import { BodyRecordDetailsComponent } from './Body/body-record-details/body-record-details.component';
 import { RegisterTrainerComponent } from './Accounts/register-trainer/register-trainer.component';
 import { RegisterComponent } from './Accounts/register/register.component';
+import { PlansCreateTemplateComponent } from './Plans/plans-create-template/plans-create-template.component';
+import { YourTemplatesComponent } from './Plans/your-templates/your-templates.component';
+import { EditTemplateComponent } from './Plans/edit-template/edit-template.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { RegisterComponent } from './Accounts/register/register.component';
     BodyMainComponent,
     BodyRecordDetailsComponent,
     RegisterTrainerComponent,
-    RegisterComponent
+    RegisterComponent,
+    PlansCreateTemplateComponent,
+    YourTemplatesComponent,
+    EditTemplateComponent
   ],
     imports: [
         BrowserModule,

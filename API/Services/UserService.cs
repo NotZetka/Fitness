@@ -6,10 +6,13 @@ namespace API.Services
 {
     public interface IUserService
     {
-        public Task<AppMember> GetCurrentUserAsync(
+        public Task<AppMember> GetCurrentMemberAsync(
             bool includeFitnessPlans = false,
             bool includeExercises = false,
             bool includeRecords = false);
+
+        public Task<AppUserBase> GetCurrentUserAsync();
+        public Task<AppTrainer> GetCurrentTrainerAsync();
 
         public int GetCurrentUserId();
     }
@@ -24,7 +27,7 @@ namespace API.Services
             _context = context;
         }
 
-        public async Task<AppMember> GetCurrentUserAsync(
+        public async Task<AppMember> GetCurrentMemberAsync(
             bool includeFitnessPlans = false,
             bool includeExercises = false,
             bool includeRecords = false)
@@ -45,6 +48,18 @@ namespace API.Services
                 query = query.Include(x=>x.FitnessPlans);
             }
             return await query.FirstOrDefaultAsync();
+        }
+
+        public async Task<AppUserBase> GetCurrentUserAsync()
+        {
+            var userid = GetCurrentUserId();
+            return await _context.Users.Where(x => x.Id == userid).FirstOrDefaultAsync();
+        }
+
+        public async Task<AppTrainer> GetCurrentTrainerAsync()
+        {
+            var userid = GetCurrentUserId();
+            return await _context.Trainers.Where(x => x.Id == userid).FirstOrDefaultAsync();
         }
 
         public int GetCurrentUserId()

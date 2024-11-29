@@ -1,14 +1,6 @@
 <div class="container col-6 justify-content-center">
   <form [formGroup]="createPlanForm" (ngSubmit)="submit()" autocomplete="off">
     <app-text-input [formControl]="$any(createPlanForm.controls['name'])" [label]="'Name'"></app-text-input>
-    <div class="mb-3 text-center">
-      <label class="form-check-label">
-        <input type="radio" value="private" formControlName="public"> Private
-      </label>
-      <label class="form-check-label">
-        <input type="radio" class="ms-4" value="public" formControlName="public"> Public
-      </label>
-    </div>
     <table class="table">
       <thead>
       <tr>
