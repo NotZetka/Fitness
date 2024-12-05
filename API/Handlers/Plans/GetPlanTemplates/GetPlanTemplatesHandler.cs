@@ -31,6 +31,7 @@ namespace API.Handlers.Plans.GetPlanTemplates
                         Name = x.Name,
                         AuthorName = x.Author.UserName,
                         Exercises = x.Exercises.Select(e => _mapper.Map<ExerciseTemplateDto>(e)),
+                        Price = x.Price,
                         PlanId = x.Id,
                     });
 

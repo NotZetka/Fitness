@@ -1,0 +1,59 @@
+<div class="container col-6 justify-content-center">
+  <form [formGroup]="createPlanForm" (ngSubmit)="submit()" autocomplete="off">
+    <app-text-input [formControl]="$any(createPlanForm.controls['name'])" [label]="'Name'"></app-text-input>
+    <div class="mb-3 text-center">
+      <label class="form-check-label">
+        <input type="radio" value="private" formControlName="public"> Private
+      </label>
+      <label class="form-check-label">
+        <input type="radio" class="ms-4" value="public" formControlName="public"> Public
+      </label>
+    </div>
+    <div *ngIf="createPlanForm.get('public')?.value === 'public'" class="mb-3">
+      <app-text-input
+        [formControl]="$any(createPlanForm.controls['price'])"
+        [label]="'Price ($)'"
+        [type]="'number'"
+      ></app-text-input>
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th style="width: 20%;">Name</th>
+        <th style="width: 60%;">Description</th>
+        <th style="width: 10%;">Sets</th>
+        <th style="width: 10%;"></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let exercise of exercises; let i = index">
+        <td>{{exercise['name']}}</td>
+        <td>{{exercise['description']}}</td>
+        <td>{{exercise['sets']}}</td>
+        <td><button class="btn g-0 btn-danger" type="button" (click)="removeExercise(i)">X</button></td>
+      </tr>
+      </tbody>
+    </table>
+
+    <form [formGroup]="exerciseForm" (ngSubmit)="addExercise()">
+      <div class=" gx-2 row mb-2">
+        <div class="col-3">
+          <app-text-input [formControl]="$any(exerciseForm.controls['name'])" [label]="'Name'"></app-text-input>
+        </div>
+        <div class="col">
+          <app-text-input [formControl]="$any(exerciseForm.controls['description'])" [label]="'Description'"></app-text-input>
+        </div>
+        <div class="col-2">
+          <app-text-input [formControl]="$any(exerciseForm.controls['sets'])" [type]="'number'" [label]="'Sets'"></app-text-input>
+        </div>
+        <button [disabled]="!exerciseForm.valid" class="btn btn-success ms-1 mb-3 col-1" type="submit">+</button>
+      </div>
+    </form>
+
+    <div class="row justify-content-center">
+      <button [disabled]="!createPlanForm.valid || exercises.length==0" class="btn btn-secondary col-4" type="submit">Submit</button>
+    </div>
+  </form>
+
+
+</div>

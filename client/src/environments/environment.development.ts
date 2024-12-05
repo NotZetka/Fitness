@@ -1,4 +1,5 @@
 export const environment = {
   production: false,
-  baseUrl : 'https://localhost:5001/'
+  baseUrl : 'https://localhost:5001/',
+  stripePK : 'pk_test_51QQoLMIwVeHkh8HmPjT22qAm49LbcqRGXD8lMxiLxG34C5W6but95hVzjfte8UOXAgqqY7dOL6rqXNbYa4Nt4PT600IBrXIaXI'
 };
