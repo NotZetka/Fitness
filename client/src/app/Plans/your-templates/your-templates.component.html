@@ -2,27 +2,27 @@
   <table class="table">
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Author</th>
-      <th>Exercises</th>
-      <th>Price</th>
-      <th></th>
+      <th style="width: 20%;">Name</th>
+      <th style="width: 20%;">Public</th>
+      <th style="width: 20%;">Price</th>
+      <th style="width: 30%;">Exercises</th>
+      <th style="width: 10%;"></th>
     </tr>
     </thead>
     <tbody>
     <ng-container *ngFor="let plan of plans">
       <tr>
         <td>{{plan.name}}</td>
-        <td>{{plan.authorName}}</td>
+        <td>{{plan.public}}</td>
+        <td>{{plan.price}} zł</td>
         <td *ngIf="plan.show">
           <button class="btn" (click)="plan.show = !plan.show"> &#9650;</button>
         </td>
         <td *ngIf="!plan.show">
           <button class="btn" (click)="plan.show = !plan.show"> &#9660;</button>
         </td>
-        <td>{{plan.price}} PLN</td>
         <td>
-          <button class="btn btn-success" (click)="addPlan(plan.planId)">Buy</button>
+          <button class="btn btn-success" routerLink="/plans/edit" [state]="{ plan: plan }">Edit</button>
         </td>
       </tr>
       <ng-container *ngIf="plan.show">
@@ -37,7 +37,6 @@
     </tbody>
   </table>
 
-  <!-- Pagination Controls -->
   <p class="text-center my-3 fs-5">Showing plans {{itemsFrom}} to {{itemsTo}} of {{totalCount}}</p>
 
   <div class="d-flex justify-content-center align-items-center mt-3">

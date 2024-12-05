@@ -1,6 +1,7 @@
 ﻿using API.Data.Repositories;
 using API.Services;
 using API.SignalR;
+using API.Utilities.Configurations;
 
 namespace API.Utilities.Extensions
 {
@@ -12,6 +13,13 @@ namespace API.Utilities.Extensions
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUserService, UserService>();
             services.AddSingleton<PresenceTracker>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddConfigurations(this IServiceCollection services, ConfigurationManager configuration)
+        {
+            services.Configure<StripeSettings>(configuration.GetSection("Stripe"));
 
             return services;
         }

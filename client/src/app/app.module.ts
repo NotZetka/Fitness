@@ -33,6 +33,10 @@ import { RegisterComponent } from './Accounts/register/register.component';
 import { PlansCreateTemplateComponent } from './Plans/plans-create-template/plans-create-template.component';
 import { YourTemplatesComponent } from './Plans/your-templates/your-templates.component';
 import { EditTemplateComponent } from './Plans/edit-template/edit-template.component';
+import { CheckoutComponent } from './Payments/checkout/checkout.component';
+import {NgxStripeModule} from "ngx-stripe";
+import {environment} from "../environments/environment";
+import { PayButtonComponent } from './_forms/pay-button/pay-button.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +61,9 @@ import { EditTemplateComponent } from './Plans/edit-template/edit-template.compo
     RegisterComponent,
     PlansCreateTemplateComponent,
     YourTemplatesComponent,
-    EditTemplateComponent
+    EditTemplateComponent,
+    CheckoutComponent,
+    PayButtonComponent
   ],
     imports: [
         BrowserModule,
@@ -73,7 +79,8 @@ import { EditTemplateComponent } from './Plans/edit-template/edit-template.compo
           type: 'ball-spin-clockwise-fade',
         }),
         FormsModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+      NgxStripeModule.forRoot(environment.stripePK)
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

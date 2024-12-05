@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Serilog;
 using System.Reflection;
 using System.Text;
+using Stripe;
 
 namespace API
 {
@@ -21,6 +22,7 @@ namespace API
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.AddDatabaseWithIdentities(builder.Configuration.GetConnectionString("DefaultConnection"));
+            builder.Services.AddConfigurations(builder.Configuration);
             builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
             builder.Services.AddControllers();
             builder.Services.AddCors();
@@ -91,6 +93,7 @@ namespace API
                 opt.AddPolicy(RoleNames.RequireMemberRole, policy => policy.RequireRole(RoleNames.Member));
             });
 
+            StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
 
             var app = builder.Build();
 
