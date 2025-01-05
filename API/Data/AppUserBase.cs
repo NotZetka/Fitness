@@ -2,7 +2,7 @@
 
 namespace API.Data
 {
-    public abstract class AppUserBase : IdentityUser<int>
+    public class AppUserBase : IdentityUser<int>
     {
         public string? PhotoUrl { get; set; }
         public string Role { get; set; }

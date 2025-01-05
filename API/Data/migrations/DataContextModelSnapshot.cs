@@ -86,8 +86,8 @@ namespace API.Data.migrations
 
                     b.Property<string>("UserType")
                         .IsRequired()
-                        .HasMaxLength(13)
-                        .HasColumnType("nvarchar(13)");
+                        .HasMaxLength(8)
+                        .HasColumnType("nvarchar(8)");
 
                     b.HasKey("Id");
 
@@ -101,7 +101,7 @@ namespace API.Data.migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasDiscriminator<string>("UserType").HasValue("AppUserBase");
+                    b.HasDiscriminator<string>("UserType").HasValue("");
 
                     b.UseTphMappingStrategy();
                 });
@@ -299,6 +299,10 @@ namespace API.Data.migrations
 
                     b.Property<int>("AuthorId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()

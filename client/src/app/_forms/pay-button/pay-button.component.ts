@@ -1,6 +1,7 @@
 import {Component, Input,  OnInit} from '@angular/core';
 import {environment} from "../../../environments/environment";
 import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-pay-button',
@@ -12,11 +13,22 @@ export class PayButtonComponent implements OnInit {
   @Input() id: number = 0;
   baseUrl = environment.baseUrl;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   handler:any = null;
 
   ngOnInit() {
     this.loadStripe();
+  }
+
+  getFree(){
+    return this.http.post(environment.baseUrl + 'Payments/checkout', {
+      tokenId: "",
+      email: "",
+      price: this.amount,
+      planId: this.id,
+    }).subscribe({
+      next: response => this.router.navigateByUrl("/plans/list"),
+    })
   }
 
   pay() {
@@ -49,8 +61,7 @@ export class PayButtonComponent implements OnInit {
           price: this.amount,
           planId: this.id,
         }).subscribe({
-          next: (response) => console.log('Payment Success:', response),
-          error: (error) => console.error('Payment Failed:', error),
+          next: response => this.router.navigateByUrl("/plans/list")
         });
       })
       .catch((err) => {
@@ -59,42 +70,23 @@ export class PayButtonComponent implements OnInit {
   }
 
   loadStripe() {
-    console.log(window.document.getElementById('stripe-script'))
-    if (!window.document.getElementById('stripe-script')) {
-      const s = window.document.createElement('script') as HTMLScriptElement;
-      s.id = 'stripe-script';
-      s.type = 'text/javascript';
-      s.src = 'https://js.stripe.com/v3/';
+
+    if(!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://checkout.stripe.com/checkout.js";
       s.onload = () => {
-        this.handler = (window as any).StripeCheckout.configure({
-          key: environment.stripePK,
+        this.handler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51HxRkiCumzEESdU2Z1FzfCVAJyiVHyHifo0GeCMAyzHPFme6v6ahYeYbQPpD9BvXbAacO2yFQ8ETlKjo4pkHSHSh00qKzqUVK9',
           locale: 'auto',
-          token: (token: any) => {
-            console.log(this.baseUrl + 'payments/checkout')
-            console.log({
-              tokenId: token.id,
-              email: token.email,
-              price: this.amount,
-              planId: this.id,
-            })
-            this.http.post<PaymentResponse>(this.baseUrl + 'payments/checkout', {
-              tokenId: token.id,
-              email: token.email,
-              price: this.amount,
-              planId: this.id,
-            }).subscribe(
-              (response: PaymentResponse) => {
-                console.log('Payment successful:', response);
-                alert('Payment Success!!');
-              },
-              (error) => {
-                console.error('Payment error:', error);
-                alert('Payment failed! Please try again.');
-              }
-            );
+          token: function (token: any) {
+            console.log(token)
+            alert('Payment Success!!');
           }
         });
-      };
+      }
+
       window.document.body.appendChild(s);
     }
   }

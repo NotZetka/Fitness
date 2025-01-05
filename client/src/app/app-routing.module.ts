@@ -16,7 +16,6 @@ import {RegisterComponent} from "./Accounts/register/register.component";
 import {PlansCreateTemplateComponent} from "./Plans/plans-create-template/plans-create-template.component";
 import {YourTemplatesComponent} from "./Plans/your-templates/your-templates.component";
 import {EditTemplateComponent} from "./Plans/edit-template/edit-template.component";
-import {CheckoutComponent} from "./Payments/checkout/checkout.component";
 
 const routes: Routes = [
   {path:'', component: HomeComponent},
@@ -35,7 +34,6 @@ const routes: Routes = [
   {path:'plans/market', component: PlansMarketComponent},
   {path:'body', component: BodyMainComponent},
   { path: 'body-record-details', component: BodyRecordDetailsComponent },
-  {path:'checkout', component: CheckoutComponent},
 ];
 
 @NgModule({
