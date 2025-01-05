@@ -40,6 +40,7 @@ export class PlansCreateTemplateComponent implements OnInit{
   initializeForm(){
     this.createPlanForm = this.formBuilder.group({
       'name': ['', Validators.required],
+      'description': ['', Validators.required],
       'public': ['private'],
       'price': [{ value: '', disabled: true }, [Validators.required, Validators.min(0)]],
     })

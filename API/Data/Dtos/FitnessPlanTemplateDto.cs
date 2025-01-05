@@ -6,6 +6,7 @@
         public string AuthorName { get; set; }
         public decimal Price { get; set; }
         public bool Public { get; set; }
+        public string Description { get; set; }
         public IEnumerable<ExerciseTemplateDto> Exercises { get; set; }
         public int PlanId { get; set; }
     }

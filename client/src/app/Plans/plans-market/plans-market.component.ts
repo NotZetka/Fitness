@@ -30,6 +30,7 @@ export class PlansMarketComponent implements OnInit {
     this.http.get<GetPlanTemplatesQueryResult>(`${this.baseUrl}Plans/Templates?PageNumber=${pageNumber}&PageSize=${pageSize}`).subscribe({
       next: response => {
         this.plans = response.items;
+        console.log(this.plans);
         this.totalPages = response.totalPages;
         this.totalCount = response.totalCount;
         this.itemsFrom = (pageNumber - 1) * pageSize + 1;

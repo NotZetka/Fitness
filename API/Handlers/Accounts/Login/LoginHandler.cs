@@ -22,14 +22,14 @@ namespace API.Handlers.Accounts.Login
         public async Task<LoginResponse> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
             AppUserBase? user = request.UsernameOrEmail.Contains('@') ?
-                _memberManager.Users.FirstOrDefault(x=>x.Email.ToLower() == request.UsernameOrEmail.ToLower()) :
-                _memberManager.Users.FirstOrDefault(x => x.UserName.ToLower() == request.UsernameOrEmail.ToLower());
+                _memberManager.Users.Where(x => x.Email.ToLower() == request.UsernameOrEmail.ToLower()).FirstOrDefault() :
+                _memberManager.Users.Where(x => x.Email.ToLower() == request.UsernameOrEmail.ToLower()).FirstOrDefault();
 
             if (user == null)
             {
                 user = request.UsernameOrEmail.Contains('@') ?
-                _trainerManager.Users.FirstOrDefault(x => x.Email.ToLower() == request.UsernameOrEmail.ToLower()) :
-                _trainerManager.Users.FirstOrDefault(x => x.UserName.ToLower() == request.UsernameOrEmail.ToLower());
+                _trainerManager.Users.Where(x => x.Email.ToLower() == request.UsernameOrEmail.ToLower()).FirstOrDefault() :
+                _trainerManager.Users.Where(x => x.Email.ToLower() == request.UsernameOrEmail.ToLower()).FirstOrDefault();
             }
 
             if (user == null)

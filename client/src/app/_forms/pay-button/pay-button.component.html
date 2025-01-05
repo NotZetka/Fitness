@@ -1,1 +1,2 @@
-<button (click)="pay()" class="btn btn-primary btn-block">Pay {{amount}} PLN</button>
+<button *ngIf="amount>0" (click)="pay()" class="btn btn-primary btn-block">Pay {{amount}} PLN</button>
+<button *ngIf="amount==0" (click)="getFree()" class="btn btn-primary btn-block">Get Free</button>

@@ -27,6 +27,7 @@ namespace API.Handlers.Plans.CreatePlanTemplate
                 Author = user,
                 Price = request.Price,
                 Public = request.Public,
+                Description = request.Description,
                 Exercises = request.Exercises.Select(_mapper.Map<ExerciseTemplate>).ToList()  
             };
             

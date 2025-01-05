@@ -33,7 +33,6 @@ import { RegisterComponent } from './Accounts/register/register.component';
 import { PlansCreateTemplateComponent } from './Plans/plans-create-template/plans-create-template.component';
 import { YourTemplatesComponent } from './Plans/your-templates/your-templates.component';
 import { EditTemplateComponent } from './Plans/edit-template/edit-template.component';
-import { CheckoutComponent } from './Payments/checkout/checkout.component';
 import {NgxStripeModule} from "ngx-stripe";
 import {environment} from "../environments/environment";
 import { PayButtonComponent } from './_forms/pay-button/pay-button.component';
@@ -62,7 +61,6 @@ import { PayButtonComponent } from './_forms/pay-button/pay-button.component';
     PlansCreateTemplateComponent,
     YourTemplatesComponent,
     EditTemplateComponent,
-    CheckoutComponent,
     PayButtonComponent
   ],
     imports: [

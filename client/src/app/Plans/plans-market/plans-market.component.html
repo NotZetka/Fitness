@@ -2,11 +2,10 @@
   <table class="table">
     <thead>
     <tr>
-      <th>Name</th>
-      <th>Author</th>
-      <th>Exercises</th>
-      <th>Price</th>
-      <th></th>
+      <th style="width: 20%">Name</th>
+      <th style="width: 20%">Author</th>
+      <th style="width: 40%">Description</th>
+      <th style="width: 20%"></th>
     </tr>
     </thead>
     <tbody>
@@ -14,30 +13,15 @@
       <tr>
         <td>{{plan.name}}</td>
         <td>{{plan.authorName}}</td>
-        <td *ngIf="plan.show">
-          <button class="btn" (click)="plan.show = !plan.show"> &#9650;</button>
-        </td>
-        <td *ngIf="!plan.show">
-          <button class="btn" (click)="plan.show = !plan.show"> &#9660;</button>
-        </td>
-        <td>{{plan.price}} PLN</td>
+        <td style="word-break: break-word;">{{plan.description}}</td>
         <td>
-          <button class="btn btn-success" (click)="addPlan(plan.planId)">Buy</button>
+          <app-pay-button [amount]="plan.price" [id]="plan.planId"></app-pay-button>
         </td>
       </tr>
-      <ng-container *ngIf="plan.show">
-        <tr class="table-secondary" *ngFor="let exercise of plan.exercises">
-          <td>{{exercise.name}}</td>
-          <td>{{exercise.description}}</td>
-          <td>{{exercise.sets}}</td>
-          <td></td>
-        </tr>
-      </ng-container>
     </ng-container>
     </tbody>
   </table>
 
-  <!-- Pagination Controls -->
   <p class="text-center my-3 fs-5">Showing plans {{itemsFrom}} to {{itemsTo}} of {{totalCount}}</p>
 
   <div class="d-flex justify-content-center align-items-center mt-3">

@@ -35,7 +35,8 @@ namespace API.Data
                 .ToTable("AspNetUsers")
                 .HasDiscriminator<string>("UserType")
                 .HasValue<AppMember>(RoleNames.Member)
-                .HasValue<AppTrainer>(RoleNames.Trainer);
+                .HasValue<AppTrainer>(RoleNames.Trainer)
+                .HasValue<AppUserBase>("");
 
 
             builder.Entity<ExerciseTemplate>()

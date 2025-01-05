@@ -7,6 +7,7 @@
         public AppTrainer Author { get; set; }
         public decimal Price { get; set; }
         public bool Public { get; set; }
+        public string Description { get; set; }
         public IEnumerable<ExerciseTemplate> Exercises { get; set; } = new List<ExerciseTemplate>();
 
     }
